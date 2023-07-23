@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\GoogleController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('auth/redirect', [GoogleController::class, 'googleRedirect']);
+Route::get('auth/callback', [GoogleController::class, 'googleCallback']);
 
 
 Route::get('/{page}', [AdminController::class, 'index']);
