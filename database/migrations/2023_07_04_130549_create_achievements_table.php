@@ -13,14 +13,14 @@ return new class extends Migration
   {
     Schema::create('achievements', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->string('title')->nullable();
       $table->string('donor')->nullable();
       $table->string('year', 5)->nullable();
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

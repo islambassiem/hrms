@@ -14,16 +14,16 @@ return new class extends Migration
     Schema::create('short_leave_details', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('short_leave_id');
-      $table->unsignedTinyInteger('status');
+      $table->string('status', 10);
       $table->text('comment');
-      $table->unsignedSmallInteger('commenter_id');
+      $table->string('commenter_id', 10);
       $table->timestamps();
 
 
       // joins
       $table->foreign('short_leave_id')->references('id')->on('short_leaves');
-      $table->foreign('status')->references('id')->on('lk_workflow_status');
-      $table->foreign('commenter_id')->references('id')->on('employees');
+      $table->foreign('status')->references('code')->on('lk_workflow_status');
+      $table->foreign('commenter_id')->references('empid')->on('employees');
     });
   }
 

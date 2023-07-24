@@ -13,15 +13,15 @@ return new class extends Migration
   {
     Schema::create('attachments', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
-      $table->unsignedTinyInteger('attachment_type')->nullable();
+      $table->string('empid', 10);
+      $table->string('attachment_type', 10)->nullable();
       $table->string('link')->nullable();
       $table->string('title', 50)->nullable();
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('attachment_type')->references('id')->on('lk_attachment_types');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('attachment_type')->references('code')->on('lk_attachment_types');
     });
   }
 

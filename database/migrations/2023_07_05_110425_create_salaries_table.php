@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('salaries', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->decimal('basic', 8, 2, true);
       $table->decimal('housing', 8, 2, true)->default(0);
       $table->decimal('transportation', 8, 2, true)->default(0);
@@ -22,7 +22,7 @@ return new class extends Migration
       $table->timestamps();
 
     //joins
-    $table->foreign('employee_id')->references('id')->on('employees');
+    $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

@@ -13,21 +13,21 @@ return new class extends Migration
   {
     Schema::create('letters', function (Blueprint $table) {
       $table->unsignedTinyInteger('id', true);
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->string('addreesee', 100);
       $table->boolean('salary')->default(0);
       $table->boolean('loan')->default(0);
       $table->boolean('attestation')->default(0);
-      $table->unsignedTinyInteger('status');
+      $table->string('status', 10);
       $table->unsignedBigInteger('attachment_id')->nullable();
       $table->text('details')->nullable();
       $table->timestamps();
 
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
       $table->foreign('attachment_id')->references('id')->on('attachments');
-      $table->foreign('status')->references('id')->on('lk_workflow_status');
+      $table->foreign('status')->references('code')->on('lk_workflow_status');
     });
   }
 

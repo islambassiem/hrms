@@ -14,16 +14,16 @@ return new class extends Migration
     Schema::create('vacation_details', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('vacation_id');
-      $table->unsignedTinyInteger('status');
+      $table->string('status', 10);
       $table->text('comment')->nullable();
-      $table->unsignedSmallInteger('commenter_id');
+      $table->string('commenter_id', 10);
       $table->timestamps();
 
 
       // joins
       $table->foreign('vacation_id')->references('id')->on('vacations');
-      $table->foreign('status')->references('id')->on('lk_workflow_status');
-      $table->foreign('commenter_id')->references('id')->on('employees');
+      $table->foreign('status')->references('code')->on('lk_workflow_status');
+      $table->foreign('commenter_id')->references('empid')->on('employees');
     });
   }
 

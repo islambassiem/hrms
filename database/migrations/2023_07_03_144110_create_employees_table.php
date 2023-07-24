@@ -22,18 +22,18 @@ return new class extends Migration
       $table->string('middle_name_ar', 50)->nullable();
       $table->string('third_name_ar', 50)->nullable();
       $table->string('family_name_ar', 50)->nullable();
-      $table->unsignedTinyInteger('gender')->nullable();
-      $table->unsignedSmallInteger('nationality')->nullable();
-      $table->unsignedTinyInteger('religion')->nullable();
+      $table->string('gender', 10)->nullable();
+      $table->string('nationality', 10)->nullable();
+      $table->string('religion', 10)->nullable();
       $table->date('date_of_birth')->nullable();
-      $table->unsignedSmallInteger('place_of_birth')->nullable();
-      $table->unsignedTinyInteger('marital_status')->nullable();
+      $table->string('place_of_birth', 10)->nullable();
+      $table->string('marital_status', 10)->nullable();
       $table->date('joining_date')->nullable();
       $table->date('resignation_date')->nullable();
-      $table->unsignedSmallInteger('position')->nullable();
-      $table->unsignedSmallInteger('sponsorship')->nullable();
-      $table->unsignedSmallInteger('section')->nullable();
-      $table->unsignedTinyInteger('category')->nullable();
+      $table->string('position',10)->nullable();
+      $table->string('sponsorship', 10)->nullable();
+      $table->string('section',10)->nullable();
+      $table->string('category',10)->nullable();
       $table->boolean('active')->default(1);
       $table->boolean('salary')->default(1);
       $table->boolean('fingerprint')->default(1);
@@ -41,7 +41,7 @@ return new class extends Migration
       $table->boolean('married_contract')->default(0);
       $table->unsignedTinyInteger('vacation_class')->default(0);
       $table->text('notes')->nullable();
-      $table->unsignedTinyInteger('special_need')->nullable();
+      $table->string('special_need',10)->nullable();
       $table->string('home_country_id', 50)->nullable();
       $table->timestamps();
       /*
@@ -49,16 +49,16 @@ return new class extends Migration
       |  Joins
       -----------------------------------
       */
-      $table->foreign('gender')->references('id')->on('lk_genders');
-      $table->foreign('nationality')->references('id')->on('lk_countries');
-      $table->foreign('religion')->references('id')->on('lk_religions');
-      $table->foreign('position')->references('id')->on('lk_positions');
-      $table->foreign('sponsorship')->references('id')->on('lk_sponsorships');
-      $table->foreign('section')->references('id')->on('lk_sections');
-      $table->foreign('category')->references('id')->on('lk_categories');
-      $table->foreign('special_need')->references('id')->on('lk_special_needs');
-      $table->foreign('place_of_birth')->references('id')->on('lk_countries');
-      $table->foreign('marital_status')->references('id')->on('lk_marital_statuses');
+      $table->foreign('gender')->references('code')->on('lk_genders');
+      $table->foreign('nationality')->references('code')->on('lk_countries');
+      $table->foreign('religion')->references('code')->on('lk_religions');
+      $table->foreign('position')->references('code')->on('lk_positions');
+      $table->foreign('sponsorship')->references('code')->on('lk_sponsorships');
+      $table->foreign('section')->references('code')->on('lk_sections');
+      $table->foreign('category')->references('code')->on('lk_categories');
+      $table->foreign('special_need')->references('code')->on('lk_special_needs');
+      $table->foreign('place_of_birth')->references('code')->on('lk_countries');
+      $table->foreign('marital_status')->references('code')->on('lk_marital_statuses');
     });
   }
 

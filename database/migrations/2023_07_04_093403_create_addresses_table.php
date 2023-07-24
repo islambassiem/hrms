@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('addresses', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id')->unique();
+      $table->string('empid', 10)->unique();
       $table->string('buliding_no', 10)->nullable();
       $table->string('street_name', 50)->nullable();
       $table->string('district_name', 50)->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
 
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

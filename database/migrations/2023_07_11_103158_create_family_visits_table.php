@@ -13,13 +13,13 @@ return new class extends Migration
   {
     Schema::create('family_visits', function (Blueprint $table) {
       $table->unsignedTinyInteger('id', true);
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->string('request_number',50);
       $table->unsignedTinyInteger('status');
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

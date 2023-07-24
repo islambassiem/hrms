@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('contacts', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->unsignedSmallInteger('employee_id')->unique();
+      $table->string('empid', 10)->unique();
       $table->string('mobile', 50)->nullable();
       $table->string('home', 50)->nullable();
       $table->string('personal_email', 100)->nullable();
@@ -23,7 +23,7 @@ return new class extends Migration
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('employee_id')->references('empid')->on('employees');
     });
   }
 

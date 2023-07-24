@@ -13,11 +13,11 @@ return new class extends Migration
   {
     Schema::create('experiences_non_ksa_institutions', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->string('profession', 100)->nullable();
       $table->string('organization_name', 100)->nullable();
       $table->string('city', 100)->nullable();
-      $table->unsignedSmallInteger('country')->nullable();
+      $table->string('country', 10)->nullable();
       $table->string('department', 100)->nullable();
       $table->string('section', 100)->nullable();
       $table->date('start_date')->nullable();
@@ -28,8 +28,8 @@ return new class extends Migration
 
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('country')->references('id')->on('lk_countries');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('country')->references('code')->on('lk_countries');
       $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });
   }

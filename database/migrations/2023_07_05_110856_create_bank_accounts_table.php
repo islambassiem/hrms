@@ -13,13 +13,13 @@ return new class extends Migration
   {
     Schema::create('bank_accounts', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->unsignedSmallInteger('employee_id')->unique();
+      $table->string('empid', 10)->unique();
       $table->string('iban', 50);
       $table->unsignedTinyInteger('bank_id');
       $table->timestamps();
 
       //joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

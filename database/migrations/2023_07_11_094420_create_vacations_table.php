@@ -13,8 +13,8 @@ return new class extends Migration
   {
     Schema::create('vacations', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
-      $table->unsignedTinyInteger('type');
+      $table->string('empid', 10);
+      $table->string('type', 10);
       $table->date('start');
       $table->date('end');
       $table->unsignedTinyInteger('approval');
@@ -23,8 +23,8 @@ return new class extends Migration
 
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('type')->references('id')->on('lk_workflow_status');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('type')->references('code')->on('lk_workflow_status');
       $table->foreign('attachment_id')->references('id')->on('lk_attachment_types')->onDelete('cascade');
     });
   }

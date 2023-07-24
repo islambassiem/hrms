@@ -13,12 +13,12 @@ return new class extends Migration
   {
     Schema::create('research', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
-      $table->unsignedTinyInteger('type')->nullable();
-      $table->unsignedTinyInteger('status')->nullable();
-      $table->unsignedTinyInteger('progress')->nullable();
-      $table->unsignedTinyInteger('nature')->nullable();
-      $table->unsignedTinyInteger('domain')->nullable();
+      $table->string('empid', 10);
+      $table->string('type', 10)->nullable();
+      $table->string('status', 10)->nullable();
+      $table->string('progress', 10)->nullable();
+      $table->string('nature', 10)->nullable();
+      $table->string('domain', 10)->nullable();
       $table->boolean('category_code')->default(1);
       $table->string('title')->nullable();
       $table->date('publishing_date')->nullable();
@@ -26,22 +26,22 @@ return new class extends Migration
       $table->string('isbn', 100)->nullable();
       $table->string('magazine')->nullable();
       $table->string('edition', 10)->nullable();
-      $table->unsignedSmallInteger('publication_location')->nullable();
+      $table->string('publication_location', 10)->nullable();
       $table->text('summary')->nullable();
-      $table->unsignedSmallInteger('lang')->nullable();
+      $table->string('lang', 10)->nullable();
       $table->string('publishing_url')->nullable();
       $table->string('key_words')->nullable();
       $table->timestamps();
 
 
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('type')->references('id')->on('lk_research_types');
-      $table->foreign('status')->references('id')->on('lk_research_status');
-      $table->foreign('progress')->references('id')->on('lk_research_progress');
-      $table->foreign('nature')->references('id')->on('lk_research_nature');
-      $table->foreign('domain')->references('id')->on('lk_reseach_domains');
-      $table->foreign('publication_location')->references('id')->on('lk_countries');
-      $table->foreign('lang')->references('id')->on('lk_research_languages');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('type')->references('code')->on('lk_research_types');
+      $table->foreign('status')->references('code')->on('lk_research_status');
+      $table->foreign('progress')->references('code')->on('lk_research_progress');
+      $table->foreign('nature')->references('code')->on('lk_research_nature');
+      $table->foreign('domain')->references('code')->on('lk_reseach_domains');
+      $table->foreign('publication_location')->references('code')->on('lk_countries');
+      $table->foreign('lang')->references('code')->on('lk_languages');
     });
   }
 

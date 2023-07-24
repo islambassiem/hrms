@@ -13,9 +13,9 @@ return new class extends Migration
   {
     Schema::create('identifications', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id')->unique();
+      $table->string('empid', 10)->unique();
       $table->string('number', 20)->unique();
-      $table->unsignedSmallInteger('position')->nullable();
+      $table->string('position', 10)->nullable();
       $table->date('expiry')->nullable();
       $table->unsignedBigInteger('attachement')->nullable();
       $table->timestamps();
@@ -23,8 +23,8 @@ return new class extends Migration
 
       // joins
 
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('position')->references('id')->on('lk_positions');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('position')->references('code')->on('lk_positions');
       $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });
   }

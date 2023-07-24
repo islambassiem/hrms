@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('short_leaves', function (Blueprint $table) {
       $table->id();
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->unsignedTinyInteger('type');
       $table->date('date');
       $table->time('start');
@@ -23,7 +23,8 @@ return new class extends Migration
       $table->timestamps();
 
       // joins
-      $table->foreign('approval')->references('id')->on('lk_workflow_status');
+      $table->foreign('empid')->references('empid')->on('lk_workflow_status');
+      $table->foreign('approval')->references('code')->on('lk_workflow_status');
       $table->foreign('attachment_id')->references('id')->on('attachments')->onDelete('cascade');
     });
   }

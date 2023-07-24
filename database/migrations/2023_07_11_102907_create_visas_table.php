@@ -13,16 +13,16 @@ return new class extends Migration
   {
     Schema::create('visas', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->unsignedSmallInteger('employee_id');
+      $table->string('empid', 10);
       $table->date('departure');
       $table->date('arrival');
-      $table->unsignedTinyInteger('status');
+      $table->string('status', 10);
       $table->timestamps();
 
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
-      $table->foreign('status')->references('id')->on('lk_workflow_status');
+      $table->foreign('empid')->references('empid')->on('employees');
+      $table->foreign('status')->references('code')->on('lk_workflow_status');
     });
   }
 

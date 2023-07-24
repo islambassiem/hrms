@@ -13,17 +13,17 @@ return new class extends Migration
   {
     Schema::create('dependents', function (Blueprint $table) {
       $table->unsignedTinyInteger('id', true);
-      $table->unsignedSmallInteger('employee_id');
+      $table->unsignedSmallInteger('empid', 10);
       $table->string('name')->nullable();
       $table->string('identification', 50)->nullable();
       $table->date('date_of_birth')->nullable();
-      $table->unsignedTinyInteger('relationship_id')->nullable();
+      $table->string('relationship_id', 10)->nullable();
       $table->boolean('ticket')->nullable();
       $table->unsignedBigInteger('attachement')->nullable();
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
       $table->foreign('relationship_id')->references('id')->on('lk_family_relationships');
       $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });

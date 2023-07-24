@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('passports', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->unsignedSmallInteger('employee_id')->unique();
+      $table->string('empid', 10)->unique();
       $table->string('passport_number')->nullable();
       $table->string('issuing_place', 100)->nullable();
       $table->date('issuing_date')->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('id')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
       $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });
   }
