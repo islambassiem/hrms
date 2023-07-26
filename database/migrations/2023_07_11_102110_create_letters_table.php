@@ -26,7 +26,7 @@ return new class extends Migration
 
       // joins
       $table->foreign('empid')->references('empid')->on('employees');
-      $table->foreign('attachment_id')->references('id')->on('attachments');
+      $table->foreign('attachment_id')->references('id')->on('attachments')->onDelete('cascade');
       $table->foreign('status')->references('code')->on('lk_workflow_status');
     });
   }

@@ -19,10 +19,10 @@ return new class extends Migration
       $table->string('college', 10)->nullable();
       $table->string('city', 50)->nullable();
       $table->string('section', 10)->nullable();
-      $table->string('major_id', 10)->nullable();
-      $table->string('minor_id', 10)->nullable();
-      $table->string('academic_rank_id', 10)->nullable();
-      $table->string('non_academic_rank_id', 10)->nullable();
+      $table->string('major_code', 10)->nullable();
+      $table->string('minor_code', 10)->nullable();
+      $table->string('academic_rank_code', 10)->nullable();
+      $table->string('non_academic_rank_code', 10)->nullable();
       $table->date('hiring_date', 10)->nullable();
       $table->date('joining_date')->nullable();
       $table->date('resignation_date')->nullable();
@@ -41,6 +41,8 @@ return new class extends Migration
       $table->foreign('city')->references('code')->on('lk_ksa_cities');
       $table->foreign('college')->references('code')->on('lk_ksa_colleges');
       $table->foreign('section')->references('code')->on('lk_academic_sections');
+      $table->foreign('major_code')->references('code')->on('lk_specialities');
+      $table->foreign('minor_code')->references('code')->on('lk_specialities');
       $table->foreign('academic_rank_code')->references('code')->on('lk_academic_ranks');
       $table->foreign('non_academic_rank_code')->references('code')->on('lk_non_academic_ranks');
       $table->foreign('appointment_type')->references('code')->on('lk_academic_staff_appointment_types');

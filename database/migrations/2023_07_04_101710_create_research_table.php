@@ -41,7 +41,7 @@ return new class extends Migration
       $table->foreign('nature')->references('code')->on('lk_research_nature');
       $table->foreign('domain')->references('code')->on('lk_reseach_domains');
       $table->foreign('publication_location')->references('code')->on('lk_countries');
-      $table->foreign('lang')->references('code')->on('lk_languages');
+      $table->foreign('lang')->references('code')->on('lk_research_languages');
     });
   }
 

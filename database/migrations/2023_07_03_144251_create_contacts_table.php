@@ -23,7 +23,7 @@ return new class extends Migration
       $table->timestamps();
 
       // joins
-      $table->foreign('employee_id')->references('empid')->on('employees');
+      $table->foreign('empid')->references('empid')->on('employees');
     });
   }
 

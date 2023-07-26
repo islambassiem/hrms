@@ -18,12 +18,12 @@ return new class extends Migration
       $table->date('date');
       $table->time('start');
       $table->time('end');
-      $table->unsignedTinyInteger('approval');
+      $table->string('approval', 10);
       $table->unsignedBigInteger('attachment_id')->nullable();
       $table->timestamps();
 
       // joins
-      $table->foreign('empid')->references('empid')->on('lk_workflow_status');
+      $table->foreign('empid')->references('empid')->on('employees');
       $table->foreign('approval')->references('code')->on('lk_workflow_status');
       $table->foreign('attachment_id')->references('id')->on('attachments')->onDelete('cascade');
     });

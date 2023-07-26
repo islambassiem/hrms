@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('dependents', function (Blueprint $table) {
       $table->unsignedTinyInteger('id', true);
-      $table->unsignedSmallInteger('empid', 10);
+      $table->string('empid', 10);
       $table->string('name')->nullable();
       $table->string('identification', 50)->nullable();
       $table->date('date_of_birth')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
 
       // joins
       $table->foreign('empid')->references('empid')->on('employees');
-      $table->foreign('relationship_id')->references('id')->on('lk_family_relationships');
+      $table->foreign('relationship_id')->references('code')->on('lk_family_relationships');
       $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });
   }

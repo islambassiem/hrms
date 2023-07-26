@@ -15,18 +15,19 @@ return new class extends Migration
       $table->id();
       $table->string('empid', 10);
       $table->string('name', 100)->nullable();
-      $table->unsignedTinyInteger('type')->nullable();
+      $table->string('type', 10)->nullable();
       $table->string('issuer', 100)->nullable();
       $table->string('year', 5)->nullable();
       $table->string('period', 100)->nullable();
       $table->string('city', 100)->nullable();
-      $table->unsignedSmallInteger('country')->nullable();
+      $table->string('country', 10)->nullable();
       $table->timestamps();
 
 
       // joins
       $table->foreign('empid')->references('empid')->on('employees');
-      $table->foreign('country')->references('id')->on('lk_countries');
+      $table->foreign('type')->references('code')->on('lk_course_types');
+      $table->foreign('country')->references('code')->on('lk_countries');
     });
   }
 

@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('qualifications', function (Blueprint $table) {
       $table->id();
-      $table->string('empid');
+      $table->string('empid', 10);
       $table->string('qualification', 10)->nullable();
       $table->string('major_id', 10)->nullable();
       $table->string('minor_id', 10)->nullable();
@@ -32,10 +32,10 @@ return new class extends Migration
       $table->timestamps();
 
       /*
-            -----------------------------------
-            |  Joins
-            -----------------------------------
-            */
+      -----------------------------------
+      |  Joins
+      -----------------------------------
+      */
 
       $table->foreign('empid')->references('empid')->on('employees');
       $table->foreign('qualification')->references('code')->on('lk_qualifications');
@@ -46,7 +46,7 @@ return new class extends Migration
       $table->foreign('study_type')->references('code')->on('lk_study_types');
       $table->foreign('graduation_country')->references('code')->on('lk_countries');
       $table->foreign('graduation_type')->references('code')->on('lk_qualification_types');
-      $table->foreign('attachement')->references('code')->on('attachments')->onDelete('cascade');
+      $table->foreign('attachement')->references('id')->on('attachments')->onDelete('cascade');
     });
   }
 
