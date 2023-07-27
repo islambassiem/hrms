@@ -3,11 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,13 @@ class User extends Authenticatable
   public function user()
   {
     return $this->belongsTo(Employee::class);
+  }
+
+  public function avatar(){
+    $path = 'assets/img/faces/'. Auth::user()->empid.'.jpeg';
+    if(file_exists(public_path($path))){
+      return asset($path);
+    }
+    return  'assets/img/faces/default.jpeg';
   }
 }
