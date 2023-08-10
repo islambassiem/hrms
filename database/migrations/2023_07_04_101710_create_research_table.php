@@ -31,6 +31,7 @@ return new class extends Migration
       $table->string('lang', 10)->nullable();
       $table->string('publishing_url')->nullable();
       $table->string('key_words')->nullable();
+			$tabke->string('PagesNumber')->nullable();
       $table->timestamps();
 
 
