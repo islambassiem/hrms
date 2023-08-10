@@ -1,4 +1,4 @@
--- CREATE VIEW TeachingStaffCourses AS
+-- CREATE VIEW TEACHINGSTAFFCOURSES AS
 SELECT 
 	e.empid AS EMPLOYEE_NO
 	, c.`name` AS CourseName

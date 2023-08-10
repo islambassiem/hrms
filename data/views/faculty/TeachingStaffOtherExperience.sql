@@ -1,4 +1,4 @@
--- CREATE VIEW TeachingStaffOtherExperience AS
+-- CREATE VIEW TEACHINGSTAFFOTHEREXPERIENCE AS
 SELECT 
 	emp.empid AS EMPLOYEE_NO
     , e.profession AS Profession
