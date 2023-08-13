@@ -16,4 +16,4 @@ SELECT
 	, e.empid AS EMPLOYEE_NO
 FROM qualifications q
 JOIN employees e ON e.id = q.employee_id
-WHERE e.active = 1 AND e.category IN (3, 8);
+WHERE e.active = 1 AND e.category NOT IN (1, 2, 4);

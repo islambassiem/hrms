@@ -34,4 +34,4 @@ JOIN identifications i ON i.employee_id = e.id
 JOIN passports p ON p.employee_id = e.id
 JOIN addresses a ON a.employee_id = e.id
 JOIN contacts c ON c.employee_id = e.id
-WHERE e.active = 1 AND e.category IN (3, 8);
+WHERE e.active = 1 AND e.category NOT IN (1, 2, 4);

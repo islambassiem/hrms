@@ -12,4 +12,4 @@ SELECT
 	, emp.empid AS EMPLOYEE_NO
 FROM experiences_non_ksa_institutions e
 JOIN employees emp ON emp.id = e.employee_id
-WHERE emp.active = 1 AND emp.category IN (3, 8);
+WHERE emp.active = 1 AND emp.category NOT IN (1, 2, 4);
