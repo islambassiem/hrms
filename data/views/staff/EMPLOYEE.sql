@@ -10,10 +10,10 @@ SELECT
     , e.third_name_en AS EnglishThirdName
     , e.family_name_en AS EnglishFourhtName
     , i.`number` AS IdentityNumber
-    , e.place_of_birth AS BirthPlaceCode
-    , e.date_of_birth AS BirthDate
+    , e.place_of_birth AS BirthPlace
+    , e.date_of_birth AS GregorianBirthDate
     , p.passport_number AS PassportNumber
-    , e.home_country_id AS HomeCountryIdentityNumber
+    , e.home_country_id AS OriginalHomeIDNumber
     , e.gender AS Gender
     , e.nationality AS NationalityCode
     , e.marital_status AS MaritalStatusCode
