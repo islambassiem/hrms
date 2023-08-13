@@ -17,5 +17,5 @@ SELECT
     , q.graduation_type AS ResearchTypeCode
     , q.attested AS IsLastQualificationAuthenticated
 FROM qualifications q
-JOIN employees e ON e.id = q.employee_id
+JOIN employees e ON e.id = q.empid
 WHERE e.active = 1 AND e.category IN (1, 2);

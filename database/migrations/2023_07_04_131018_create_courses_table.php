@@ -17,7 +17,7 @@ return new class extends Migration
       $table->string('name', 100)->nullable();
       $table->string('type', 10)->nullable();
       $table->string('issuer', 100)->nullable();
-      $table->string('year', 5)->nullable();
+      $table->date('courseDate')->nullable();
       $table->string('period', 100)->nullable();
       $table->string('city', 100)->nullable();
       $table->string('country', 10)->nullable();

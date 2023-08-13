@@ -11,5 +11,5 @@ SELECT
     , e.end_date AS EndWorkingDate
     , e.functional_tasks AS FunctionalTasks
 FROM experiences_non_ksa_institutions e
-JOIN employees emp ON emp.id = e.employee_id
+JOIN employees emp ON emp.id = e.empid
 WHERE emp.active = 1 AND emp.category IN (1, 2);

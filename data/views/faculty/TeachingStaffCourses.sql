@@ -4,10 +4,10 @@ SELECT
 	, c.`name` AS CourseName
     , c.`type` AS CourseType
     , c.`issuer` AS 'Issuer'
-    , c.`year` AS CertificateAwardingGYear
+    , year(c.`courseDate`) AS CertificateAwardingGYear
     , c.period AS CoursePeriod
     , c.city AS City
     , c.country AS CountryCode
 FROM courses c
-JOIN employees e ON e.id = c.employee_id
+JOIN employees e ON e.empid = c.empid
 WHERE e.active = 1 AND e.category IN (1, 2);

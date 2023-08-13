@@ -11,9 +11,9 @@ SELECT
     , q.graduation_college AS Faculty
     , q.graduation_date AS DateOfScientificDegree
     , YEAR(q.graduation_date) AS GraduationYear
-    , q.city AS CityCode
+    , q.city AS City
     , q.graduation_country AS CountryCode
 	, e.empid AS EMPLOYEE_NO
 FROM qualifications q
-JOIN employees e ON e.id = q.employee_id
+JOIN employees e ON e.id = q.empid
 WHERE e.active = 1 AND e.category NOT IN (1, 2, 4);

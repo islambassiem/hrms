@@ -30,8 +30,8 @@ SELECT
     , e.special_need AS SpecialNeedCode
     , e.updated_at AS LastUpdateDate
 FROM employees e
-JOIN identifications i ON i.employee_id = e.id
-JOIN passports p ON p.employee_id = e.id
-JOIN addresses a ON a.employee_id = e.id
-JOIN contacts c ON c.employee_id = e.id
+JOIN identifications i ON i.empid = e.id
+JOIN passports p ON p.empid = e.id
+JOIN addresses a ON a.empid = e.id
+JOIN contacts c ON c.empid = e.id
 WHERE e.active = 1 AND e.category IN (1, 2);

@@ -18,7 +18,7 @@ SELECT
     , r.lang AS 'Language'
     , r.publishing_url AS PublishingURL
     , r.key_words AS KeyWords
-		, r.PagesNumber AS PagesNumber
+	, r.PagesNumber AS PagesNumber
 FROM research r
-JOIN employees e ON e.id = r.employee_id
+JOIN employees e ON e.id = r.empid
 WHERE e.active = 1 AND e.category IN (1, 2);
