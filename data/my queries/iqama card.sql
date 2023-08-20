@@ -1,5 +1,7 @@
+set @i:=0;
 select 
-	e.empid
+	@i:=@i+1 '#'
+ , e.empid
  , concat(e.first_name , ' '  , coalesce(e.middle_name, " ") , ' '  , coalesce(e.third_name, " "), ' '  , e.last_name) as name
  , n.id_num
  from employees e 

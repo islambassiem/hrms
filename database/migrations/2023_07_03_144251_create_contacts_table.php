@@ -13,13 +13,15 @@ return new class extends Migration
   {
     Schema::create('contacts', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
-      $table->string('empid', 10)->unique();
-      $table->string('mobile', 50)->nullable();
-      $table->string('home', 50)->nullable();
-      $table->string('personal_email', 100)->nullable();
-      $table->string('official_email', 100)->nullable();
-      $table->string('office_number', 10)->nullable();
-      $table->string('extention', 10)->nullable();
+      $table->string('contact', 100);
+      $table->string('contact_type', 50);
+      // $table->string('empid', 10)->unique();
+      // $table->string('mobile', 50)->nullable();
+      // $table->string('home', 50)->nullable();
+      // $table->string('personal_email', 100)->nullable();
+      // $table->string('official_email', 100)->nullable();
+      // $table->string('office_number', 10)->nullable();
+      // $table->string('extention', 10)->nullable();
       $table->timestamps();
 
       // joins
