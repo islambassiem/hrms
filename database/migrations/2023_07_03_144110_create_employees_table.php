@@ -14,6 +14,7 @@ return new class extends Migration
     Schema::create('employees', function (Blueprint $table) {
       $table->unsignedSmallInteger('id', true);
       $table->string('empid', 10)->unique();
+      $table->string('head', 10);
       $table->string('first_name_en', 50)->nullable();
       $table->string('middle_name_en', 50)->nullable();
       $table->string('third_name_en', 50)->nullable();
