@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Leave;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Leave\EmployeeSickLeaveCycle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;

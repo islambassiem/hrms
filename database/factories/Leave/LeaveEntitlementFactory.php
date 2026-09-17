@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories\Leave;
 
 use App\Enums\LeaveEntitlementEnum;
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveEntitlement;
 use App\Models\Leave\LeavePeriod;
 use App\Models\Leave\LeavePolicy;

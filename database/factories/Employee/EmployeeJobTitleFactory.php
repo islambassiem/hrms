@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Employees;
+namespace Database\Factories\Employee;
 
-use App\Models\Employees\Employee;
-use App\Models\Employees\EmployeeJobTitle;
+use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeJobTitle;
 use App\Models\Lookup\JobTitle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Database\Factories\Employees;
+namespace Database\Factories\Employee;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Lookup\Category;
 use App\Models\Lookup\Country;
 use App\Models\Lookup\Department;

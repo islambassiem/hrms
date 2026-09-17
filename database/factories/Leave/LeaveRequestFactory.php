@@ -3,7 +3,7 @@
 namespace Database\Factories\Leave;
 
 use App\Enums\WorkflowActionEnum;
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveRequest;
 use App\Models\Lookup\LeaveType;
 use Illuminate\Database\Eloquent\Factories\Factory;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Database\Factories\Workflow;
 
 use App\Enums\WorkflowActionEnum;
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Workflow\WorkflowAction;
 use App\Models\Workflow\WorkflowStep;
 use Illuminate\Database\Eloquent\Factories\Factory;

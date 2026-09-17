@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories\Payroll;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Lookup\Bank;
 use App\Models\Payroll\EmployeeBank;
 use Illuminate\Database\Eloquent\Factories\Factory;

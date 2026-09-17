@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories\Leave;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveBalance;
 use App\Models\Lookup\LeaveType;
 use Illuminate\Database\Eloquent\Factories\Factory;

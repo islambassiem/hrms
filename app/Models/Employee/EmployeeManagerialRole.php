@@ -2,30 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Employees;
+namespace App\Models\Employee;
 
 use App\Concerns\UserStamp;
-use Database\Factories\Employees\EmployeeAddressFactory;
+use Database\Factories\Employee\EmployeeManagerialRoleFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
     'employee_id',
-    'short_address',
-    'building_number',
-    'street',
-    'secondary_number',
-    'district',
-    'postal_code',
-    'city',
+    'managerial_role_id',
+    'start_date',
+    'end_date',
     'created_by',
     'updated_by',
 ])]
-
-class EmployeeAddress extends Model
+class EmployeeManagerialRole extends Model
 {
-    /** @use HasFactory<EmployeeAddressFactory> */
+    /** @use HasFactory<EmployeeManagerialRoleFactory> */
     use HasFactory;
 
     use UserStamp;
