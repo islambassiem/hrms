@@ -70,6 +70,7 @@
             "Composer\\Config::disableProcessTimeout",
             "npm run check",
             "npm run types:check",
+            "npm run build",
             "./vendor/bin/phpstan analyse",
             "./vendor/bin/rector",
             "@test"
