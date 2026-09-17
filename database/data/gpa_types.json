@@ -1,0 +1,22 @@
+[
+    {
+        "code": "1",
+        "name_en": "Five-Point Cumulative GPA System",
+        "name_ar": "نظام المعدل التراكمي المكون من خمس نقاط"
+    },
+    {
+        "code": "2",
+        "name_en": "Four-Point Cumulative GPA System",
+        "name_ar": "نظام المعدل التراكمي المكون من أربع نقاط"
+    },
+    {
+        "code": "3",
+        "name_en": "Percentage Cumulative GPA System",
+        "name_ar": "نظام المعدل التراكمي المئوي"
+    },
+    {
+        "code": "9",
+        "name_en": "Other",
+        "name_ar": "أخرى"
+    }
+]

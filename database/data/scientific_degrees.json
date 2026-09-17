@@ -1,0 +1,127 @@
+[
+  {
+    "code": "1",
+    "name_en": "Intermediate Diploma",
+    "name_ar": "دبلوم متوسط"
+  },
+  {
+    "code": "10",
+    "name_en": "Board Certified",
+    "name_ar": "البورد"
+  },
+  {
+    "code": "11",
+    "name_en": "High Secondary School",
+    "name_ar": "الثانوية العامة"
+  },
+  {
+    "code": "12",
+    "name_en": "Middle Intermediate School",
+    "name_ar": "المتوسطة"
+  },
+  {
+    "code": "13",
+    "name_en": "Primary School",
+    "name_ar": "الابتدائية"
+  },
+  {
+    "code": "14",
+    "name_en": "Illiterate",
+    "name_ar": "أمي"
+  },
+  {
+    "code": "15",
+    "name_en": "Associate Diploma",
+    "name_ar": "دبلوم مشارك"
+  },
+  {
+    "code": "16",
+    "name_en": "Certificate of Completion of Military Vocational Training",
+    "name_ar": "شهادة إتمام التدريب العسكري المهني"
+  },
+  {
+    "code": "17",
+    "name_en": "Diploma of Secondary Industrial Institutes",
+    "name_ar": "شهادة دبلوم المعاهد الصناعية الثانوية"
+  },
+  {
+    "code": "18",
+    "name_en": "Certificate of Completion the Program",
+    "name_ar": "شهادة إتمام برنامج"
+  },
+  {
+    "code": "19",
+    "name_en": "Industrial High Secondary School",
+    "name_ar": "ثانوية صناعية"
+  },
+  {
+    "code": "2",
+    "name_en": "Bachelors Degree",
+    "name_ar": "بكالوريوس"
+  },
+  {
+    "code": "20",
+    "name_en": "Commercial High Secondary School",
+    "name_ar": "ثانوية تجارية"
+  },
+  {
+    "code": "21",
+    "name_en": "Technical High Secondary School",
+    "name_ar": "ثانوية فنية"
+  },
+  {
+    "code": "22",
+    "name_en": "Licence",
+    "name_ar": "ليسانس"
+  },
+  {
+    "code": "23",
+    "name_en": "Advanced Diploma",
+    "name_ar": "دبلوم متقدم"
+  },
+  {
+    "code": "24",
+    "name_en": "Executive Master's Degree",
+    "name_ar": "ماجستير تنفيذي"
+  },
+  {
+    "code": "25",
+    "name_en": "Training course",
+    "name_ar": "دورة تدريبية"
+  },
+  {
+    "code": "3",
+    "name_en": "Postgraduate Diploma",
+    "name_ar": "دبلوم عال"
+  },
+  {
+    "code": "4",
+    "name_en": "Masters Degree",
+    "name_ar": "ماجستير"
+  },
+  {
+    "code": "5",
+    "name_en": "Doctorate - PhD",
+    "name_ar": "دكتوراه"
+  },
+  {
+    "code": "6",
+    "name_en": "Fellowship",
+    "name_ar": "زمالة"
+  },
+  {
+    "code": "7",
+    "name_en": "Preparatory Year",
+    "name_ar": "السنة التحضيرية"
+  },
+  {
+    "code": "8",
+    "name_en": "Not Applicable",
+    "name_ar": "لا ينطبق"
+  },
+  {
+    "code": "9",
+    "name_en": "Other",
+    "name_ar": "أخرى"
+  }
+]

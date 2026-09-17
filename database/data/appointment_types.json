@@ -1,0 +1,32 @@
+[
+  {
+    "code": "1",
+    "name_en": "Official Position (Faculty Members Cadre)",
+    "name_ar": "وظيفة رسمية (كادر أعضاء هيئة التدريس)"
+  },
+  {
+    "code": "2",
+    "name_en": "Contract Employee",
+    "name_ar": "متعاقد"
+  },
+  {
+    "code": "3",
+    "name_en": "Collaborator",
+    "name_ar": "متعاون"
+  },
+  {
+    "code": "4",
+    "name_en": "Transferred Employee",
+    "name_ar": "منقول"
+  },
+  {
+    "code": "8",
+    "name_en": "Not Applicable",
+    "name_ar": "لاينطبق"
+  },
+  {
+    "code": "9",
+    "name_en": "Not Specified",
+    "name_ar": "غير محدد"
+  }
+]

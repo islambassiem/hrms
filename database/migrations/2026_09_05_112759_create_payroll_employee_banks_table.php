@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('payroll_employee_banks', function (Blueprint $table): void {
+            $table->id();
+            $table->foreignId('employee_id')->unique()->constrained('employees');
+            $table->foreignId('bank_id')->constrained('lookup_payroll_banks');
+            $table->string('iban', 34)->unique();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('payroll_employee_banks');
+    }
+};

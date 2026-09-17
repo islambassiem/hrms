@@ -1,0 +1,57 @@
+[
+    {
+        "code": "ALBI",
+        "name_en": "Albilad Bank",
+        "name_ar": "بنك البلاد"
+    },
+    {
+        "code": "ARNB",
+        "name_en": "Arab National Bank",
+        "name_ar": "البنك العربي الوطني"
+    },
+    {
+        "code": "BJAZ",
+        "name_en": "Aljazeera Bank",
+        "name_ar": "بنك الجزيرة"
+    },
+    {
+        "code": "BSFR",
+        "name_en": "Saudi Faransi Bank",
+        "name_ar": "البنك السعودي الفرنسي"
+    },
+    {
+        "code": "INMA",
+        "name_en": "Inmaa Bank",
+        "name_ar": "بنك الانماء"
+    },
+    {
+        "code": "NCBK",
+        "name_en": "National Commercial Bank",
+        "name_ar": "البنك الأهلي التجاري"
+    },
+    {
+        "code": "RIBL",
+        "name_en": "Riyadh Bank",
+        "name_ar": "بنك الرياض"
+    },
+    {
+        "code": "RJHI",
+        "name_en": "Alrajhi Bank",
+        "name_ar": "بنك الراجحي"
+    },
+    {
+        "code": "SABB",
+        "name_en": "Saudi British Bank",
+        "name_ar": "البنك السعودي البريطاني"
+    },
+    {
+        "code": "SAMB",
+        "name_en": "Samba",
+        "name_ar": "بنك سامبا"
+    },
+    {
+        "code": "SIBC",
+        "name_en": "Saudi Investment Bank",
+        "name_ar": "البنك السعودي للاستثمار"
+    }
+]

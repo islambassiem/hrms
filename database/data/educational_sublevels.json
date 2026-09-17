@@ -1,0 +1,97 @@
+[
+  {
+    "code": "010",
+    "name_en": "Early Childhood Development (Nursery)",
+    "name_ar": "تنمية الطفولة المبكرة (حضانة)"
+  },
+  {
+    "code": "020",
+    "name_en": "Pre-Primary Education (Kindergarten)",
+    "name_ar": "تعليم ما قبل الابتدائي (رياض الأطفال)"
+  },
+  {
+    "code": "030",
+    "name_en": "Primary Education without Completion of the Level (Early Grades)",
+    "name_ar": "الابتدائية دون إتمام المستوى (الصفوف الأولية)"
+  },
+  {
+    "code": "100",
+    "name_en": "Primary Education",
+    "name_ar": "تعليم ابتدائي"
+  },
+  {
+    "code": "244",
+    "name_en": "General Intermediate Education",
+    "name_ar": "تعليم متوسط (عام)"
+  },
+  {
+    "code": "254",
+    "name_en": "Vocational Intermediate Education",
+    "name_ar": "تعليم متوسط (مهني)"
+  },
+  {
+    "code": "344",
+    "name_en": "General Secondary Education",
+    "name_ar": "تعليم ثانوي (عام)"
+  },
+  {
+    "code": "354",
+    "name_en": "Vocational Secondary Education",
+    "name_ar": "تعليم ثانوي (مهني)"
+  },
+  {
+    "code": "444",
+    "name_en": "General Associate Diploma",
+    "name_ar": "دبلوم مشارك (عام)"
+  },
+  {
+    "code": "454",
+    "name_en": "Vocational Associate Diploma",
+    "name_ar": "دبلوم مشارك (مهني)"
+  },
+  {
+    "code": "544",
+    "name_en": "General Intermediate Diploma",
+    "name_ar": "دبلوم متوسط (عام)"
+  },
+  {
+    "code": "554",
+    "name_en": "Vocational Intermediate Diploma",
+    "name_ar": "دبلوم متوسط (مهني)"
+  },
+  {
+    "code": "645",
+    "name_en": "Academic Bachelor's Degree (3–4 Years)",
+    "name_ar": "بكالوريوس أكاديمي 3-4 سنوات"
+  },
+  {
+    "code": "646",
+    "name_en": "Academic Bachelor's Degree (5 Years)",
+    "name_ar": "بكالوريوس أكاديمي 5 سنوات"
+  },
+  {
+    "code": "656",
+    "name_en": "Technical Bachelor's Degree (5 Years)",
+    "name_ar": "بكالوريوس فني 5 سنوات"
+  },
+  {
+    "code": "667",
+    "name_en": "Higher Diploma",
+    "name_ar": "دبلوم عالي"
+  },
+  {
+    "code": "746",
+    "name_en": "6-Year Bachelor's Degree Programs",
+    "name_ar": "برامج البكالوريوس 6 سنوات"
+  },
+  {
+    "code": "747",
+    "name_en": "Master's Degree",
+    "name_ar": "ماجستير"
+  },
+  {
+    "code": "844",
+    "name_en": "Doctorate",
+    "name_ar": "دكتوراه"
+  }
+]

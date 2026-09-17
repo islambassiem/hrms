@@ -1,0 +1,32 @@
+[
+    {
+        "code": "1",
+        "name_en": "Basic Salary",
+        "name_ar": "الراتب الاساسي"
+    },
+    {
+        "code": "2",
+        "name_en": "Housing Allowance",
+        "name_ar": "بدل السكن"
+    },
+    {
+        "code": "3",
+        "name_en": "Transportation Allowance",
+        "name_ar": "بدل المواصلات"
+    },
+    {
+        "code": "4",
+        "name_en": "Food Allowance",
+        "name_ar": "بدل الطعام"
+    },
+    {
+        "code": "5",
+        "name_en": "Ticket Allowance",
+        "name_ar": "بدل التذاكر"
+    },
+    {
+        "code": "6",
+        "name_en": "GOSI",
+        "name_ar": "التامينات"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "code": "1",
+        "name_en": "Single",
+        "name_ar": "أعزب"
+    },
+    {
+        "code": "2",
+        "name_en": "Married",
+        "name_ar": "متزوج"
+    },
+    {
+        "code": "3",
+        "name_en": "Other",
+        "name_ar": "آخر"
+    }
+]

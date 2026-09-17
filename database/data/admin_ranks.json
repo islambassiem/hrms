@@ -1,0 +1,232 @@
+[
+  {
+    "code": "01",
+    "name_en": "Official Position - Grade One",
+    "name_ar": "وظيفة رسمية - المرتبة الأولى"
+  },
+  {
+    "code": "02",
+    "name_en": "Official Position - Grade Two",
+    "name_ar": "وظيفة رسمية - المرتبة الثانية"
+  },
+  {
+    "code": "03",
+    "name_en": "Official Position - Grade Three",
+    "name_ar": "وظيفة رسمية - المرتبة الثالثة"
+  },
+  {
+    "code": "04",
+    "name_en": "Official Position - Grade Four",
+    "name_ar": "وظيفة رسمية - المرتبة الرابعة"
+  },
+  {
+    "code": "05",
+    "name_en": "Official Position - Grade Five",
+    "name_ar": "وظيفة رسمية - المرتبة الخامسة"
+  },
+  {
+    "code": "06",
+    "name_en": "Official Position - Grade Six",
+    "name_ar": "وظيفة رسمية - المرتبة السادسة"
+  },
+  {
+    "code": "07",
+    "name_en": "Official Position - Grade Seven",
+    "name_ar": "وظيفة رسمية - المرتبة السابعة"
+  },
+  {
+    "code": "08",
+    "name_en": "Official Position - Grade Eight",
+    "name_ar": "وظيفة رسمية - المرتبة الثامنة"
+  },
+  {
+    "code": "09",
+    "name_en": "Official Position - Grade Nine",
+    "name_ar": "وظيفة رسمية - المرتبة التاسعة"
+  },
+  {
+    "code": "10",
+    "name_en": "Official Position - Grade Ten",
+    "name_ar": "وظيفة رسمية - المرتبة العاشرة"
+  },
+  {
+    "code": "11",
+    "name_en": "Official Position - Grade Eleven",
+    "name_ar": "وظيفة رسمية - المرتبة الحادية عشر"
+  },
+  {
+    "code": "12",
+    "name_en": "Official Position - Grade Twelve",
+    "name_ar": "وظيفة رسمية - المرتبة الثانية عشر"
+  },
+  {
+    "code": "13",
+    "name_en": "Official Position - Grade Thirteen",
+    "name_ar": "وظيفة رسمية - المرتبة الثالثة عشر"
+  },
+  {
+    "code": "14",
+    "name_en": "Official Position - Grade Fourteen",
+    "name_ar": "وظيفة رسمية - المرتبة الرابعة عشر"
+  },
+  {
+    "code": "15",
+    "name_en": "Official Position - Grade Fifteen",
+    "name_ar": "وظيفة رسمية - المرتبة الخامسة عشر"
+  },
+  {
+    "code": "16",
+    "name_en": "Excellent Grade",
+    "name_ar": "المرتبة الممتازة"
+  },
+  {
+    "code": "17",
+    "name_en": "Deputy Minister",
+    "name_ar": "نائب الوزير"
+  },
+  {
+    "code": "18",
+    "name_en": "Minister and Equivalent",
+    "name_ar": "وزير ومن في مرتبته"
+  },
+  {
+    "code": "19",
+    "name_en": "Advisor",
+    "name_ar": "مستشار"
+  },
+  {
+    "code": "20",
+    "name_en": "University President",
+    "name_ar": "رئيس الجامعة"
+  },
+  {
+    "code": "21",
+    "name_en": "Workers Category - A",
+    "name_ar": "بند العمال – فئة أ"
+  },
+  {
+    "code": "22",
+    "name_en": "Workers Category - B",
+    "name_ar": "بند العمال – فئة ب"
+  },
+  {
+    "code": "23",
+    "name_en": "Workers Category - C",
+    "name_ar": "بند العمال – فئة ج"
+  },
+  {
+    "code": "24",
+    "name_en": "Workers Category - D",
+    "name_ar": "بند العمال – فئة د"
+  },
+  {
+    "code": "25",
+    "name_en": "Wages Category",
+    "name_ar": "بند أجور"
+  },
+  {
+    "code": "26",
+    "name_en": "Operations Category",
+    "name_ar": "بند تشغيل"
+  },
+  {
+    "code": "31",
+    "name_en": "Employee - Grade 31",
+    "name_ar": "مستخدم – الدرجة 31"
+  },
+  {
+    "code": "32",
+    "name_en": "Employee - Grade 32",
+    "name_ar": "مستخدم – الدرجة 32"
+  },
+  {
+    "code": "33",
+    "name_en": "Employee - Grade 33",
+    "name_ar": "مستخدم – الدرجة 33"
+  },
+  {
+    "code": "51",
+    "name_en": "Category 105 - Daily Wage",
+    "name_ar": "بند105– أجر يومي"
+  },
+  {
+    "code": "60",
+    "name_en": "Deputy Physician",
+    "name_ar": "طبيب نائب"
+  },
+  {
+    "code": "61",
+    "name_en": "Health Positions - Consultant Physician",
+    "name_ar": "وظائف صحية – طبيب استشاري"
+  },
+  {
+    "code": "62",
+    "name_en": "Health Positions - Specialist Physician",
+    "name_ar": "وظائف صحية – طبيب اختصاصي"
+  },
+  {
+    "code": "63",
+    "name_en": "Health Positions - Resident Physician",
+    "name_ar": "وظائف صحية – طبيب مقيم"
+  },
+  {
+    "code": "64",
+    "name_en": "Health Positions - Pharmacist",
+    "name_ar": "وظائف صحية – صيدلي"
+  },
+  {
+    "code": "65",
+    "name_en": "Health Positions - Specialist",
+    "name_ar": "وظائف صحية – اختصاصي"
+  },
+  {
+    "code": "66",
+    "name_en": "Health Positions - Technician",
+    "name_ar": "وظائف صحية – فني"
+  },
+  {
+    "code": "67",
+    "name_en": "Health Positions - Health Assistant A",
+    "name_ar": "وظائف صحية – مساعد صحي أ"
+  },
+  {
+    "code": "68",
+    "name_en": "Health Positions - Health Assistant B",
+    "name_ar": "وظائف صحية – مساعد صحي ب"
+  },
+  {
+    "code": "69",
+    "name_en": "Senior Specialist",
+    "name_ar": "أخصائي أول"
+  },
+  {
+    "code": "70",
+    "name_en": "Consultant Specialist",
+    "name_ar": "أخصائي أستشاري"
+  },
+  {
+    "code": "71",
+    "name_en": "Senior Pharmacist",
+    "name_ar": "صيدلي أول"
+  },
+  {
+    "code": "72",
+    "name_en": "Consultant Pharmacist",
+    "name_ar": "صيدلي أستشاري"
+  },
+  {
+    "code": "73",
+    "name_en": "Contract Employee",
+    "name_ar": "متعاقد"
+  },
+  {
+    "code": "98",
+    "name_en": "Not Applicable",
+    "name_ar": "لاينطبق"
+  },
+  {
+    "code": "99",
+    "name_en": "Other",
+    "name_ar": "أخرى"
+  }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "code": "0",
+        "name_en": "Very Good with Third Class Honors",
+        "name_ar": "جيد جداً مع مرتبة الشرف الثالثة"
+    },
+    {
+        "code": "1",
+        "name_en": "Excellent with First Class Honors",
+        "name_ar": "ممتاز مع مرتبة الشرف الأولى"
+    },
+    {
+        "code": "2",
+        "name_en": "Excellent with Second Class Honors",
+        "name_ar": "ممتاز مع مرتبة الشرف الثانية"
+    },
+    {
+        "code": "3",
+        "name_en": "Excellent",
+        "name_ar": "ممتاز"
+    },
+    {
+        "code": "4",
+        "name_en": "Very Good with Second Class Honors",
+        "name_ar": "جيد جداً مع مرتبة الشرف الثانية"
+    },
+    {
+        "code": "5",
+        "name_en": "Very Good",
+        "name_ar": "جيد جداً"
+    },
+    {
+        "code": "6",
+        "name_en": "Good",
+        "name_ar": "جيد"
+    },
+    {
+        "code": "7",
+        "name_en": "Pass",
+        "name_ar": "مقبول"
+    },
+    {
+        "code": "8",
+        "name_en": "Not Applicable",
+        "name_ar": "لا ينطبق"
+    },
+    {
+        "code": "9",
+        "name_en": "Other",
+        "name_ar": "أخرى"
+    }
+]

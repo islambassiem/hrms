@@ -16,7 +16,7 @@ export default function ConfirmPassword() {
         <>
             <Head title="Confirm password" />
 
-            <PasskeyVerify
+            {/* <PasskeyVerify
                 routes={{
                     options: confirmOptions(),
                     submit: confirmStore(),
@@ -24,7 +24,7 @@ export default function ConfirmPassword() {
                 label="Confirm with passkey"
                 loadingLabel="Confirming..."
                 separator="Or confirm with password"
-            />
+            /> */}
 
             <Form {...store.form()} resetOnSuccess={['password']}>
                 {({ processing, errors }) => (

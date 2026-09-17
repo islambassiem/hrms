@@ -1,0 +1,22 @@
+[
+    {
+        "code": "1",
+        "name_en": "Regular",
+        "name_ar": "اعتيادي"
+    },
+    {
+        "code": "2",
+        "name_en": "Bonus",
+        "name_ar": "مكافأة"
+    },
+    {
+        "code": "3",
+        "name_en": "Correction",
+        "name_ar": "تصحيح"
+    },
+    {
+        "code": "4",
+        "name_en": "Off Cycle",
+        "name_ar": "خارج الدورة"
+    }
+]

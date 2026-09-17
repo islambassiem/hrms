@@ -1,0 +1,17 @@
+[
+    {
+        "code": "1",
+        "name_en": "Open",
+        "name_ar": "مفتوح"
+    },
+    {
+        "code": "2",
+        "name_en": "Processing",
+        "name_ar": "قيد التنفيذ"
+    },
+    {
+        "code": "3",
+        "name_en": "Closed",
+        "name_ar": "مغلق"
+    }
+]

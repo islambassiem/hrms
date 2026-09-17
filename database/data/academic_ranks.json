@@ -1,0 +1,127 @@
+[
+  {
+    "code": "11",
+    "name_en": "Professor",
+    "name_ar": "أستاذ"
+  },
+  {
+    "code": "12",
+    "name_en": "Associate Professor",
+    "name_ar": "أستاذ مشارك"
+  },
+  {
+    "code": "13",
+    "name_en": "Assistant Professor",
+    "name_ar": "أستاذ مساعد"
+  },
+  {
+    "code": "14",
+    "name_en": "Lecturer",
+    "name_ar": "محاضر"
+  },
+  {
+    "code": "15",
+    "name_en": "Teaching Assistant",
+    "name_ar": "معيد"
+  },
+  {
+    "code": "16",
+    "name_en": "Language Teacher",
+    "name_ar": "مدرس لغة"
+  },
+  {
+    "code": "17",
+    "name_en": "Research Assistant A",
+    "name_ar": "مساعد باحث أ"
+  },
+  {
+    "code": "18",
+    "name_en": "Research Assistant B",
+    "name_ar": "مساعد باحث ب"
+  },
+  {
+    "code": "19",
+    "name_en": "Assistant Teacher",
+    "name_ar": "مساعد مدرس"
+  },
+  {
+    "code": "20",
+    "name_en": "Teacher",
+    "name_ar": "مدرس"
+  },
+  {
+    "code": "21",
+    "name_en": "Teacher - Level One",
+    "name_ar": "مدرس – مستوى أول"
+  },
+  {
+    "code": "22",
+    "name_en": "Teacher - Level Two",
+    "name_ar": "مدرس – مستوى ثاني"
+  },
+  {
+    "code": "23",
+    "name_en": "Teacher - Level Three",
+    "name_ar": "مدرس – مستوى ثالث"
+  },
+  {
+    "code": "24",
+    "name_en": "Teacher - Level Four",
+    "name_ar": "مدرس – مستوى رابع"
+  },
+  {
+    "code": "25",
+    "name_en": "Teacher - Level Five",
+    "name_ar": "مدرس – مستوى خامس"
+  },
+  {
+    "code": "26",
+    "name_en": "Teacher - Level Six",
+    "name_ar": "مدرس – مستوى سادس"
+  },
+  {
+    "code": "27",
+    "name_en": "Assistant Teacher / Teacher",
+    "name_ar": "مساعد معلم /معلم"
+  },
+  {
+    "code": "28",
+    "name_en": "Practicing Teacher",
+    "name_ar": "معلم ممارس"
+  },
+  {
+    "code": "29",
+    "name_en": "Advanced Teacher",
+    "name_ar": "معلم متقدم"
+  },
+  {
+    "code": "30",
+    "name_en": "Expert Teacher",
+    "name_ar": "معلم خبير"
+  },
+  {
+    "code": "31",
+    "name_en": "Trainer",
+    "name_ar": "مدرب"
+  },
+  {
+    "code": "32",
+    "name_en": "Assistant Trainer",
+    "name_ar": "مساعد مدرب"
+  },
+  {
+    "code": "33",
+    "name_en": "Technician",
+    "name_ar": "فني"
+  },
+  {
+    "code": "98",
+    "name_en": "Not Applicable",
+    "name_ar": "لاينطبق"
+  },
+  {
+    "code": "99",
+    "name_en": "Other",
+    "name_ar": "أخرى"
+  }
+]

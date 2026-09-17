@@ -1,0 +1,57 @@
+[
+    {
+        "code": "0",
+        "name_en": "Full-Time",
+        "name_ar": "انتظام كلي"
+    },
+    {
+        "code": "1",
+        "name_en": "Part-Time",
+        "name_ar": "انتظام جزئي"
+    },
+    {
+        "code": "10",
+        "name_en": "Blended Learning",
+        "name_ar": "تعليم مدمج"
+    },
+    {
+        "code": "2",
+        "name_en": "Affiliation",
+        "name_ar": "انتساب"
+    },
+    {
+        "code": "3",
+        "name_en": "Advanced Affiliation",
+        "name_ar": "انتساب مطور"
+    },
+    {
+        "code": "4",
+        "name_en": "Parallel Education",
+        "name_ar": "تعليم موازي"
+    },
+    {
+        "code": "5",
+        "name_en": "Distance Learning",
+        "name_ar": "تعليم عن بعد"
+    },
+    {
+        "code": "6",
+        "name_en": "Auditing Student",
+        "name_ar": "مستمع"
+    },
+    {
+        "code": "7",
+        "name_en": "Bridging Program",
+        "name_ar": "تجسير"
+    },
+    {
+        "code": "8",
+        "name_en": "Unregistered",
+        "name_ar": "غير مقيد"
+    },
+    {
+        "code": "9",
+        "name_en": "Other",
+        "name_ar": "أخرى"
+    }
+]

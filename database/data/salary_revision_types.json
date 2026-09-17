@@ -1,0 +1,27 @@
+[
+    {
+        "code": "1",
+        "name_en": "Increment",
+        "name_ar": "زيادة"
+    },
+    {
+        "code": "2",
+        "name_en": "Promotion",
+        "name_ar": "ترقية"
+    },
+    {
+        "code": "3",
+        "name_en": "Adjustment",
+        "name_ar": "تعديل"
+    },
+    {
+        "code": "4",
+        "name_en": "Demotion",
+        "name_ar": "خفض"
+    },
+    {
+        "code": "5",
+        "name_en": "Initial",
+        "name_ar": "البداية"
+    }
+]

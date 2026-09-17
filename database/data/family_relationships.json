@@ -1,0 +1,42 @@
+[
+    {
+        "code": "0",
+        "name_en": "Father",
+        "name_ar": "أب"
+    },
+    {
+        "code": "1",
+        "name_en": "Mother",
+        "name_ar": "أم"
+    },
+    {
+        "code": "2",
+        "name_en": "Sister",
+        "name_ar": "أخت"
+    },
+    {
+        "code": "3",
+        "name_en": "Brother",
+        "name_ar": "أخ"
+    },
+    {
+        "code": "4",
+        "name_en": "Son",
+        "name_ar": "ابن"
+    },
+    {
+        "code": "5",
+        "name_en": "Daughter",
+        "name_ar": "بنت"
+    },
+    {
+        "code": "8",
+        "name_en": "Uncle",
+        "name_ar": "عم"
+    },
+    {
+        "code": "9",
+        "name_en": "Other",
+        "name_ar": "أخرى"
+    }
+]

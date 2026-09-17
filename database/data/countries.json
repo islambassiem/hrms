@@ -1,0 +1,1122 @@
+[
+    {
+        "code": "101",
+        "name_en": "Saudi Arabia",
+        "name_ar": "المملكة العربية السعودية"
+    },
+    {
+        "code": "102",
+        "name_en": "The United Arab Emirates",
+        "name_ar": "الإمارات العربية المتحدة"
+    },
+    {
+        "code": "103",
+        "name_en": "Bahrain",
+        "name_ar": "البحرين"
+    },
+    {
+        "code": "104",
+        "name_en": "Kuwait",
+        "name_ar": "الكويت"
+    },
+    {
+        "code": "105",
+        "name_en": "Oman",
+        "name_ar": "عُمان"
+    },
+    {
+        "code": "106",
+        "name_en": "Qatar",
+        "name_ar": "قطر"
+    },
+    {
+        "code": "107",
+        "name_en": "Jordan",
+        "name_ar": "الأردن"
+    },
+    {
+        "code": "108",
+        "name_en": "Syria",
+        "name_ar": "سوريا"
+    },
+    {
+        "code": "109",
+        "name_en": "Iraq",
+        "name_ar": "العراق"
+    },
+    {
+        "code": "110",
+        "name_en": "Palestine",
+        "name_ar": "فلسطين"
+    },
+    {
+        "code": "111",
+        "name_en": "Lebanon",
+        "name_ar": "لبنان"
+    },
+    {
+        "code": "112",
+        "name_en": "Yemen",
+        "name_ar": "اليمن"
+    },
+    {
+        "code": "113",
+        "name_en": "Tunisia",
+        "name_ar": "تونس"
+    },
+    {
+        "code": "114",
+        "name_en": "Algeria",
+        "name_ar": "الجزائر"
+    },
+    {
+        "code": "115",
+        "name_en": "Djibouti",
+        "name_ar": "جيبوتي"
+    },
+    {
+        "code": "116",
+        "name_en": "Sudan",
+        "name_ar": "السودان"
+    },
+    {
+        "code": "117",
+        "name_en": "Somalia",
+        "name_ar": "الصومال"
+    },
+    {
+        "code": "118",
+        "name_en": "Egypt",
+        "name_ar": "مصر"
+    },
+    {
+        "code": "119",
+        "name_en": "Morocco",
+        "name_ar": "المغرب"
+    },
+    {
+        "code": "120",
+        "name_en": "Mauritania",
+        "name_ar": "موريتانيا"
+    },
+    {
+        "code": "121",
+        "name_en": "Libya",
+        "name_ar": "ليبيا"
+    },
+    {
+        "code": "122",
+        "name_en": "Comoros",
+        "name_ar": "جزر القمر"
+    },
+    {
+        "code": "201",
+        "name_en": "Azerbaijan",
+        "name_ar": "أذربيجان"
+    },
+    {
+        "code": "202",
+        "name_en": "Afghanistan",
+        "name_ar": "أفغانستان"
+    },
+    {
+        "code": "203",
+        "name_en": "Uzbekistan",
+        "name_ar": "أوزبكستان"
+    },
+    {
+        "code": "204",
+        "name_en": "Indonesia",
+        "name_ar": "إندونيسيا"
+    },
+    {
+        "code": "205",
+        "name_en": "Iran",
+        "name_ar": "إيران"
+    },
+    {
+        "code": "206",
+        "name_en": "Pakistan",
+        "name_ar": "باكستان"
+    },
+    {
+        "code": "207",
+        "name_en": "Bangladesh",
+        "name_ar": "بنجلاديش"
+    },
+    {
+        "code": "208",
+        "name_en": "Brunei Darussalam",
+        "name_ar": "بروناى دار السلام"
+    },
+    {
+        "code": "209",
+        "name_en": "Turkey",
+        "name_ar": "تركيا"
+    },
+    {
+        "code": "210",
+        "name_en": "Turkmenistan",
+        "name_ar": "تركمانستان"
+    },
+    {
+        "code": "211",
+        "name_en": "Tajikistan",
+        "name_ar": "طاجكستان"
+    },
+    {
+        "code": "212",
+        "name_en": "Kyrgyzstan",
+        "name_ar": "قيرغيزستان"
+    },
+    {
+        "code": "213",
+        "name_en": "Kazakhstan",
+        "name_ar": "كازاخستان"
+    },
+    {
+        "code": "214",
+        "name_en": "Malaysia",
+        "name_ar": "ماليزيا"
+    },
+    {
+        "code": "215",
+        "name_en": "Maldives",
+        "name_ar": "المالديف"
+    },
+    {
+        "code": "219",
+        "name_en": "Other Asian Muslim Countries",
+        "name_ar": "دول آسيوية إسلامية أخرى"
+    },
+    {
+        "code": "220",
+        "name_en": "Armenia",
+        "name_ar": "أرمينيا"
+    },
+    {
+        "code": "221",
+        "name_en": "Bhutan",
+        "name_ar": "بوتان"
+    },
+    {
+        "code": "223",
+        "name_en": "Thailand",
+        "name_ar": "تايلاند"
+    },
+    {
+        "code": "225",
+        "name_en": "Sri Lanka",
+        "name_ar": "سري لانكا"
+    },
+    {
+        "code": "226",
+        "name_en": "Singapore",
+        "name_ar": "سنغافورة"
+    },
+    {
+        "code": "227",
+        "name_en": "Timurlist",
+        "name_ar": "تيمورليست"
+    },
+    {
+        "code": "228",
+        "name_en": "China",
+        "name_ar": "الصين"
+    },
+    {
+        "code": "229",
+        "name_en": "Taiwan",
+        "name_ar": "تايوان"
+    },
+    {
+        "code": "230",
+        "name_en": "Philippines",
+        "name_ar": "الفلبين"
+    },
+    {
+        "code": "231",
+        "name_en": "Vietnam",
+        "name_ar": "فيتنام"
+    },
+    {
+        "code": "232",
+        "name_en": "Cambodia",
+        "name_ar": "كمبوديا"
+    },
+    {
+        "code": "233",
+        "name_en": "South Korea",
+        "name_ar": "كوريا الجنوبية"
+    },
+    {
+        "code": "234",
+        "name_en": "North Korea",
+        "name_ar": "كوريا الشمالية"
+    },
+    {
+        "code": "235",
+        "name_en": "Democratic Republic of Laos",
+        "name_ar": "جمهوريه لاوس الديمقراطية"
+    },
+    {
+        "code": "236",
+        "name_en": "Mongolia",
+        "name_ar": "منغوليا"
+    },
+    {
+        "code": "237",
+        "name_en": "Myanmar - formerly Burma",
+        "name_ar": "ميانمار - بورما سابقاً"
+    },
+    {
+        "code": "238",
+        "name_en": "Nepal",
+        "name_ar": "نيبال"
+    },
+    {
+        "code": "239",
+        "name_en": "India",
+        "name_ar": "الهند"
+    },
+    {
+        "code": "240",
+        "name_en": "Hong Kong",
+        "name_ar": "هونج كونج"
+    },
+    {
+        "code": "241",
+        "name_en": "Japan",
+        "name_ar": "اليابان"
+    },
+    {
+        "code": "242",
+        "name_en": "Macau",
+        "name_ar": "ماكاو"
+    },
+    {
+        "code": "299",
+        "name_en": "Other non-Muslim Asian countries",
+        "name_ar": "دول آسيوية أخرى غير إسلامية"
+    },
+    {
+        "code": "301",
+        "name_en": "Niger",
+        "name_ar": "النيجر"
+    },
+    {
+        "code": "302",
+        "name_en": "Uganda",
+        "name_ar": "أوغندا"
+    },
+    {
+        "code": "303",
+        "name_en": "benin",
+        "name_ar": "بينين"
+    },
+    {
+        "code": "304",
+        "name_en": "Burkina Faso",
+        "name_ar": "بوركينا فاسو"
+    },
+    {
+        "code": "305",
+        "name_en": "Chad",
+        "name_ar": "تشاد"
+    },
+    {
+        "code": "306",
+        "name_en": "Gabon",
+        "name_ar": "الجابون"
+    },
+    {
+        "code": "307",
+        "name_en": "Togo",
+        "name_ar": "توغو"
+    },
+    {
+        "code": "308",
+        "name_en": "Gambia",
+        "name_ar": "غامبيا"
+    },
+    {
+        "code": "309",
+        "name_en": "Senegal",
+        "name_ar": "السنغال"
+    },
+    {
+        "code": "310",
+        "name_en": "Sierra Leone",
+        "name_ar": "سيراليون"
+    },
+    {
+        "code": "311",
+        "name_en": "Guinea",
+        "name_ar": "غينيا"
+    },
+    {
+        "code": "312",
+        "name_en": "Guinea Bissau",
+        "name_ar": "غينيا بيساو"
+    },
+    {
+        "code": "313",
+        "name_en": "Cameroon",
+        "name_ar": "الكاميرون"
+    },
+    {
+        "code": "314",
+        "name_en": "Ivory Coast (Cote dIvoire)",
+        "name_ar": "ساحل العاج (كوت ديفوار)"
+    },
+    {
+        "code": "316",
+        "name_en": "Mali",
+        "name_ar": "مالي"
+    },
+    {
+        "code": "317",
+        "name_en": "Mozambique",
+        "name_ar": "موزمبيق"
+    },
+    {
+        "code": "318",
+        "name_en": "Nigeria",
+        "name_ar": "نيجيريا"
+    },
+    {
+        "code": "319",
+        "name_en": "Other African Muslim Countries",
+        "name_ar": "دول أفريقية إسلامية أخرى"
+    },
+    {
+        "code": "320",
+        "name_en": "Eritrea",
+        "name_ar": "اريتريا"
+    },
+    {
+        "code": "321",
+        "name_en": "Ethiopia",
+        "name_ar": "إثيوبيا"
+    },
+    {
+        "code": "322",
+        "name_en": "Central African Republic",
+        "name_ar": "جمهورية أفريقيا الوسطى"
+    },
+    {
+        "code": "323",
+        "name_en": "Angola",
+        "name_ar": "انجولا"
+    },
+    {
+        "code": "324",
+        "name_en": "Botswana",
+        "name_ar": "بوتسوانا"
+    },
+    {
+        "code": "325",
+        "name_en": "Burundi",
+        "name_ar": "بوروندي"
+    },
+    {
+        "code": "326",
+        "name_en": "United Republic of Tanzania",
+        "name_ar": "جمهورية تنزانيا المتحدة"
+    },
+    {
+        "code": "327",
+        "name_en": "South Africa",
+        "name_ar": "جنوب أفريقيا"
+    },
+    {
+        "code": "328",
+        "name_en": "Zambia",
+        "name_ar": "زامبيا"
+    },
+    {
+        "code": "329",
+        "name_en": "Zimbabwe",
+        "name_ar": "زمبابوى"
+    },
+    {
+        "code": "330",
+        "name_en": "Sao Tome and Principe",
+        "name_ar": "ساو توم وبرنسيب"
+    },
+    {
+        "code": "331",
+        "name_en": "Seychelles",
+        "name_ar": "سيشيل"
+    },
+    {
+        "code": "332",
+        "name_en": "Swaziland",
+        "name_ar": "سوازيلاند"
+    },
+    {
+        "code": "333",
+        "name_en": "Ghana",
+        "name_ar": "غانا"
+    },
+    {
+        "code": "334",
+        "name_en": "Congo",
+        "name_ar": "كونغو"
+    },
+    {
+        "code": "335",
+        "name_en": "Kenya",
+        "name_ar": "كينيا"
+    },
+    {
+        "code": "336",
+        "name_en": "Liberia",
+        "name_ar": "ليبيريا"
+    },
+    {
+        "code": "337",
+        "name_en": "Lesotho",
+        "name_ar": "ليسوتو"
+    },
+    {
+        "code": "338",
+        "name_en": "Malawi",
+        "name_ar": "ملاوي"
+    },
+    {
+        "code": "339",
+        "name_en": "Rwanda",
+        "name_ar": "رواندا"
+    },
+    {
+        "code": "340",
+        "name_en": "Namibia",
+        "name_ar": "ناميبيا"
+    },
+    {
+        "code": "341",
+        "name_en": "green head",
+        "name_ar": "الرأس الأخضر"
+    },
+    {
+        "code": "342",
+        "name_en": "Democratic Republic of the Congo (formerly Zaire)",
+        "name_ar": "جمهورية الكونغو الديمقراطية (زائير سابقاً)"
+    },
+    {
+        "code": "343",
+        "name_en": "Equatorial Guinea",
+        "name_ar": "غينيا الاستوائية"
+    },
+    {
+        "code": "344",
+        "name_en": "Madagascar",
+        "name_ar": "مدغشقر"
+    },
+    {
+        "code": "345",
+        "name_en": "Mauritius",
+        "name_ar": "موريشيوس"
+    },
+    {
+        "code": "349",
+        "name_en": "other African countries",
+        "name_ar": "دول أفريقية أخرى"
+    },
+    {
+        "code": "350",
+        "name_en": "Benin",
+        "name_ar": "بنين"
+    },
+    {
+        "code": "401",
+        "name_en": "Albania",
+        "name_ar": "ألبانيا"
+    },
+    {
+        "code": "402",
+        "name_en": "Bosnia and Herzegovina",
+        "name_ar": "البوسنة والهرسك"
+    },
+    {
+        "code": "403",
+        "name_en": "Spain",
+        "name_ar": "إسبانيا"
+    },
+    {
+        "code": "404",
+        "name_en": "Estonia",
+        "name_ar": "إستونيا"
+    },
+    {
+        "code": "405",
+        "name_en": "Ukraine",
+        "name_ar": "أوكرانيا"
+    },
+    {
+        "code": "406",
+        "name_en": "Italia",
+        "name_ar": "إيطاليا"
+    },
+    {
+        "code": "407",
+        "name_en": "Iceland",
+        "name_ar": "أيسلندا"
+    },
+    {
+        "code": "408",
+        "name_en": "Ireland",
+        "name_ar": "ايرلندا"
+    },
+    {
+        "code": "409",
+        "name_en": "Germany",
+        "name_ar": "ألمانيا"
+    },
+    {
+        "code": "410",
+        "name_en": "Portugal",
+        "name_ar": "البرتغال"
+    },
+    {
+        "code": "411",
+        "name_en": "Belgium",
+        "name_ar": "بلجيكا"
+    },
+    {
+        "code": "412",
+        "name_en": "United Kingdom",
+        "name_ar": "المملكة المتحدة"
+    },
+    {
+        "code": "413",
+        "name_en": "Bulgaria",
+        "name_ar": "بلغاريا"
+    },
+    {
+        "code": "414",
+        "name_en": "Poland",
+        "name_ar": "بولندا"
+    },
+    {
+        "code": "415",
+        "name_en": "Belarus",
+        "name_ar": "بيلاروسيا"
+    },
+    {
+        "code": "416",
+        "name_en": "Czech Republic",
+        "name_ar": "جمهورية التشيك"
+    },
+    {
+        "code": "417",
+        "name_en": "Georgia",
+        "name_ar": "جورجيا"
+    },
+    {
+        "code": "418",
+        "name_en": "Denmark",
+        "name_ar": "الدانمارك"
+    },
+    {
+        "code": "419",
+        "name_en": "The Russian Federation",
+        "name_ar": "روسيا الاتحادية"
+    },
+    {
+        "code": "420",
+        "name_en": "Romania",
+        "name_ar": "رومانيا"
+    },
+    {
+        "code": "421",
+        "name_en": "San Marino",
+        "name_ar": "سان مارينو"
+    },
+    {
+        "code": "422",
+        "name_en": "Sweden",
+        "name_ar": "السويد"
+    },
+    {
+        "code": "423",
+        "name_en": "Swiss",
+        "name_ar": "سويسرا"
+    },
+    {
+        "code": "424",
+        "name_en": "Slovenia",
+        "name_ar": "سلوفينيا"
+    },
+    {
+        "code": "425",
+        "name_en": "Slovakia",
+        "name_ar": "سلوفاكيا"
+    },
+    {
+        "code": "426",
+        "name_en": "Serbia",
+        "name_ar": "صربيا"
+    },
+    {
+        "code": "427",
+        "name_en": "France",
+        "name_ar": "فرنسا"
+    },
+    {
+        "code": "428",
+        "name_en": "Finland",
+        "name_ar": "فنلندا"
+    },
+    {
+        "code": "429",
+        "name_en": "Cyprus",
+        "name_ar": "قبرص"
+    },
+    {
+        "code": "430",
+        "name_en": "Croatia",
+        "name_ar": "كرواتيا"
+    },
+    {
+        "code": "431",
+        "name_en": "Luxembourg",
+        "name_ar": "لوكسمبورج"
+    },
+    {
+        "code": "432",
+        "name_en": "Liechtenstein",
+        "name_ar": "ليختنشتاين"
+    },
+    {
+        "code": "433",
+        "name_en": "Latvia",
+        "name_ar": "لاتفيا"
+    },
+    {
+        "code": "434",
+        "name_en": "Lithuania",
+        "name_ar": "ليثوانيا"
+    },
+    {
+        "code": "435",
+        "name_en": "Republic of Moldova",
+        "name_ar": "جمهورية مولدوفا"
+    },
+    {
+        "code": "436",
+        "name_en": "Malta",
+        "name_ar": "مالطا"
+    },
+    {
+        "code": "437",
+        "name_en": "Macedonia",
+        "name_ar": "مقدونيا"
+    },
+    {
+        "code": "438",
+        "name_en": "Norway",
+        "name_ar": "النرويج"
+    },
+    {
+        "code": "439",
+        "name_en": "Austria",
+        "name_ar": "النمسا"
+    },
+    {
+        "code": "440",
+        "name_en": "Holland",
+        "name_ar": "هولندا"
+    },
+    {
+        "code": "441",
+        "name_en": "Greece",
+        "name_ar": "اليونان"
+    },
+    {
+        "code": "442",
+        "name_en": "Hungary (formerly Hungarian)",
+        "name_ar": "المجر (هنغاري سابقاً)"
+    },
+    {
+        "code": "443",
+        "name_en": "Andorra",
+        "name_ar": "أندورا"
+    },
+    {
+        "code": "444",
+        "name_en": "Tarek mountain",
+        "name_ar": "جبل طارق"
+    },
+    {
+        "code": "446",
+        "name_en": "Monaco",
+        "name_ar": "موناكو"
+    },
+    {
+        "code": "447",
+        "name_en": "the black Mountain",
+        "name_ar": "الجبل الاسود"
+    },
+    {
+        "code": "448",
+        "name_en": "papal chair",
+        "name_ar": "الكرسي الباباوي"
+    },
+    {
+        "code": "449",
+        "name_en": "Kosovo",
+        "name_ar": "كوسوفو"
+    },
+    {
+        "code": "450",
+        "name_en": "Montenegro",
+        "name_ar": "منتينيغرو"
+    },
+    {
+        "code": "451",
+        "name_en": "Other European countries",
+        "name_ar": "دول أوربية أخرى"
+    },
+    {
+        "code": "501",
+        "name_en": "United States",
+        "name_ar": "الولايات المتحدة الأمريكية"
+    },
+    {
+        "code": "502",
+        "name_en": "Panama",
+        "name_ar": "بنما"
+    },
+    {
+        "code": "503",
+        "name_en": "Puerto Rico",
+        "name_ar": "بويرتوريكو"
+    },
+    {
+        "code": "504",
+        "name_en": "Barbados",
+        "name_ar": "بربادوس"
+    },
+    {
+        "code": "505",
+        "name_en": "Trinidad and Tobago",
+        "name_ar": "ترينيداد وتوباجو"
+    },
+    {
+        "code": "506",
+        "name_en": "Jamaica",
+        "name_ar": "جامايكا"
+    },
+    {
+        "code": "507",
+        "name_en": "Guatemala",
+        "name_ar": "غواتيمالا"
+    },
+    {
+        "code": "508",
+        "name_en": "Grenada",
+        "name_ar": "غرينادا"
+    },
+    {
+        "code": "509",
+        "name_en": "Dominica",
+        "name_ar": "دومينيكا"
+    },
+    {
+        "code": "510",
+        "name_en": "El Salvador",
+        "name_ar": "السلفادور"
+    },
+    {
+        "code": "511",
+        "name_en": "Saint Lucia",
+        "name_ar": "سانت لوسيا"
+    },
+    {
+        "code": "512",
+        "name_en": "Canada",
+        "name_ar": "كندا"
+    },
+    {
+        "code": "513",
+        "name_en": "Cuba",
+        "name_ar": "كوبا"
+    },
+    {
+        "code": "514",
+        "name_en": "Costa Rica",
+        "name_ar": "كوستاريكا"
+    },
+    {
+        "code": "515",
+        "name_en": "Mexico",
+        "name_ar": "المكسيك"
+    },
+    {
+        "code": "516",
+        "name_en": "Nicaragua",
+        "name_ar": "نيكاراجوا"
+    },
+    {
+        "code": "517",
+        "name_en": "Haiti",
+        "name_ar": "هاييتي"
+    },
+    {
+        "code": "518",
+        "name_en": "Honduras",
+        "name_ar": "هندوراس"
+    },
+    {
+        "code": "519",
+        "name_en": "Other North American Countries",
+        "name_ar": "دول أمريكا الشمالية الأخرى"
+    },
+    {
+        "code": "520",
+        "name_en": "Argentina",
+        "name_ar": "الأرجنتين"
+    },
+    {
+        "code": "521",
+        "name_en": "Ecuador",
+        "name_ar": "الإكوادور"
+    },
+    {
+        "code": "522",
+        "name_en": "Uruguay",
+        "name_ar": "اورغواي"
+    },
+    {
+        "code": "523",
+        "name_en": "Paraguay",
+        "name_ar": "باراغواي"
+    },
+    {
+        "code": "524",
+        "name_en": "Peruvian",
+        "name_ar": "البيرو"
+    },
+    {
+        "code": "525",
+        "name_en": "Brazil",
+        "name_ar": "البرازيل"
+    },
+    {
+        "code": "526",
+        "name_en": "Bolivia",
+        "name_ar": "بوليفيا"
+    },
+    {
+        "code": "527",
+        "name_en": "Suriname",
+        "name_ar": "سورينام"
+    },
+    {
+        "code": "528",
+        "name_en": "Chilean",
+        "name_ar": "شيلي"
+    },
+    {
+        "code": "529",
+        "name_en": "Guyana",
+        "name_ar": "جيانا"
+    },
+    {
+        "code": "530",
+        "name_en": "Venezuela",
+        "name_ar": "فنزويلا"
+    },
+    {
+        "code": "531",
+        "name_en": "Colombia",
+        "name_ar": "كولومبيا"
+    },
+    {
+        "code": "539",
+        "name_en": "Other Latin American Countries",
+        "name_ar": "دول امريكا اللاتينية الأخرى"
+    },
+    {
+        "code": "540",
+        "name_en": "Saint Vincent and the Grenadines",
+        "name_ar": "سانت فنسنت وجزر غرينادين"
+    },
+    {
+        "code": "541",
+        "name_en": "Bermuda",
+        "name_ar": "برمودا"
+    },
+    {
+        "code": "542",
+        "name_en": "angia",
+        "name_ar": "انغيا"
+    },
+    {
+        "code": "543",
+        "name_en": "Antigua and Barbuda",
+        "name_ar": "أنتيغوا وبربودا"
+    },
+    {
+        "code": "544",
+        "name_en": "Aruba",
+        "name_ar": "أروبا"
+    },
+    {
+        "code": "545",
+        "name_en": "Bahamas",
+        "name_ar": "البهاما"
+    },
+    {
+        "code": "546",
+        "name_en": "Belize",
+        "name_ar": "بيليز"
+    },
+    {
+        "code": "547",
+        "name_en": "British Virgin Islands",
+        "name_ar": "جزر فيرجن البريطانية"
+    },
+    {
+        "code": "548",
+        "name_en": "Cayman Islands",
+        "name_ar": "جزر كايمان"
+    },
+    {
+        "code": "549",
+        "name_en": "dominican republic",
+        "name_ar": "جمهورية الدومينيكان"
+    },
+    {
+        "code": "550",
+        "name_en": "Montserrat",
+        "name_ar": "مونتسيرات"
+    },
+    {
+        "code": "551",
+        "name_en": "Netherlands Antilles",
+        "name_ar": "جزر الأنتيل الهولندية"
+    },
+    {
+        "code": "552",
+        "name_en": "Saint Kitts and Nevis",
+        "name_ar": "سانت كيتس ونيفيس"
+    },
+    {
+        "code": "553",
+        "name_en": "Turks and Caicos Islands",
+        "name_ar": "جزر تركس وكايكوس"
+    },
+    {
+        "code": "601",
+        "name_en": "Australia",
+        "name_ar": "أستراليا"
+    },
+    {
+        "code": "602",
+        "name_en": "Marshall Islands",
+        "name_ar": "جزر مارشال"
+    },
+    {
+        "code": "603",
+        "name_en": "Samoa",
+        "name_ar": "ساموا"
+    },
+    {
+        "code": "604",
+        "name_en": "Fiji",
+        "name_ar": "فيجي"
+    },
+    {
+        "code": "605",
+        "name_en": "New Zealand",
+        "name_ar": "نيوزيلندا"
+    },
+    {
+        "code": "606",
+        "name_en": "New Caledonian",
+        "name_ar": "نيوكالدوني"
+    },
+    {
+        "code": "607",
+        "name_en": "British Cook Islands",
+        "name_ar": "جزر كوك البريطانية"
+    },
+    {
+        "code": "608",
+        "name_en": "Kiribati",
+        "name_ar": "كيريباتى"
+    },
+    {
+        "code": "609",
+        "name_en": "Micronesia (federal states)",
+        "name_ar": "ميكرونسيا (الولايات الفدرالية)"
+    },
+    {
+        "code": "610",
+        "name_en": "Nauru",
+        "name_ar": "ناورو"
+    },
+    {
+        "code": "611",
+        "name_en": "Palau",
+        "name_ar": "بالاو"
+    },
+    {
+        "code": "612",
+        "name_en": "Papua New Guinea",
+        "name_ar": "بابوا غينيا الجديدة"
+    },
+    {
+        "code": "613",
+        "name_en": "Solomon Islands",
+        "name_ar": "جزر سليمان"
+    },
+    {
+        "code": "614",
+        "name_en": "Tokelau",
+        "name_ar": "توكيلاو"
+    },
+    {
+        "code": "615",
+        "name_en": "Tonga",
+        "name_ar": "تونقا"
+    },
+    {
+        "code": "616",
+        "name_en": "TUV",
+        "name_ar": "توفالو"
+    },
+    {
+        "code": "617",
+        "name_en": "Vanatu",
+        "name_ar": "فاناتو"
+    },
+    {
+        "code": "618",
+        "name_en": "Niue",
+        "name_ar": "نيوي"
+    },
+    {
+        "code": "639",
+        "name_en": "Other Oceanic Countries",
+        "name_ar": "دول أوقيانوسية أخرى"
+    },
+    {
+        "code": "800",
+        "name_en": "Displaced tribes (without)",
+        "name_ar": "قبائل نازحة (بدون)"
+    },
+    {
+        "code": "900",
+        "name_en": "resident",
+        "name_ar": "مقيم"
+    },
+    {
+        "code": "999",
+        "name_en": "Other countries of the world (unspecified)",
+        "name_ar": "دول العالم الأخرى (غير محدد)"
+    }
+]

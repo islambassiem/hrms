@@ -1,0 +1,86 @@
+[
+    {
+        "code": "1",
+        "name_en": "Dentistry",
+        "name_ar": "طب الأسنان",
+        "category_id": 1
+    },
+    {
+        "code": "2",
+        "name_en": "Pharmacy",
+        "name_ar": "صيدلية",
+        "category_id": 2
+    },
+    {
+        "code": "3",
+        "name_en": "Medical Sciences",
+        "name_ar": "العلوم الطبية",
+        "category_id": 3
+    },
+    {
+        "code": "4",
+        "name_en": "Law",
+        "name_ar": "القانون",
+        "category_id": 4
+    },
+    {
+        "code": "5",
+        "name_en": "Social Sciences",
+        "name_ar": "العلوم الاجتماعية",
+        "category_id": 5
+    },
+    {
+        "code": "6",
+        "name_en": "Economics",
+        "name_ar": "الاقتصاد",
+        "category_id": 6
+    },
+    {
+        "code": "7",
+        "name_en": "Management",
+        "name_ar": "الادارة",
+        "category_id": 7
+    },
+    {
+        "code": "8",
+        "name_en": "Education",
+        "name_ar": "التربية",
+        "category_id": 8
+    },
+    {
+        "code": "9",
+        "name_en": "Teaching",
+        "name_ar": "التعليم",
+        "category_id": 9
+    },
+    {
+        "code": "10",
+        "name_en": "Arts",
+        "name_ar": "الآداب",
+        "category_id": 10
+    },
+    {
+        "code": "11",
+        "name_en": "Humanities",
+        "name_ar": "الانسانية",
+        "category_id": 11
+    },
+    {
+        "code": "12",
+        "name_en": "Islamic Studies",
+        "name_ar": "الدراسات الاسلامية",
+        "category_id": 12
+    },
+    {
+        "code": "13",
+        "name_en": "Sharia Studies",
+        "name_ar": "الدراسات الشرعية",
+        "category_id": 13
+    },
+    {
+        "code": "14",
+        "name_en": "Other",
+        "name_ar": "اخرى",
+        "category_id": 14
+    }
+]

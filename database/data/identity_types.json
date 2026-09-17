@@ -1,0 +1,27 @@
+[
+    {
+        "code": "1",
+        "name_en": "National ID",
+        "name_ar": "الهوية الوطنية"
+    },
+    {
+        "code": "2",
+        "name_en": "Gulf ID",
+        "name_ar": "هوية خليجية"
+    },
+    {
+        "code": "3",
+        "name_en": "Iqama",
+        "name_ar": "إقامة"
+    },
+    {
+        "code": "4",
+        "name_en": "Passport",
+        "name_ar": "جواز سفر"
+    },
+    {
+        "code": "5",
+        "name_en": "Border Number",
+        "name_ar": "رقم حدود"
+    }
+]

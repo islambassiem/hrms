@@ -1,0 +1,22 @@
+[
+    {
+        "code": "1",
+        "name_en": "Draft",
+        "name_ar": "مسودة"
+    },
+    {
+        "code": "2",
+        "name_en": "Approved",
+        "name_ar": "موافق"
+    },
+    {
+        "code": "3",
+        "name_en": "Paid",
+        "name_ar": "مدفوع"
+    },
+    {
+        "code": "4",
+        "name_en": "Cancelled",
+        "name_ar": "ملغي"
+    }
+]
