@@ -1,92 +1,92 @@
 [
-  {
-    "code": "1",
-    "name_en": "Islamic and Sharia Studies Specializations",
-    "name_ar": "تخصصات الدراسات الإسلامية والشرعية"
-  },
-  {
-    "code": "2",
-    "name_en": "Arts, Social Sciences, and Humanities Specializations",
-    "name_ar": "تخصصات الآداب والعلوم الاجتماعية والإنسانية"
-  },
-  {
-    "code": "3",
-    "name_en": "Economics and Management Specializations",
-    "name_ar": "تخصصات مجموعة الاقتصاد والإدارة"
-  },
-  {
-    "code": "4",
-    "name_en": "Education and Teaching Specializations",
-    "name_ar": "تخصصات مجموعة التربية والتعليم"
-  },
-  {
-    "code": "5",
-    "name_en": "Arts and Home Economics Specializations",
-    "name_ar": "تخصصات الفنون والاقتصاد المنزلي"
-  },
-  {
-    "code": "6",
-    "name_en": "Natural Sciences Specializations",
-    "name_ar": "تخصصات مجموعة العلوم الطبيعية"
-  },
-  {
-    "code": "7",
-    "name_en": "Engineering Sciences Specializations",
-    "name_ar": "تخصصات العلوم الهندسية"
-  },
-  {
-    "code": "8",
-    "name_en": "Human Medicine Specializations",
-    "name_ar": "تخصصات الطب البشرى"
-  },
-  {
-    "code": "9",
-    "name_en": "Dental Medicine Specializations",
-    "name_ar": "تخصصات طب الأسنان"
-  },
-  {
-    "code": "10",
-    "name_en": "Pharmaceutical Sciences Specializations",
-    "name_ar": "تخصصات العلوم الصيدلية"
-  },
-  {
-    "code": "11",
-    "name_en": "Applied Medical Sciences Specializations",
-    "name_ar": "تخصصات العلوم الطبية التطبيقية"
-  },
-  {
-    "code": "12",
-    "name_en": "Law and Political Science Specializations",
-    "name_ar": "تخصصات القانون والعلوم السياسية"
-  },
-  {
-    "code": "13",
-    "name_en": "Agricultural, Food, and Environmental Sciences Specializations",
-    "name_ar": "تخصصات العلوم الزراعية والغذائية والبيئية"
-  },
-  {
-    "code": "14",
-    "name_en": "Computer Science and Information Technology Specializations",
-    "name_ar": "تخصصات الحاسب و تقنية المعلومات"
-  },
-  {
-    "code": "15",
-    "name_en": "Technical and Industrial Colleges Specializations",
-    "name_ar": "تخصصات الكليات التقنية والصناعية"
-  },
-  {
-    "code": "16",
-    "name_en": "Other Specializations",
-    "name_ar": "تخصصات أخرى"
-  },
-  {
-    "code": "17",
-    "name_en": "Security and Military Services Specializations",
-    "name_ar": "تخصصات الخدمات الأمنية والعسكرية"
-  },
-  {
-    "code": "18",
-    "name_en": "Training Centers Specializations",
-    "name_ar": "تخصصات مراكز التدريب"
-  }
+    {
+        "code": "1",
+        "name_en": "Islamic and Sharia Studies Specializations",
+        "name_ar": "تخصصات الدراسات الإسلامية والشرعية"
+    },
+    {
+        "code": "2",
+        "name_en": "Arts, Social Sciences, and Humanities Specializations",
+        "name_ar": "تخصصات الآداب والعلوم الاجتماعية والإنسانية"
+    },
+    {
+        "code": "3",
+        "name_en": "Economics and Management Specializations",
+        "name_ar": "تخصصات مجموعة الاقتصاد والإدارة"
+    },
+    {
+        "code": "4",
+        "name_en": "Education and Teaching Specializations",
+        "name_ar": "تخصصات مجموعة التربية والتعليم"
+    },
+    {
+        "code": "5",
+        "name_en": "Arts and Home Economics Specializations",
+        "name_ar": "تخصصات الفنون والاقتصاد المنزلي"
+    },
+    {
+        "code": "6",
+        "name_en": "Natural Sciences Specializations",
+        "name_ar": "تخصصات مجموعة العلوم الطبيعية"
+    },
+    {
+        "code": "7",
+        "name_en": "Engineering Sciences Specializations",
+        "name_ar": "تخصصات العلوم الهندسية"
+    },
+    {
+        "code": "8",
+        "name_en": "Human Medicine Specializations",
+        "name_ar": "تخصصات الطب البشرى"
+    },
+    {
+        "code": "9",
+        "name_en": "Dental Medicine Specializations",
+        "name_ar": "تخصصات طب الأسنان"
+    },
+    {
+        "code": "10",
+        "name_en": "Pharmaceutical Sciences Specializations",
+        "name_ar": "تخصصات العلوم الصيدلية"
+    },
+    {
+        "code": "11",
+        "name_en": "Applied Medical Sciences Specializations",
+        "name_ar": "تخصصات العلوم الطبية التطبيقية"
+    },
+    {
+        "code": "12",
+        "name_en": "Law and Political Science Specializations",
+        "name_ar": "تخصصات القانون والعلوم السياسية"
+    },
+    {
+        "code": "13",
+        "name_en": "Agricultural, Food, and Environmental Sciences Specializations",
+        "name_ar": "تخصصات العلوم الزراعية والغذائية والبيئية"
+    },
+    {
+        "code": "14",
+        "name_en": "Computer Science and Information Technology Specializations",
+        "name_ar": "تخصصات الحاسب و تقنية المعلومات"
+    },
+    {
+        "code": "15",
+        "name_en": "Technical and Industrial Colleges Specializations",
+        "name_ar": "تخصصات الكليات التقنية والصناعية"
+    },
+    {
+        "code": "16",
+        "name_en": "Other Specializations",
+        "name_ar": "تخصصات أخرى"
+    },
+    {
+        "code": "17",
+        "name_en": "Security and Military Services Specializations",
+        "name_ar": "تخصصات الخدمات الأمنية والعسكرية"
+    },
+    {
+        "code": "18",
+        "name_en": "Training Centers Specializations",
+        "name_ar": "تخصصات مراكز التدريب"
+    }
 ]

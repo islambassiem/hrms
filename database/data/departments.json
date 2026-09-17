@@ -1,152 +1,152 @@
 [
-  {
-    "code": "KJ03",
-    "name_en": "Biomedical Technology",
-    "name_ar": "التكنولوجيا الطبية الحيوية"
-  },
-  {
-    "code": "PA89",
-    "name_en": "CEO Office",
-    "name_ar": "مكتب الرئيس التنفيذي"
-  },
-  {
-    "code": "KE03",
-    "name_en": "Clinical Laboratory Sciences",
-    "name_ar": "علوم المختبرات الاكلينيكية"
-  },
-  {
-    "code": "PA89",
-    "name_en": "Dean Office",
-    "name_ar": "مكتب العميد"
-  },
-  {
-    "code": "KC29",
-    "name_en": "Dental Health Care",
-    "name_ar": "رعاية صحة الفم والاسنان"
-  },
-  {
-    "code": "KI05",
-    "name_en": "Emergency Medical Services",
-    "name_ar": "الطوارئ الطبية والعناية المركزة"
-  },
-  {
-    "code": "CF29",
-    "name_en": "Finance",
-    "name_ar": "المالية"
-  },
-  {
-    "code": "CB07",
-    "name_en": "Human Resources",
-    "name_ar": "الموارد البشرية"
-  },
-  {
-    "code": "BB05",
-    "name_en": "Library",
-    "name_ar": "المكتبة"
-  },
-  {
-    "code": "HF07",
-    "name_en": "Nuclear Medicine Technology",
-    "name_ar": "تقنية الطب النووي"
-  },
-  {
-    "code": "KL01",
-    "name_en": "Nursing Science",
-    "name_ar": "علوم التمريض"
-  },
-  {
-    "code": "PA41",
-    "name_en": "Purchasing",
-    "name_ar": "المشتريات"
-  },
-  {
-    "code": "PA85",
-    "name_en": "Quality & Accreditation",
-    "name_ar": "الجودة والاعتماد"
-  },
-  {
-    "code": "KF01",
-    "name_en": "Radiological Science",
-    "name_ar": "العلوم الاشعاعية"
-  },
-  {
-    "code": "PA89",
-    "name_en": "Registration",
-    "name_ar": "القبول والتسجيل"
-  },
-  {
-    "code": "KL73",
-    "name_en": "Respiratory Therapy",
-    "name_ar": "العلاج التنفسي"
-  },
-  {
-    "code": "PA89",
-    "name_en": "Saudization",
-    "name_ar": "السعودة"
-  },
-  {
-    "code": "PA41",
-    "name_en": "Services",
-    "name_ar": "الخدمات المساندة"
-  },
-  {
-    "code": "19",
-    "name_en": "Shining",
-    "name_ar": "مجمع الآفاق"
-  },
-  {
-    "code": "PA79",
-    "name_en": "Information Technology",
-    "name_ar": "تكنولوجيا المعلومات"
-  },
-  {
-    "code": "21",
-    "name_en": "Universities Sports Union",
-    "name_ar": "اتحاد الجامعات الرياضي"
-  },
-  {
-    "code": "PA01",
-    "name_en": "Common First Year",
-    "name_ar": "السنة الأولى المشتركة"
-  },
-  {
-    "code": "CI07",
-    "name_en": "Health Adminstration",
-    "name_ar": "الإدارة الصحية"
-  },
-  {
-    "code": "CI39",
-    "name_en": "Health Informatics",
-    "name_ar": "المعلوماتية الصحية"
-  },
-  {
-    "code": "PA41",
-    "name_en": "Other",
-    "name_ar": "أخرى"
-  },
-  {
-    "code": "PA87",
-    "name_en": "Community Services",
-    "name_ar": "الخدمة المجتمعية"
-  },
-  {
-    "code": "PA87",
-    "name_en": "Public Relationship",
-    "name_ar": "الإدارة والعلاقات العامة"
-  },
-  {
-    "code": "PA87",
-    "name_en": "Marketing",
-    "name_ar": "التسويق"
-  },
-  {
-    "code": "PA87",
-    "name_en": "Secretary",
-    "name_ar": "السكرتارية"
-  },
-  {
-    "code": "PA87",
-    "name_en": "Follow up",
-    "name_ar": "المتابعة"
-  }
+    {
+        "code": "KJ03",
+        "name_en": "Biomedical Technology",
+        "name_ar": "التكنولوجيا الطبية الحيوية"
+    },
+    {
+        "code": "PA89",
+        "name_en": "CEO Office",
+        "name_ar": "مكتب الرئيس التنفيذي"
+    },
+    {
+        "code": "KE03",
+        "name_en": "Clinical Laboratory Sciences",
+        "name_ar": "علوم المختبرات الاكلينيكية"
+    },
+    {
+        "code": "PA89",
+        "name_en": "Dean Office",
+        "name_ar": "مكتب العميد"
+    },
+    {
+        "code": "KC29",
+        "name_en": "Dental Health Care",
+        "name_ar": "رعاية صحة الفم والاسنان"
+    },
+    {
+        "code": "KI05",
+        "name_en": "Emergency Medical Services",
+        "name_ar": "الطوارئ الطبية والعناية المركزة"
+    },
+    {
+        "code": "CF29",
+        "name_en": "Finance",
+        "name_ar": "المالية"
+    },
+    {
+        "code": "CB07",
+        "name_en": "Human Resources",
+        "name_ar": "الموارد البشرية"
+    },
+    {
+        "code": "BB05",
+        "name_en": "Library",
+        "name_ar": "المكتبة"
+    },
+    {
+        "code": "HF07",
+        "name_en": "Nuclear Medicine Technology",
+        "name_ar": "تقنية الطب النووي"
+    },
+    {
+        "code": "KL01",
+        "name_en": "Nursing Science",
+        "name_ar": "علوم التمريض"
+    },
+    {
+        "code": "PA41",
+        "name_en": "Purchasing",
+        "name_ar": "المشتريات"
+    },
+    {
+        "code": "PA85",
+        "name_en": "Quality & Accreditation",
+        "name_ar": "الجودة والاعتماد"
+    },
+    {
+        "code": "KF01",
+        "name_en": "Radiological Science",
+        "name_ar": "العلوم الاشعاعية"
+    },
+    {
+        "code": "PA89",
+        "name_en": "Registration",
+        "name_ar": "القبول والتسجيل"
+    },
+    {
+        "code": "KL73",
+        "name_en": "Respiratory Therapy",
+        "name_ar": "العلاج التنفسي"
+    },
+    {
+        "code": "PA89",
+        "name_en": "Saudization",
+        "name_ar": "السعودة"
+    },
+    {
+        "code": "PA41",
+        "name_en": "Services",
+        "name_ar": "الخدمات المساندة"
+    },
+    {
+        "code": "19",
+        "name_en": "Shining",
+        "name_ar": "مجمع الآفاق"
+    },
+    {
+        "code": "PA79",
+        "name_en": "Information Technology",
+        "name_ar": "تكنولوجيا المعلومات"
+    },
+    {
+        "code": "21",
+        "name_en": "Universities Sports Union",
+        "name_ar": "اتحاد الجامعات الرياضي"
+    },
+    {
+        "code": "PA01",
+        "name_en": "Common First Year",
+        "name_ar": "السنة الأولى المشتركة"
+    },
+    {
+        "code": "CI07",
+        "name_en": "Health Adminstration",
+        "name_ar": "الإدارة الصحية"
+    },
+    {
+        "code": "CI39",
+        "name_en": "Health Informatics",
+        "name_ar": "المعلوماتية الصحية"
+    },
+    {
+        "code": "PA41",
+        "name_en": "Other",
+        "name_ar": "أخرى"
+    },
+    {
+        "code": "PA87",
+        "name_en": "Community Services",
+        "name_ar": "الخدمة المجتمعية"
+    },
+    {
+        "code": "PA87",
+        "name_en": "Public Relationship",
+        "name_ar": "الإدارة والعلاقات العامة"
+    },
+    {
+        "code": "PA87",
+        "name_en": "Marketing",
+        "name_ar": "التسويق"
+    },
+    {
+        "code": "PA87",
+        "name_en": "Secretary",
+        "name_ar": "السكرتارية"
+    },
+    {
+        "code": "PA87",
+        "name_en": "Follow up",
+        "name_ar": "المتابعة"
+    }
 ]
