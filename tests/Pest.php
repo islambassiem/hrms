@@ -46,7 +46,22 @@ expect()->extend('toBeOne', fn () => $this->toBe(1));
 |
 */
 
-function something(): void
+function expectValidationError(callable $callback, array $fields): void
 {
-    // ..
+    try {
+        $callback();
+    } catch (ValidationException $validationException) {
+        foreach ($fields as $field) {
+            expect($validationException->errors())->toHaveKey($field);
+        }
+
+        return;
+    }
+
+    test()->fail('ValidationException was not thrown');
+}
+
+function invalid(?string $field = null): InvalidDataset
+{
+    return new InvalidDataset($field);
 }

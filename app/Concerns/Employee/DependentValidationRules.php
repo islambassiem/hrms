@@ -18,9 +18,7 @@ trait DependentValidationRules
             ...self::baseRules(),
 
             'identification' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->identification(),
                 Rule::unique('employee_dependents', 'identification'),
             ],
         ];
@@ -35,9 +33,7 @@ trait DependentValidationRules
             ...self::baseRules(),
 
             'identification' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->identification(),
                 Rule::unique('employee_dependents', 'identification')
                     ->ignore($dependent->id),
             ],
@@ -97,5 +93,13 @@ trait DependentValidationRules
                 'max:100',
             ],
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function identification(): array
+    {
+        return ['required', 'string', 'digits:10'];
     }
 }
