@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class PayslipDeduction extends Model
+final class PayslipDeduction extends Model
 {
     /** @use HasFactory<PayslipDeductionFactory> */
     use HasFactory;

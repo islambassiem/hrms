@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_qualifications_study_types')]
-class StudyType extends Model
+final class StudyType extends Model
 {
     /** @use HasFactory<StudyTypeFactory> */
     use HasFactory;

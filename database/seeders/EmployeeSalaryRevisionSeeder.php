@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Lookup\SalaryRevision;
 use App\Models\Payroll\Salary\EmployeeSalaryRevision;
 use Illuminate\Database\Seeder;

@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class Qualification extends Model
+final class Qualification extends Model
 {
     /** @use HasFactory<QualificationFactory> */
     use HasFactory;

@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class PayslipEarning extends Model
+final class PayslipEarning extends Model
 {
     /** @use HasFactory<PayslipEarningFactory> */
     use HasFactory;

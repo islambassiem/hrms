@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
     'expiring_days',
     'next_expiry_date',
 ])]
-class LeaveBalance extends Model
+final class LeaveBalance extends Model
 {
     /** @use HasFactory<LeaveBalanceFactory> */
     use HasFactory;

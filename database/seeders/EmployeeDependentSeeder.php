@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Employees\Employee;
-use App\Models\Employees\EmployeeDependent;
+use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeDependent;
 use App\Models\Lookup\FamilyRelationship;
 use App\Models\Lookup\Gender;
 use Illuminate\Database\Seeder;

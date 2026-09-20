@@ -1,9 +1,11 @@
 <?php
 
-namespace Database\Factories\Employees;
+declare(strict_types=1);
 
-use App\Models\Employees\Employee;
-use App\Models\Employees\EmployeeIdentity;
+namespace Database\Factories\Employee;
+
+use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeIdentity;
 use App\Models\Lookup\IdentityType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;

@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_religions')]
-class Religion extends Model
+final class Religion extends Model
 {
     /** @use HasFactory<ReligionFactory> */
     use HasFactory;

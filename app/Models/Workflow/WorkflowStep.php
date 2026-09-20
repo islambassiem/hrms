@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class WorkflowStep extends Model
+final class WorkflowStep extends Model
 {
     /** @use HasFactory<WorkflowStepFactory> */
     use HasFactory;

@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('payroll_runs')]
-class PayrollRun extends Model
+final class PayrollRun extends Model
 {
     /** @use HasFactory<PayrollRunFactory> */
     use HasFactory;

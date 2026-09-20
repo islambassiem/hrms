@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_qualifications_included_specializations')]
-class IncludedSpecialization extends Model
+final class IncludedSpecialization extends Model
 {
     /** @use HasFactory<IncludedSpecializationFactory> */
     use HasFactory;

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Employees;
+namespace App\Models\Employee;
 
 use App\Concerns\UserStamp;
-use Database\Factories\Employees\EmployeeIdentityFactory;
+use Database\Factories\Employee\EmployeeIdentityFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class EmployeeIdentity extends Model
+final class EmployeeIdentity extends Model
 {
     /** @use HasFactory<EmployeeIdentityFactory> */
     use HasFactory;

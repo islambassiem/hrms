@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-class LookupFactory
+final class LookupFactory
 {
     /**
      * @return array{code: int, "name_ar": string, "name_en": string}

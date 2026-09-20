@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_administrative_ranks')]
-class AdministrativeRank extends Model
+final class AdministrativeRank extends Model
 {
     /** @use HasFactory<AdministrativeRankFactory> */
     use HasFactory;

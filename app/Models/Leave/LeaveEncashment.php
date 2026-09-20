@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
     'processed_at',
     'payroll_reference',
 ])]
-class LeaveEncashment extends Model
+final class LeaveEncashment extends Model
 {
     /** @use HasFactory<LeaveEncashmentFactory> */
     use HasFactory;

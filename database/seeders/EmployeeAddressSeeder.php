@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Employees\Employee;
-use App\Models\Employees\EmployeeAddress;
+use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeAddress;
 use Illuminate\Database\Seeder;
 
 class EmployeeAddressSeeder extends Seeder

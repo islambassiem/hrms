@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_appointment_types')]
-class AppointmentType extends Model
+final class AppointmentType extends Model
 {
     /** @use HasFactory<AppointmentTypeFactory> */
     use HasFactory;

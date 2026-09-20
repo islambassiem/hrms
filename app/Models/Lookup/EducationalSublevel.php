@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_qualifications_educational_sublevels')]
-class EducationalSublevel extends Model
+final class EducationalSublevel extends Model
 {
     /** @use HasFactory<EducationalSublevelFactory> */
     use HasFactory;

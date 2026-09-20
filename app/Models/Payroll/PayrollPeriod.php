@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 )]
 #[Table('payroll_periods')]
-class PayrollPeriod extends Model
+final class PayrollPeriod extends Model
 {
     /** @use HasFactory<PayrollPeriodFactory> */
     use HasFactory;

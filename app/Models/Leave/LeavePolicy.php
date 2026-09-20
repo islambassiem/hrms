@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class LeavePolicy extends Model
+final class LeavePolicy extends Model
 {
     /** @use HasFactory<LeavePolicyFactory> */
     use HasFactory;

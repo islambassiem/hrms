@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_qualifications_scientific_degrees')]
-class ScientificDegree extends Model
+final class ScientificDegree extends Model
 {
     /** @use HasFactory<ScientificDegreeFactory> */
     use HasFactory;

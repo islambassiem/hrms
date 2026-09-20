@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_payroll_deductions')]
-class Deduction extends Model
+final class Deduction extends Model
 {
     /** @use HasFactory<DeductionFactory> */
     use HasFactory;

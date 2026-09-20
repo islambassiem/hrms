@@ -14,7 +14,7 @@ trait PasswordValidationRules
      *
      * @return array<int, Password|ValidationRule|array<mixed>|string>
      */
-    protected function passwordRules(): array
+    public function passwordRules(): array
     {
         return ['required', 'string', Password::default(), 'confirmed'];
     }
@@ -24,7 +24,7 @@ trait PasswordValidationRules
      *
      * @return array<int, Password|ValidationRule|array<mixed>|string>
      */
-    protected function currentPasswordRules(): array
+    public function currentPasswordRules(): array
     {
         return ['required', 'string', 'current_password'];
     }

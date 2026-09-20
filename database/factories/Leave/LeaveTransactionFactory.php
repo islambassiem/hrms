@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories\Leave;
 
 use App\Enums\LeaveTransactionTypeEnum;
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveEntitlement;
 use App\Models\Leave\LeaveRequest;
 use App\Models\Leave\LeaveTransaction;

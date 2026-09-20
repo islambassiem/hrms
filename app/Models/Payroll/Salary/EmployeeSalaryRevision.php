@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('payroll_employee_salary_revisions')]
-class EmployeeSalaryRevision extends Model
+final class EmployeeSalaryRevision extends Model
 {
     /** @use HasFactory<EmployeeSalaryRevisionFactory> */
     use HasFactory;

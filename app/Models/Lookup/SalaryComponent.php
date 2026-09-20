@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_payroll_salary_components')]
-class SalaryComponent extends Model
+final class SalaryComponent extends Model
 {
     /** @use HasFactory<SalaryComponentFactory> */
     use HasFactory;

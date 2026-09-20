@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_leave_types')]
-class LeaveType extends Model
+final class LeaveType extends Model
 {
     /** @use HasFactory<LeaveTypeFactory> */
     use HasFactory;

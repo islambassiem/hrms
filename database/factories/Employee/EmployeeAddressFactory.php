@@ -1,9 +1,11 @@
 <?php
 
-namespace Database\Factories\Employees;
+declare(strict_types=1);
 
-use App\Models\Employees\Employee;
-use App\Models\Employees\EmployeeAddress;
+namespace Database\Factories\Employee;
+
+use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

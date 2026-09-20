@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_special_needs')]
-class SpecialNeed extends Model
+final class SpecialNeed extends Model
 {
     /** @use HasFactory<SpecialNeedFactory> */
     use HasFactory;

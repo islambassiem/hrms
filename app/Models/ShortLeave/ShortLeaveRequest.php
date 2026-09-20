@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class ShortLeaveRequest extends Model
+final class ShortLeaveRequest extends Model
 {
     /** @use HasFactory<ShortLeaveRequestFactory> */
     use HasFactory;

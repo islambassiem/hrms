@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Lookup\Category;
 use App\Models\Lookup\Department;
 use App\Models\Lookup\Gender;

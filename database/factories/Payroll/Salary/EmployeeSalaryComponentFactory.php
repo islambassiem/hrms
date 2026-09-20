@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Database\Factories\Payroll\Salary;
 
-use App\Models\Employees\Employee;
+use App\Models\Employee\Employee;
 use App\Models\Lookup\SalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryRevision;

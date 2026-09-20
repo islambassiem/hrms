@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Models\Employees;
+namespace App\Models\Employee;
 
 use App\Concerns\UserStamp;
-use Database\Factories\Employees\EmployeeFactory;
+use Database\Factories\Employee\EmployeeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
     'category_id',
     'department_id',
     'nationality_id',
-    'place_of_birth',
+    'place_of_birth_id',
     'email',
     'phone',
     'image',
@@ -44,10 +44,20 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 /** @use UserStamp<Employee> */
-class Employee extends Model
+final class Employee extends Model
 {
     /** @use HasFactory<EmployeeFactory> */
     use HasFactory;
 
     use UserStamp;
+
+    /** @retun array<string, string> */
+    public function casts(): array
+    {
+        return [
+            'date_of_birth' => 'immutable_date',
+            'joining_date' => 'immutable_date',
+            'leaving_date' => 'immutable_date',
+        ];
+    }
 }
