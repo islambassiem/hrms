@@ -73,11 +73,8 @@
             "npm run check",
             "npm run types:check",
             "npm run build",
-<<<<<<< HEAD
             "./vendor/bin/pint --parallel",
             "./vendor/bin/phpstan analyse",
-=======
->>>>>>> development
             "./vendor/bin/rector",
             "@test"
         ],
