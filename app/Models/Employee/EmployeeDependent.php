@@ -23,10 +23,20 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class EmployeeDependent extends Model
+final class EmployeeDependent extends Model
 {
     /** @use HasFactory<EmployeeDependentFactory> */
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    public function casts(): array
+    {
+        return [
+            'date_of_birth' => 'immutable_datetime',
+        ];
+    }
 }

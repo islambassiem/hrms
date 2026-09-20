@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('leave_employee_policies')]
-class EmployeeLeavePolicy extends Model
+final class EmployeeLeavePolicy extends Model
 {
     /** @use HasFactory<EmployeeLeavePolicyFactory> */
     use HasFactory;

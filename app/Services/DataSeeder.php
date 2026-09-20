@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class DataSeeder
+final class DataSeeder
 {
     public static function run(
         string $filename,

@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_job_titles')]
-class JobTitle extends Model
+final class JobTitle extends Model
 {
     /** @use HasFactory<JobTitleFactory> */
     use HasFactory;

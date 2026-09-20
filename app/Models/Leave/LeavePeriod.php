@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class LeavePeriod extends Model
+final class LeavePeriod extends Model
 {
     /** @use HasFactory<LeavePeriodFactory> */
     use HasFactory;

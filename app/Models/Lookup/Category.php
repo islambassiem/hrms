@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_categories')]
-class Category extends Model
+final class Category extends Model
 {
     /** @use HasFactory<CategoryFactory> */
     use HasFactory;

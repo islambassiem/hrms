@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_departments')]
-class Department extends Model
+final class Department extends Model
 {
     /** @use HasFactory<DepartmentFactory> */
     use HasFactory;

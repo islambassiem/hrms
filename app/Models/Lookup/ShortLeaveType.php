@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_short_leave_types')]
-class ShortLeaveType extends Model
+final class ShortLeaveType extends Model
 {
     /** @use HasFactory<ShortLeaveTypeFactory> */
     use HasFactory;

@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_academic_ranks')]
-class AcademicRank extends Model
+final class AcademicRank extends Model
 {
     /** @use HasFactory<AcademicRankFactory> */
     use HasFactory;

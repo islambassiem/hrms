@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_genders')]
-class Gender extends Model
+final class Gender extends Model
 {
     /** @use HasFactory<GenderFactory> */
     use HasFactory;

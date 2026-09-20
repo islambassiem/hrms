@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_countries')]
-class Country extends Model
+final class Country extends Model
 {
     /** @use HasFactory<CountryFactory> */
     use HasFactory;

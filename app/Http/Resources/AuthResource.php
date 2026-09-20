@@ -11,7 +11,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @mixin User
  */
-class AuthResource extends JsonResource
+final class AuthResource extends JsonResource
 {
     public static $wrap;
 

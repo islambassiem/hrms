@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_payroll_banks')]
-class Bank extends Model
+final class Bank extends Model
 {
     /** @use HasFactory<BankFactory> */
     use HasFactory;

@@ -8,6 +8,7 @@ namespace App\Models;
 use App\Concerns\UserStamp;
 use App\Models\Employee\Employee;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,7 +34,7 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * @property-read Employee $employee
  */
-class User extends Authenticatable implements PasskeyUser
+final class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
@@ -49,7 +50,7 @@ class User extends Authenticatable implements PasskeyUser
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    public function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',

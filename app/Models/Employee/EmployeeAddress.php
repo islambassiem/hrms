@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 
-class EmployeeAddress extends Model
+final class EmployeeAddress extends Model
 {
     /** @use HasFactory<EmployeeAddressFactory> */
     use HasFactory;

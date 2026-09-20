@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_family_relationships')]
-class FamilyRelationship extends Model
+final class FamilyRelationship extends Model
 {
     /** @use HasFactory<FamilyRelationshipFactory> */
     use HasFactory;

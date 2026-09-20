@@ -21,12 +21,10 @@ class DepartmentFactory extends Factory
      */
     public function definition(): array
     {
-        $types = DepartmentTypeEnum::cases();
-
         return [
             ...LookupFactory::run(),
-            'type' => $types[array_rand($types)],
-            'is_active' => (bool) random_int(0, 1),
+            'type' => fake()->randomElement(DepartmentTypeEnum::cases()),
+            'is_active' => fake()->boolean(),
             'parent_id' => null,
             'head_id' => null,
         ];

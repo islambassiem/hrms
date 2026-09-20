@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
     'used_days',
 ])]
 #[Table('leave_employee_sick_cycles')]
-class EmployeeSickLeaveCycle extends Model
+final class EmployeeSickLeaveCycle extends Model
 {
     /** @use HasFactory<EmployeeSickLeaveCycleFactory> */
     use HasFactory;

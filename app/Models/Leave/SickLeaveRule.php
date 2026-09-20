@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('leave_sick_rules')]
-class SickLeaveRule extends Model
+final class SickLeaveRule extends Model
 {
     /** @use HasFactory<SickLeaveRuleFactory> */
     use HasFactory;

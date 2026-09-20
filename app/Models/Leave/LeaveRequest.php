@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class LeaveRequest extends Model
+final class LeaveRequest extends Model
 {
     /** @use HasFactory<LeaveRequestFactory> */
     use HasFactory;

@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_workflows')]
-class Workflow extends Model
+final class Workflow extends Model
 {
     /** @use HasFactory<WorkflowFactory> */
     use HasFactory;

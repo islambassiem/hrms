@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
     'approved_at',
     'expires_at',
 ])]
-class LeaveCarryover extends Model
+final class LeaveCarryover extends Model
 {
     /** @use HasFactory<LeaveCarryoverFactory> */
     use HasFactory;

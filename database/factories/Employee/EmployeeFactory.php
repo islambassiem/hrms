@@ -14,6 +14,7 @@ use App\Models\Lookup\Religion;
 use App\Models\Lookup\SpecialNeed;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @extends Factory<Employee>
@@ -56,8 +57,8 @@ class EmployeeFactory extends Factory
             'phone' => fake()->numerify('5########'),
 
             'date_of_birth' => fake()->date(),
-            'joining_date' => fake()->date(),
-            'leaving_date' => fake()->date(),
+            'joining_date' => $joiningDate = Date::parse(fake()->dateTimeBetween(now(), '+10 years')),
+            'leaving_date' => fake()->randomElement([null, $joiningDate->addYears(random_int(1, 5))]),
 
             'home_telephone_number' => fake()->randomElement([null, fake()->phoneNumber()]),
             'home_country_identity' => fake()->randomElement([null, fake()->numerify('##########')]),

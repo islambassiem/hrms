@@ -18,10 +18,21 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class EmployeeJobTitle extends Model
+final class EmployeeJobTitle extends Model
 {
     /** @use HasFactory<EmployeeJobTitleFactory> */
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    public function casts(): array
+    {
+        return [
+            'start_date' => 'immutable_date',
+            'end_date' => 'immutable_date',
+        ];
+    }
 }

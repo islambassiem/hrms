@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class EmployeeIdentity extends Model
+final class EmployeeIdentity extends Model
 {
     /** @use HasFactory<EmployeeIdentityFactory> */
     use HasFactory;

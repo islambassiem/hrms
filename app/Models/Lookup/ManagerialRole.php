@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_managerial_roles')]
-class ManagerialRole extends Model
+final class ManagerialRole extends Model
 {
     /** @use HasFactory<ManagerialRoleFactory> */
     use HasFactory;

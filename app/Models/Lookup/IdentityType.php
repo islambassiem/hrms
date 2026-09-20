@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_identity_types')]
-class IdentityType extends Model
+final class IdentityType extends Model
 {
     /** @use HasFactory<IdentityTypeFactory> */
     use HasFactory;

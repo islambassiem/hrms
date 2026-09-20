@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('payroll_employee_banks')]
-class EmployeeBank extends Model
+final class EmployeeBank extends Model
 {
     /** @use HasFactory<EmployeeBankFactory> */
     use HasFactory;

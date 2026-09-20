@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_qualifications_gpa_types')]
-class GpaType extends Model
+final class GpaType extends Model
 {
     /** @use HasFactory<GpaTypeFactory> */
     use HasFactory;

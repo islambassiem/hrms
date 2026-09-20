@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
     'reference_id',
     'created_by',
 ])]
-class LeaveTransaction extends Model
+final class LeaveTransaction extends Model
 {
     /** @use HasFactory<LeaveTransactionFactory> */
     use HasFactory;

@@ -11,7 +11,7 @@
  */
 
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @use UserStamp<Employee>
  * @property int $id
@@ -39,9 +39,9 @@ namespace App\Models\Employees{
  * @property string|null $email
  * @property string|null $phone
  * @property string|null $image
- * @property string|null $date_of_birth
- * @property string|null $joining_date
- * @property string|null $leaving_date
+ * @property \Carbon\CarbonImmutable|null $date_of_birth
+ * @property \Carbon\CarbonImmutable|null $joining_date
+ * @property \Carbon\CarbonImmutable|null $leaving_date
  * @property string|null $home_telephone_number
  * @property string|null $home_country_identity
  * @property string|null $blood_type
@@ -52,7 +52,7 @@ namespace App\Models\Employees{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee query()
@@ -96,7 +96,7 @@ namespace App\Models\Employees{
 	class Employee extends \Eloquent {}
 }
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
@@ -113,7 +113,7 @@ namespace App\Models\Employees{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeAddressFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeAddressFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress query()
@@ -134,7 +134,7 @@ namespace App\Models\Employees{
 	class EmployeeAddress extends \Eloquent {}
 }
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
@@ -142,7 +142,7 @@ namespace App\Models\Employees{
  * @property string|null $name_ar
  * @property string $identification
  * @property int $gender_id
- * @property string $date_of_birth
+ * @property \Carbon\CarbonImmutable $date_of_birth
  * @property int $relationship_id
  * @property int $has_insurance
  * @property int $ticket_ratio
@@ -152,7 +152,7 @@ namespace App\Models\Employees{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeDependentFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeDependentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeDependent newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeDependent newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeDependent query()
@@ -174,7 +174,7 @@ namespace App\Models\Employees{
 	class EmployeeDependent extends \Eloquent {}
 }
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
@@ -189,7 +189,7 @@ namespace App\Models\Employees{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeIdentityFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeIdentityFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity query()
@@ -208,20 +208,20 @@ namespace App\Models\Employees{
 	class EmployeeIdentity extends \Eloquent {}
 }
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
  * @property int $job_title_id
- * @property string $start_date
- * @property string|null $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeJobTitleFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeJobTitleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle query()
@@ -238,7 +238,7 @@ namespace App\Models\Employees{
 	class EmployeeJobTitle extends \Eloquent {}
 }
 
-namespace App\Models\Employees{
+namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
@@ -251,7 +251,7 @@ namespace App\Models\Employees{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
- * @method static \Database\Factories\Employees\EmployeeManagerialRoleFactory factory($count = null, $state = [])
+ * @method static \Database\Factories\Employee\EmployeeManagerialRoleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeManagerialRole newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeManagerialRole newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeManagerialRole query()

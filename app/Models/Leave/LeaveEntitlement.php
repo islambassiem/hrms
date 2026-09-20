@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
     'expires_at',
     'status',
 ])]
-class LeaveEntitlement extends Model
+final class LeaveEntitlement extends Model
 {
     /** @use HasFactory<LeaveEntitlementFactory> */
     use HasFactory;

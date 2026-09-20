@@ -18,10 +18,21 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-class EmployeeManagerialRole extends Model
+final class EmployeeManagerialRole extends Model
 {
     /** @use HasFactory<EmployeeManagerialRoleFactory> */
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    public function casts(): array
+    {
+        return [
+            'start_date' => 'immutable_date',
+            'end_date' => 'immutable_date',
+        ];
+    }
 }
