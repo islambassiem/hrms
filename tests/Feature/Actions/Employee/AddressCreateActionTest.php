@@ -6,8 +6,6 @@ use App\Actions\Employee\AddressCreateAction;
 use App\Data\Employee\AddressData;
 use App\Models\Employee\Employee;
 use App\Models\Employee\EmployeeAddress;
-use App\Models\User;
-use Tests\Support\DatabaseState;
 
 it('creates an employee address', function (): void {
     $data = AddressData::from(EmployeeAddress::factory()->make());
@@ -18,11 +16,14 @@ it('creates an employee address', function (): void {
 });
 
 test('action fails when employee already exists', function (): void {
-    $employeeId = DatabaseState::foreignKey(Employee::class);
+    $employee = Employee::factory()->create();
+    EmployeeAddress::factory()->create([
+        'employee_id' => $employee->id,
+    ]);
 
     $data = AddressData::from(
         EmployeeAddress::factory()->make([
-            'employee_id' => $employeeId,
+            'employee_id' => $employee->id,
         ])
     );
 
@@ -33,14 +34,13 @@ test('action fails when employee already exists', function (): void {
 });
 
 test('action fails when short address already exists', function (): void {
-    $shortAddress = DatabaseState::unique(
-        EmployeeAddress::class,
-        'short_address',
-        'Existing Address',
-    );
+    EmployeeAddress::factory()->create([
+        'short_address' => 'Existing Address',
+    ]);
+
     $data = AddressData::from(
         EmployeeAddress::factory()->make([
-            'short_address' => $shortAddress,
+            'short_address' => 'Existing Address',
         ])
     );
 

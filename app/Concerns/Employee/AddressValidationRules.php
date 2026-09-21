@@ -14,36 +14,44 @@ trait AddressValidationRules
      */
 
     /**
-     * @return array<string, array<int, string|ValidationRule>>
+     * @return array<string, mixed>
      */
     public function createRules(): array
     {
         return [
             ...self::baseRules(),
             'employee_id' => [
-                ...$this->employeeIdRules(),
+                'required',
+                'integer',
+                Rule::exists('employees', 'id'),
                 Rule::unique('employee_addresses', 'employee_id'),
             ],
             'short_address' => [
-                $this->shortAddressRules(),
+                'required',
+                'string',
+                'max:255',
                 Rule::unique('employee_addresses', 'short_address'),
             ],
         ];
     }
 
     /**
-     * @return array<string, array<int, string|ValidationRule>>
+     * @return array<string, mixed>
      */
     public function updateRules(EmployeeAddress $address): array
     {
         return [
             ...self::baseRules(),
             'employee_id' => [
-                ...$this->employeeIdRules(),
+                'required',
+                'integer',
+                Rule::exists('employees', 'id'),
                 Rule::unique('employee_addresses', 'employee_id')->ignore($address->id),
             ],
             'short_address' => [
-                ...$this->shortAddressRules(),
+                'required',
+                'string',
+                'max:255',
                 Rule::unique('employee_addresses', 'short_address')->ignore($address->id),
             ],
         ];
@@ -61,30 +69,6 @@ trait AddressValidationRules
             'district' => ['nullable', 'string', 'max:255'],
             'postal_code' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:255'],
-        ];
-    }
-
-    /**
-     * @return array<int, string|ValidationRule>
-     */
-    private function employeeIdRules(): array
-    {
-        return [
-            'required',
-            'integer',
-            Rule::exists('employees', 'id'),
-        ];
-    }
-
-    /**
-     * @return array<int, string|ValidationRule>
-     */
-    private function shortAddressRules(): array
-    {
-        return [
-            'required',
-            'string',
-            'max:255',
         ];
     }
 }

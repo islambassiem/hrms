@@ -215,11 +215,11 @@ trait EmployeeValidationRules
             'blood_type' => [
                 'nullable',
                 'string',
-                'max:10',
+                'max:30',
             ],
 
             'is_active' => [
-                'nullable',
+                'required',
                 'boolean',
             ],
         ];

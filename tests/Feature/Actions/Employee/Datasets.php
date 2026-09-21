@@ -164,3 +164,109 @@ dataset('managerial role dataset', [
         ->invalidDateOrder('start_date', 'end_date')
         ->build(),
 ]);
+
+dataset('employee dataset', [
+
+    ...invalid('user_id')
+        ->required()
+        ->build(),
+
+    ...invalid('first_name_en')
+        ->required()
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('middle_name_en')
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('third_name_en')
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('last_name_en')
+        ->required()
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('first_name_ar')
+        ->required()
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('middle_name_ar')
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('third_name_ar')
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('last_name_ar')
+        ->required()
+        ->notString()
+        ->tooLong(30)
+        ->build(),
+
+    ...invalid('gender_id')
+        ->required()
+        ->build(),
+
+    ...invalid('category_id')
+        ->required()
+        ->build(),
+
+    ...invalid('nationality_id')
+        ->required()
+        ->build(),
+
+    ...invalid('phone')
+        ->notString()
+        ->aboveMax(30)
+        ->build(),
+
+    ...invalid('image')
+        ->notString()
+        ->aboveMax(30)
+        ->build(),
+
+    ...invalid('date_of_birth')
+        ->required()
+        ->future()
+        ->build(),
+
+    ...invalid('joining_date')
+        ->required()
+        ->past()
+        ->build(),
+
+    ...invalid('leaving_date')
+        ->invalidDateOrder('joining_date', 'leaving_date')
+        ->build(),
+
+    ...invalid('home_telephone_number')
+        ->notString()
+        ->aboveMax(30)
+        ->build(),
+
+    ...invalid('home_country_identity')
+        ->notString()
+        ->aboveMax(30)
+        ->build(),
+
+    ...invalid('blood_type')
+        ->notString()
+        ->aboveMax(30)
+        ->build(),
+
+    ...invalid('is_active')
+        ->notBoolean()
+        ->build(),
+]);
