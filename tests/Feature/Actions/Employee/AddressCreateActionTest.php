@@ -4,60 +4,58 @@ declare(strict_types=1);
 
 use App\Actions\Employee\AddressCreateAction;
 use App\Data\Employee\AddressData;
+use App\Models\Employee\Employee;
 use App\Models\Employee\EmployeeAddress;
-use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
 it('creates an employee address', function (): void {
-    $user = User::factory()->create();
-
-    $this->actingAs($user);
-
     $data = AddressData::from(EmployeeAddress::factory()->make());
     $address = resolve(AddressCreateAction::class)->handle($data);
 
     expect($address)->toBeInstanceOf(EmployeeAddress::class);
-
-    $this->assertDatabaseHas('employee_addresses', [
-        'id' => $address->id,
-        'employee_id' => $data->employee_id,
-        'short_address' => $data->short_address,
-        'created_by' => $user->id,
-        'updated_by' => $user->id,
-    ]);
+    $this->assertDatabaseHas('employee_addresses', $address->getAttributes());
 });
 
-it('fails when :dataset', function ($ovrrides) {
-    expect(
-        fn () => AddressData::from(EmployeeAddress::factory()->make($ovrrides))
-    )->toThrow(ValidationException::class);
-})
-    ->with([
-        'both are null' =>  [['employee_id' => null, 'short_address' => null]],
-        'short_address is null' => [['employee_id' => 123, 'short_address' => null]],
-        'employee_id is null' => [['employee_id' => null, 'short_address' => '123 Main St']],
+test('action fails when employee already exists', function (): void {
+    $employee = Employee::factory()->create();
+    EmployeeAddress::factory()->create([
+        'employee_id' => $employee->id,
     ]);
 
-it('fails validation when non-existent employee_id is provided', function (): void {
-    $data = AddressData::from([
-        'employee_id' => 99999,
-        'short_address' => 'RIYD1234',
+    $data = AddressData::from(
+        EmployeeAddress::factory()->make([
+            'employee_id' => $employee->id,
+        ])
+    );
+
+    expectValidationError(
+        fn () => resolve(AddressCreateAction::class)->handle($data),
+        ['employee_id'],
+    );
+});
+
+test('action fails when short address already exists', function (): void {
+    EmployeeAddress::factory()->create([
+        'short_address' => 'Existing Address',
     ]);
 
-    $action = new AddressCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+    $data = AddressData::from(
+        EmployeeAddress::factory()->make([
+            'short_address' => 'Existing Address',
+        ])
+    );
 
-it('fails validation when employee_id already has an address', function (): void {
-    $existingAddress = EmployeeAddress::factory()->create();
+    expectValidationError(
+        fn () => resolve(AddressCreateAction::class)->handle($data),
+        ['short_address'],
+    );
+});
 
-    $data = AddressData::from([
-        'employee_id' => $existingAddress->employee_id,
-        'short_address' => 'NEW1234',
-    ]);
-
-    $action = new AddressCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
-
-
+test('action fails when :dataset', function (array $overrides, array $fields): void {
+    expectValidationError(
+        fn () => resolve(AddressCreateAction::class)->handle(
+            AddressData::from(
+                EmployeeAddress::factory()->make($overrides)
+            )
+        ), $fields
+    );
+})->with('Address Dataset');

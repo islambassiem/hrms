@@ -17,7 +17,7 @@ final class DependentData extends Data
         public int $relationship_id,
         public ?string $name_en = null,
         public ?string $name_ar = null,
-        public bool $has_insurance = false,
-        public int $ticket_ratio = 0,
+        public ?bool $has_insurance = false,
+        public ?int $ticket_ratio = 0,
     ) {}
 }

@@ -18,9 +18,7 @@ trait IdentityValidationRules
             ...self::baseRules(),
 
             'identity_number' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->identityNumber(),
                 Rule::unique('employee_identities', 'identity_number'),
             ],
         ];
@@ -35,9 +33,7 @@ trait IdentityValidationRules
             ...self::baseRules(),
 
             'identity_number' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->identityNumber(),
                 Rule::unique('employee_identities', 'identity_number')
                     ->ignore($identity->id),
             ],
@@ -74,9 +70,17 @@ trait IdentityValidationRules
             ],
 
             'expiry_date' => [
-                'nullable',
+                'required',
                 Rule::date()->after('issue_date'),
             ],
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function identityNumber(): array
+    {
+        return ['required', 'string', 'max:15'];
     }
 }

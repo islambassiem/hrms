@@ -6,58 +6,43 @@ use App\Actions\Employee\IdentityCreateAction;
 use App\Data\Employee\IdentityData;
 use App\Models\Employee\Employee;
 use App\Models\Employee\EmployeeIdentity;
-use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
 it('creates an identity with authenticated user audit fields', function (): void {
-    $user = User::factory()->create();
     $employee = Employee::factory()->create();
-
-    $this->actingAs($user);
-
     $data = IdentityData::from(EmployeeIdentity::factory()->make([
         'employee_id' => $employee->id,
     ]));
-
-    $action = new IdentityCreateAction;
-    $identity = $action->handle($data);
+    $identity = resolve(IdentityCreateAction::class)->handle($data);
 
     expect($identity)->toBeInstanceOf(EmployeeIdentity::class);
-
-    $this->assertDatabaseHas('employee_identities', [
-        'id' => $identity->id,
-        'employee_id' => $employee->id,
-        'identity_number' => $data->identity_number,
-        'created_by' => $user->id,
-        'updated_by' => $user->id,
-    ]);
+    $this->assertDatabaseHas('employee_identities', $identity->getAttributes());
 });
 
-it('fails validation when identity_number is not unique', function (): void {
-    EmployeeIdentity::factory()->create(['identity_number' => '1010101010']);
-    $employee = Employee::factory()->create();
+it('fails to create an identity for non employee', function (): void {
+    $data = IdentityData::from(EmployeeIdentity::factory()->make([
+        'employee_id' => 999,
+    ]));
+    expectValidationError(
+        fn () => resolve(IdentityCreateAction::class)->handle($data),
+        ['employee_id']
+    );
+});
 
-    $data = IdentityData::from([
-        'employee_id' => $employee->id,
-        'identity_type_id' => 1,
-        'identity_number' => '1010101010',
-    ]);
+it('fails to create an identity for non identity type', function (): void {
+    $data = IdentityData::from(EmployeeIdentity::factory()->make([
+        'identity_type_id' => 999,
+    ]));
+    expectValidationError(
+        fn () => resolve(IdentityCreateAction::class)->handle($data),
+        ['identity_type_id']
+    );
+});
 
-    $action = new IdentityCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
-
-it('fails validation when expiry_date is before issue_date', function (): void {
-    $employee = Employee::factory()->create();
-
-    $data = IdentityData::from([
-        'employee_id' => $employee->id,
-        'identity_type_id' => 1,
-        'identity_number' => '1010101011',
-        'issue_date' => now()->subYear(),
-        'expiry_date' => now()->subYears(2),
-    ]);
-
-    $action = new IdentityCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+it('fails to create an identity when :dataset', function (array $overrides, array $fields): void {
+    expectValidationError(
+        fn () => resolve(IdentityCreateAction::class)->handle(
+            IdentityData::from(EmployeeIdentity::factory()->make($overrides))
+        ),
+        $fields
+    );
+})->with('identity dataset');

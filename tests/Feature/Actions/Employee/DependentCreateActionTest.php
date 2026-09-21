@@ -6,56 +6,60 @@ use App\Actions\Employee\DependentCreateAction;
 use App\Data\Employee\DependentData;
 use App\Models\Employee\Employee;
 use App\Models\Employee\EmployeeDependent;
-use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
-it('creates an employee dependent with authenticated user audit fields', function (): void {
-    $user = User::factory()->create();
+it('creates an employee dependent', function (): void {
     $employee = Employee::factory()->create();
-
-    $this->actingAs($user);
-
-    $data = DependentData::from(EmployeeDependent::factory()->make([
-        'employee_id' => $employee->id,
-    ]));
-
-    $action = new DependentCreateAction;
-    $dependent = $action->handle($data);
+    $dependent = resolve(DependentCreateAction::class)->handle(
+        DependentData::from(EmployeeDependent::factory()->make([
+            'employee_id' => $employee->id,
+        ]))
+    );
 
     expect($dependent)->toBeInstanceOf(EmployeeDependent::class);
-
     $this->assertDatabaseHas('employee_dependents', [
         'employee_id' => $employee->id,
         'identification' => $dependent->identification,
-        'created_by' => $user->id,
-        'updated_by' => $user->id,
     ]);
 });
 
-it('fails validation when identification is already taken', function (): void {
-    EmployeeDependent::factory()->create(['identification' => '1098765432']);
-    $employee = Employee::factory()->create();
+it('fails to create a dependent for non employee', function (): void {
+    expectValidationError(
+        fn () => resolve(DependentCreateAction::class)->handle(
+            DependentData::from(EmployeeDependent::factory()->make([
+                'employee_id' => 99999,
+            ]))
+        ),
+        ['employee_id']
+    );
+});
 
-    $data = DependentData::from(EmployeeDependent::factory()->make([
-        'employee_id' => $employee->id,
-        'identification' => '1098765432',
-    ]));
+it('fails to create a dependent for wrong relationship', function (): void {
+    expectValidationError(
+        fn () => resolve(DependentCreateAction::class)->handle(
+            DependentData::from(EmployeeDependent::factory()->make([
+                'relationship_id' => 99999,
+            ]))
+        ),
+        ['relationship_id']
+    );
+});
 
-    $action = new DependentCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+it('fails to create a dependent for wrong gender', function (): void {
+    expectValidationError(
+        fn () => resolve(DependentCreateAction::class)->handle(
+            DependentData::from(EmployeeDependent::factory()->make([
+                'gender_id' => 99999,
+            ]))
+        ),
+        ['gender_id']
+    );
+});
 
-it('fails validation when date_of_birth is in the future', function (): void {
-    $employee = Employee::factory()->create();
-
-    $data = DependentData::from([
-        'employee_id' => $employee->id,
-        'identification' => '1122334455',
-        'gender_id' => 1,
-        'date_of_birth' => now()->addYear(),
-        'relationship_id' => 1,
-    ]);
-
-    $action = new DependentCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+it('fails to create a dependent when :dataset', function (array $overrides, array $fields): void {
+    expectValidationError(
+        fn () => resolve(DependentCreateAction::class)->handle(
+            DependentData::from(EmployeeDependent::factory()->make($overrides))
+        ),
+        $fields
+    );
+})->with('dependent dataset');

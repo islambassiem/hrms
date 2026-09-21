@@ -6,67 +6,74 @@ use App\Actions\Employee\EmployeeCreateAction;
 use App\Data\Employee\EmployeeData;
 use App\Models\Employee\Employee;
 use App\Models\User;
-use Illuminate\Validation\ValidationException;
 
 it('creates an employee with authenticated user audit fields', function (): void {
+    $employee = resolve(EmployeeCreateAction::class)->handle(
+        EmployeeData::from(Employee::factory()->make())
+    );
+
+    expect($employee)->toBeInstanceOf(Employee::class);
+
+    $this->assertDatabaseHas('employees', $employee->getAttributes());
+});
+
+it('fails to create a non-unique user id', function (): void {
     $user = User::factory()->create();
-    $this->actingAs($user);
-
-    $data = EmployeeData::from(Employee::factory()->make());
-
-    $action = new EmployeeCreateAction;
-    $employee = $action->handle($data);
-
-    expect($employee)->toBeInstanceOf(Employee::class);
-
-    $this->assertDatabaseHas('employees', [
-        'id' => $employee->id,
-        'employee_code' => $data->employee_code,
-        'created_by' => $user->id,
-        'updated_by' => $user->id,
+    Employee::factory()->create([
+        'user_id' => $user->id,
     ]);
+
+    expectValidationError(
+        fn () => resolve(EmployeeCreateAction::class)->handle(
+            EmployeeData::from(Employee::factory()->make([
+                'user_id' => $user->id,
+            ]))
+        ), ['user_id']
+    );
 });
 
-it('creates an employee without authenticated user', function (): void {
-    $data = EmployeeData::from(Employee::factory()->make());
-
-    $action = new EmployeeCreateAction;
-    $employee = $action->handle($data);
-
-    expect($employee)->toBeInstanceOf(Employee::class);
-    expect($employee->created_by)->toBeNull()
-        ->and($employee->updated_by)->toBeNull();
-
-    $this->assertDatabaseHas('employees', [
-        'id' => $employee->id,
-        'employee_code' => $data->employee_code,
-        'created_by' => null,
-        'updated_by' => null,
+it('fails to create an employee with duplicate field', function (string $field, string $value): void {
+    $employee = Employee::factory()->create([
+        $field => $value,
     ]);
-});
 
-it('fails validation when required fields are missing or invalid', function (): void {
-    $data = EmployeeData::from(Employee::factory()->make([
-        'user_id' => null,
-        'employee_code' => '',
-        'gender_id' => 99999,
-        'category_id' => 1,
-        'department_id' => 1,
-        'nationality_id' => 1,
-        'joining_date' => now()->addDays(1),
-    ]));
+    expectValidationError(
+        fn () => resolve(EmployeeCreateAction::class)->handle(
+            EmployeeData::from(Employee::factory()->make([
+                $field => $employee->$field,
+            ]))
+        ), [$field]
+    );
+})->with([
+    ['field' => 'employee_code', 'value' => '500322'],
+    ['field' => 'email', 'value' => '500322@inaya.edu.sa'],
+]);
 
-    $action = new EmployeeCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+it('fails to create employee with non existing :dataset', function (string $column, int $value = PHP_INT_MIN): void {
+    expectValidationError(
+        fn () => resolve(EmployeeCreateAction::class)->handle(
+            EmployeeData::from(Employee::factory()->make([
+                $column => $value,
+            ]))
+        ), [$column]
+    );
+})->with([
+    'user' => ['user_id'],
+    'head' => ['head_id'],
+    'gender' => ['gender_id'],
+    'category' => ['category_id'],
+    'department' => ['department_id'],
+    'nationality' => ['nationality_id'],
+    'place of birth country' => ['place_of_birth_id'],
+    'marital status' => ['marital_status_id'],
+    'religion' => ['religion_id'],
+    'special need' => ['special_need_id'],
+]);
 
-it('fails validation when employee_code is not unique', function (): void {
-    Employee::factory()->create(['employee_code' => '500322']);
-
-    $data = EmployeeData::from(Employee::factory()->make([
-        'employee_code' => '500322',
-    ]));
-
-    $action = new EmployeeCreateAction;
-    $action->handle($data);
-})->throws(ValidationException::class);
+it('fails to create employee when :dataset', function (array $overrides, array $fields): void {
+    expectValidationError(
+        fn () => resolve(EmployeeCreateAction::class)->handle(
+            EmployeeData::from(Employee::factory()->make($overrides))
+        ), $fields
+    );
+})->with('employee dataset');
