@@ -19,6 +19,7 @@ final class AddressUpdateAction
     {
         Validator::make(
             $data->toArray(),
+            /** @var array<string, mixed> */
             $this->updateRules($address),
         )->validate();
 

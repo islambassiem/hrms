@@ -10,6 +10,7 @@ use App\Models\Employee\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use LogicException;
 
 final class EmployeeUpdateAction
 {
@@ -22,10 +23,16 @@ final class EmployeeUpdateAction
             $this->updateRules($employee),
         )->validate();
 
-        /** @var int|null $currentUserId */
+        /** @var int|string|null $currentUserId */
         $currentUserId = Auth::id();
 
-        return DB::transaction(function () use ($employee, $data, $currentUserId): Employee {
+        throw_if($currentUserId !== null && ! \is_int($currentUserId), LogicException::class, 'The authenticated user ID must be an integer.');
+
+        return DB::transaction(function () use (
+            $employee,
+            $data,
+            $currentUserId
+        ): Employee {
             /** @var array<string, mixed> $payload */
             $payload = [
                 ...$data->toArray(),
