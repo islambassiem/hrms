@@ -42,7 +42,7 @@ class QualificationFactory extends Factory
             'is_last_qualification' => fake()->boolean(),
 
             'rating_id' => Rating::factory(),
-            'gpa' => fake()->randomFloat(2, 0, 4),
+            'gpa' => (string) fake()->randomFloat(2, 0, 4),
             'gpa_type_id' => GpaType::factory(),
             'study_type_id' => StudyType::factory(),
             'city' => fake()->city(),

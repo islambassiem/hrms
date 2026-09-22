@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
-    'emplyee_id',
+    'employee_id',
+    'educational_sublevel_id',
     'major_id',
     'minor_id',
     'educational_sub_level_id',
