@@ -6,6 +6,7 @@ namespace App\Concerns\Employee;
 
 use App\Models\Employee\EmployeeAddress;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 trait AddressValidationRules
 {
@@ -21,15 +22,11 @@ trait AddressValidationRules
         return [
             ...self::baseRules(),
             'employee_id' => [
-                'required',
-                'integer',
-                Rule::exists('employees', 'id'),
+                ...$this->employee(),
                 Rule::unique('employee_addresses', 'employee_id'),
             ],
             'short_address' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->shortAddress(),
                 Rule::unique('employee_addresses', 'short_address'),
             ],
         ];
@@ -43,15 +40,11 @@ trait AddressValidationRules
         return [
             ...self::baseRules(),
             'employee_id' => [
-                'required',
-                'integer',
-                Rule::exists('employees', 'id'),
+                ...$this->employee(),
                 Rule::unique('employee_addresses', 'employee_id')->ignore($address->id),
             ],
             'short_address' => [
-                'required',
-                'string',
-                'max:255',
+                ...$this->shortAddress(),
                 Rule::unique('employee_addresses', 'short_address')->ignore($address->id),
             ],
         ];
@@ -69,6 +62,30 @@ trait AddressValidationRules
             'district' => ['nullable', 'string', 'max:255'],
             'postal_code' => ['nullable', 'string', 'max:255'],
             'city' => ['nullable', 'string', 'max:255'],
+        ];
+    }
+
+    /**
+     * @return array<string|Exists>
+     */
+    private function employee(): array
+    {
+        return [
+            'required',
+            'integer',
+            Rule::exists('employees', 'id'),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function shortAddress(): array
+    {
+        return [
+            'required',
+            'string',
+            'max:255',
         ];
     }
 }

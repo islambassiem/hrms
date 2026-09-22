@@ -19,6 +19,7 @@ final class IdentityUpdateAction
     {
         Validator::make(
             $data->toArray(),
+            /** @var array<string, mixed> */
             $this->updateRules($identity),
         )->validate();
 

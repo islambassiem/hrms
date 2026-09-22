@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Concerns\Employee;
 
 use App\Models\Employee\Employee;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 trait EmployeeValidationRules
 {
     /**
-     * @return array<string, mixed>
+     * @return array<string, array<mixed>|ValidationRule|string>
      */
     public function createRules(): array
     {
@@ -18,30 +20,24 @@ trait EmployeeValidationRules
             ...self::baseRules(),
 
             'user_id' => [
-                'required',
-                Rule::exists('users', 'id'),
+                ...$this->user(),
                 Rule::unique('employees', 'user_id'),
             ],
 
             'employee_code' => [
-                'required',
-                'string',
-                'max:10',
+                $this->employeeCode(),
                 Rule::unique('employees', 'employee_code'),
             ],
 
             'email' => [
-                'nullable',
-                'string',
-                'email',
-                'max:255',
+                ...$this->email(),
                 Rule::unique('employees', 'email'),
             ],
         ];
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, array<mixed>|ValidationRule|string>
      */
     public function updateRules(Employee $employee): array
     {
@@ -49,25 +45,19 @@ trait EmployeeValidationRules
             ...self::baseRules(),
 
             'user_id' => [
-                'required',
-                Rule::exists('users', 'id'),
+                ...$this->user(),
                 Rule::unique('employees', 'user_id')
                     ->ignore($employee->id),
             ],
 
             'employee_code' => [
-                'required',
-                'string',
-                'max:10',
+                ...$this->employeeCode(),
                 Rule::unique('employees', 'employee_code')
                     ->ignore($employee->id),
             ],
 
             'email' => [
-                'nullable',
-                'string',
-                'email',
-                'max:255',
+                ...$this->email(),
                 Rule::unique('employees', 'email')
                     ->ignore($employee->id),
             ],
@@ -75,7 +65,7 @@ trait EmployeeValidationRules
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, array<mixed>|ValidationRule|string>
      */
     public function baseRules(): array
     {
@@ -222,6 +212,41 @@ trait EmployeeValidationRules
                 'required',
                 'boolean',
             ],
+        ];
+    }
+
+    /**
+     * @return array<int, Exists|string>
+     */
+    private function user(): array
+    {
+        return [
+            'required',
+            Rule::exists('users', 'id'),
+        ];
+    }
+
+    /**
+     * @return array<int, ValidationRule|array<mixed>|string>
+     */
+    private function employeeCode(): array
+    {
+        return [
+            'required',
+            'string',
+            'max:30',
+        ];
+    }
+
+    /**
+     * @return array<int, ValidationRule|array<mixed>|string>
+     */
+    private function email(): array
+    {
+        return [
+            'required',
+            'email',
+            'max:255',
         ];
     }
 }

@@ -19,6 +19,7 @@ final class AddressCreateAction
     {
         Validator::make(
             $data->toArray(),
+            /** @var array<string, mixed> */
             $this->createRules(),
         )->validate();
 
