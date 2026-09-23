@@ -27,4 +27,13 @@ final class PayrollPeriod extends Model
     use HasFactory;
 
     use UserStamp;
+
+    protected function casts()
+    {
+        return [
+            'start_date' => 'immutable_date',
+            'end_date' => 'immutable_date',
+            'pay_date' => 'immutable_date',
+        ];
+    }
 }

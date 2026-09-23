@@ -26,4 +26,14 @@ final class LeaveEntitlement extends Model
 {
     /** @use HasFactory<LeaveEntitlementFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'expires_at' => 'immutable_date',
+        ];
+    }
 }

@@ -31,7 +31,7 @@ class WorkflowStepFactory extends Factory
             'workflow_id' => Workflow::factory(),
             'name_en' => fake()->word(),
             'name_ar' => fake('ar_SA')->word(),
-            'code' => fake()->unique()->numberBetween(1, 10000000000000),
+            'code' => (string) fake()->unique()->randomNumber(5),
             'description' => fake()->sentence(),
             'step_order' => fake()->numberBetween(1, 50),
             'role_id' => $role->id,

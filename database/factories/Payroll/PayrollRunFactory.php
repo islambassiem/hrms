@@ -7,6 +7,7 @@ namespace Database\Factories\Payroll;
 use App\Models\Employee\Employee;
 use App\Models\Payroll\PayrollPeriod;
 use App\Models\Payroll\PayrollRun;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,11 +25,11 @@ class PayrollRunFactory extends Factory
         return [
             'period_id' => PayrollPeriod::factory(),
             'run_type' => fake()->word(),
-            'run_date' => fake()->date(),
+            'run_date' => CarbonImmutable::parse(fake()->date()),
             'status' => fake()->word(),
             'processed_by' => Employee::factory(),
             'approved_by' => Employee::factory(),
-            'approved_at' => fake()->date(),
+            'approved_at' => CarbonImmutable::parse(fake()->date()),
             'total_gross' => fake()->numberBetween(),
             'total_deductions' => fake()->numberBetween(),
             'total_net' => fake()->numberBetween(),

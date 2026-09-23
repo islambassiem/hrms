@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models\Workflow;
 
 use App\Concerns\UserStamp;
+use App\Enums\WorkflowActionEnum;
 use Database\Factories\Workflow\WorkflowActionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,4 +28,11 @@ final class WorkflowAction extends Model
     use HasFactory;
 
     use UserStamp;
+
+    protected function casts()
+    {
+        return [
+            'action' => WorkflowActionEnum::class,
+        ];
+    }
 }

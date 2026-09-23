@@ -23,4 +23,14 @@ final class LeaveBalance extends Model
 {
     /** @use HasFactory<LeaveBalanceFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'next_expiry_date' => 'immutable_date',
+        ];
+    }
 }

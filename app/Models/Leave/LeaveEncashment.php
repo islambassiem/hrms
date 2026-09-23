@@ -27,4 +27,15 @@ final class LeaveEncashment extends Model
 {
     /** @use HasFactory<LeaveEncashmentFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'approved_at' => 'immutable_date',
+            'processed_at' => 'immutable_date',
+        ];
+    }
 }

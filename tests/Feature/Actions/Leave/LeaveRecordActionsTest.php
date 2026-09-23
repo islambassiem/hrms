@@ -47,7 +47,7 @@ it('creates and updates an employee leave policy assignment', function (): void 
     [$employee, $type, $period, $policy] = leaveRecordDependencies();
     $assignment = (new EmployeeLeavePolicyCreateAction)->handle(new EmployeeLeavePolicyData($employee->id, $policy->id, CarbonImmutable::parse('2026-01-01')));
     $updated = (new EmployeeLeavePolicyUpdateAction)->handle($assignment, new EmployeeLeavePolicyData($employee->id, $policy->id, CarbonImmutable::parse('2026-01-01'), CarbonImmutable::parse('2026-12-31')));
-    expect($updated->end_date)->toBe('2026-12-31T00:00:00+00:00');
+    expect($updated->end_date)->toEqual((CarbonImmutable::parse('2026-12-31')));
 });
 
 it('creates and updates an employee sick leave cycle', function (): void {

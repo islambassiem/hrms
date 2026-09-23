@@ -14,7 +14,7 @@ final class LookupFactory
         return [
             'name_en' => fake()->name(),
             'name_ar' => fake('ar_SA')->name(),
-            'code' => fake()->unique()->randomNumber(2),
+            'code' => fake()->unique()->randomNumber(5),
         ];
     }
 }

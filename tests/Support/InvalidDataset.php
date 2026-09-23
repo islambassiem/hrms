@@ -325,7 +325,11 @@ final class InvalidDataset
 
     private function field(): string
     {
-        throw_if($this->field === null, InvalidArgumentException::class, 'A field is required for this invalid dataset.');
+        throw_if(
+            $this->field === null,
+            InvalidArgumentException::class,
+            'A field is required for this invalid dataset.'
+        );
 
         return $this->field;
     }

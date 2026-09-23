@@ -31,4 +31,17 @@ final class LeaveTransaction extends Model
 {
     /** @use HasFactory<LeaveTransactionFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'immutable_date',
+            'end_date' => 'immutable_date',
+            'expires_at' => 'immutable_date',
+            'payroll_processed_at' => 'immutable_date',
+        ];
+    }
 }

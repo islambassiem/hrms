@@ -26,4 +26,16 @@ final class ShortLeaveRequest extends Model
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'short_leave_date' => 'immutable_date',
+            'short_leave_from' => 'immutable_datetime',
+            'short_leave_to' => 'immutable_datetime',
+        ];
+    }
 }
