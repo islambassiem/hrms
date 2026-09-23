@@ -30,4 +30,15 @@ final class LeaveCarryover extends Model
 {
     /** @use HasFactory<LeaveCarryoverFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'approved_at' => 'immutable_date',
+            'expires_at' => 'immutable_date',
+        ];
+    }
 }

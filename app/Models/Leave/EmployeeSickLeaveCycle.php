@@ -21,4 +21,15 @@ final class EmployeeSickLeaveCycle extends Model
 {
     /** @use HasFactory<EmployeeSickLeaveCycleFactory> */
     use HasFactory;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'immutable_date',
+            'end_date' => 'immutable_date',
+        ];
+    }
 }

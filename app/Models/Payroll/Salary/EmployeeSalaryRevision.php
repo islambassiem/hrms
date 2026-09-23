@@ -28,4 +28,14 @@ final class EmployeeSalaryRevision extends Model
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'effective_date' => 'immutable_date',
+        ];
+    }
 }

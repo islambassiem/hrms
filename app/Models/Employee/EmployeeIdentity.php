@@ -26,4 +26,15 @@ final class EmployeeIdentity extends Model
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'issue_date' => 'immutable_date',
+            'expiry_date' => 'immutable_date',
+        ];
+    }
 }

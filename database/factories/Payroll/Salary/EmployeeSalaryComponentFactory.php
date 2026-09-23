@@ -9,6 +9,7 @@ use App\Models\Lookup\SalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryRevision;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Date;
 
 /**
  * @extends Factory<EmployeeSalaryComponent>
@@ -26,8 +27,8 @@ class EmployeeSalaryComponentFactory extends Factory
             'employee_id' => Employee::factory(),
             'component_id' => SalaryComponent::factory(),
             'amount' => fake()->numberBetween(),
-            'effective_from' => fake()->date(),
-            'effective_to' => fake()->optional()->date(),
+            'effective_from' => $startDate = Date::parse(fake()->date()),
+            'effective_to' => fake()->randomElement([null, $startDate->copy()->addYears(fake()->numberBetween(1, 3))]),
             'revision_id' => EmployeeSalaryRevision::factory(),
         ];
     }
