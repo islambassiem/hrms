@@ -85,7 +85,7 @@
             "@php artisan config:clear --ansi",
             "@lint",
             "@types:check",
-            "@php artisan test"
+            "@php artisan test --parallel"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
