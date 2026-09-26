@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Models\Employee;
 
 use App\Concerns\UserStamp;
+use App\Models\Lookup\JobTitle;
 use Database\Factories\Employee\EmployeeJobTitleFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'employee_id',
@@ -34,5 +36,13 @@ final class EmployeeJobTitle extends Model
             'start_date' => 'immutable_date',
             'end_date' => 'immutable_date',
         ];
+    }
+
+    /**
+     * @return BelongsTo<JobTitle, $this>
+     */
+    public function jobTitle(): BelongsTo
+    {
+        return $this->belongsTo(JobTitle::class);
     }
 }

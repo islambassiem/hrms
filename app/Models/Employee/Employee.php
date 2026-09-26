@@ -9,6 +9,8 @@ use Database\Factories\Employee\EmployeeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'user_id',
@@ -59,5 +61,32 @@ final class Employee extends Model
             'joining_date' => 'immutable_date',
             'leaving_date' => 'immutable_date',
         ];
+    }
+
+    /**
+     * @return HasMany<EmployeeJobTitle, $this>
+     */
+    public function jobTitles(): HasMany
+    {
+        return $this->hasMany(EmployeeJobTitle::class);
+    }
+
+    /**
+     * @return HasMany<EmployeeJobTitle, $this>
+     */
+    public function currentJobTitles(): HasMany
+    {
+        return $this->jobTitles()
+            ->whereNull('end_date');
+    }
+
+    /**
+     * @return HasOne<EmployeeJobTitle, $this>
+     */
+    public function latestCurrentJobTitle(): HasOne
+    {
+        return $this->currentJobTitles()
+            ->one()
+            ->latestOfMany('start_date');
     }
 }

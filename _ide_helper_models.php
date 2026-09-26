@@ -15,7 +15,7 @@ namespace App\Models\Employee{
 /**
  * @use UserStamp<Employee>
  * @property int $id
- * @property int|null $user_id
+ * @property int $user_id
  * @property int|null $head_id
  * @property string $employee_code
  * @property string $first_name_ar
@@ -28,19 +28,19 @@ namespace App\Models\Employee{
  * @property string|null $third_name_en
  * @property string $last_name_en
  * @property string|null $full_name_en
- * @property int|null $marital_status_id
- * @property int|null $religion_id
- * @property int|null $special_need_id
  * @property int $gender_id
  * @property int $category_id
  * @property int $department_id
  * @property int $nationality_id
  * @property int|null $place_of_birth_id
+ * @property int|null $marital_status_id
+ * @property int|null $religion_id
+ * @property int|null $special_need_id
  * @property string|null $email
  * @property string|null $phone
  * @property string|null $image
  * @property \Carbon\CarbonImmutable|null $date_of_birth
- * @property \Carbon\CarbonImmutable|null $joining_date
+ * @property \Carbon\CarbonImmutable $joining_date
  * @property \Carbon\CarbonImmutable|null $leaving_date
  * @property string|null $home_telephone_number
  * @property string|null $home_country_identity
@@ -51,6 +51,8 @@ namespace App\Models\Employee{
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeJobTitle> $currentJobTitles
+ * @property-read int|null $current_job_titles_count
  * @property-read \App\Models\User|null $editor
  * @method static \Database\Factories\Employee\EmployeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newModelQuery()
@@ -93,7 +95,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee whereUserId($value)
  */
-	class Employee extends \Eloquent {}
+	final class Employee extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -131,7 +133,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress whereUpdatedBy($value)
  */
-	class EmployeeAddress extends \Eloquent {}
+	final class EmployeeAddress extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -171,7 +173,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeDependent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeDependent whereUpdatedBy($value)
  */
-	class EmployeeDependent extends \Eloquent {}
+	final class EmployeeDependent extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -181,8 +183,8 @@ namespace App\Models\Employee{
  * @property int $identity_type_id
  * @property string $identity_number
  * @property string|null $place_of_issue
- * @property string|null $issue_date
- * @property string|null $expiry_date
+ * @property \Carbon\CarbonImmutable|null $issue_date
+ * @property \Carbon\CarbonImmutable|null $expiry_date
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -205,7 +207,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity whereUpdatedBy($value)
  */
-	class EmployeeIdentity extends \Eloquent {}
+	final class EmployeeIdentity extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -221,6 +223,7 @@ namespace App\Models\Employee{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read \App\Models\Lookup\JobTitle $jobTitle
  * @method static \Database\Factories\Employee\EmployeeJobTitleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle newQuery()
@@ -235,7 +238,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeJobTitle whereUpdatedBy($value)
  */
-	class EmployeeJobTitle extends \Eloquent {}
+	final class EmployeeJobTitle extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -243,8 +246,8 @@ namespace App\Models\Employee{
  * @property int $id
  * @property int $employee_id
  * @property int $managerial_role_id
- * @property string $start_date
- * @property string|null $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -265,7 +268,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeManagerialRole whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeManagerialRole whereUpdatedBy($value)
  */
-	class EmployeeManagerialRole extends \Eloquent {}
+	final class EmployeeManagerialRole extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -273,8 +276,8 @@ namespace App\Models\Leave{
  * @property int $id
  * @property int $employee_id
  * @property int $leave_policy_id
- * @property string $start_date
- * @property string|null $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -295,15 +298,15 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeLeavePolicy whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeLeavePolicy whereUpdatedBy($value)
  */
-	class EmployeeLeavePolicy extends \Eloquent {}
+	final class EmployeeLeavePolicy extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
 /**
  * @property int $id
  * @property int $employee_id
- * @property string $start_date
- * @property string|null $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
  * @property int $used_days
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
@@ -319,7 +322,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSickLeaveCycle whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSickLeaveCycle whereUsedDays($value)
  */
-	class EmployeeSickLeaveCycle extends \Eloquent {}
+	final class EmployeeSickLeaveCycle extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -332,7 +335,7 @@ namespace App\Models\Leave{
  * @property numeric $used_days
  * @property numeric $pending_days
  * @property numeric $expiring_days
- * @property string|null $next_expiry_date
+ * @property \Carbon\CarbonImmutable|null $next_expiry_date
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @method static \Database\Factories\Leave\LeaveBalanceFactory factory($count = null, $state = [])
@@ -351,7 +354,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveBalance whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveBalance whereUsedDays($value)
  */
-	class LeaveBalance extends \Eloquent {}
+	final class LeaveBalance extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -370,8 +373,8 @@ namespace App\Models\Leave{
  * @property int|null $requested_by
  * @property int|null $approved_by
  * @property string|null $requested_at
- * @property string|null $approved_at
- * @property string|null $expires_at
+ * @property \Carbon\CarbonImmutable|null $approved_at
+ * @property \Carbon\CarbonImmutable|null $expires_at
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @method static \Database\Factories\Leave\LeaveCarryoverFactory factory($count = null, $state = [])
@@ -397,7 +400,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveCarryover whereToPeriodId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveCarryover whereUpdatedAt($value)
  */
-	class LeaveCarryover extends \Eloquent {}
+	final class LeaveCarryover extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -412,8 +415,8 @@ namespace App\Models\Leave{
  * @property string $status
  * @property string|null $reason
  * @property int|null $approved_by
- * @property string|null $approved_at
- * @property string|null $processed_at
+ * @property \Carbon\CarbonImmutable|null $approved_at
+ * @property \Carbon\CarbonImmutable|null $processed_at
  * @property string|null $payroll_reference
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
@@ -437,7 +440,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveEncashment whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveEncashment whereUpdatedAt($value)
  */
-	class LeaveEncashment extends \Eloquent {}
+	final class LeaveEncashment extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -452,7 +455,7 @@ namespace App\Models\Leave{
  * @property numeric $used_days
  * @property numeric $expired_days
  * @property numeric $encashed_days
- * @property string|null $expires_at
+ * @property \Carbon\CarbonImmutable|null $expires_at
  * @property string $status
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
@@ -475,7 +478,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveEntitlement whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveEntitlement whereUsedDays($value)
  */
-	class LeaveEntitlement extends \Eloquent {}
+	final class LeaveEntitlement extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -485,8 +488,8 @@ namespace App\Models\Leave{
  * @property string $name_ar
  * @property string|null $code
  * @property string $type
- * @property string $start_date
- * @property string $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable $end_date
  * @property int $is_closed
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -511,7 +514,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeavePeriod whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeavePeriod whereUpdatedBy($value)
  */
-	class LeavePeriod extends \Eloquent {}
+	final class LeavePeriod extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -559,7 +562,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeavePolicy whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeavePolicy whereUpdatedBy($value)
  */
-	class LeavePolicy extends \Eloquent {}
+	final class LeavePolicy extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -567,8 +570,8 @@ namespace App\Models\Leave{
  * @property int $id
  * @property int $leave_type_id
  * @property int $employee_id
- * @property string $start_date
- * @property string $end_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable $end_date
  * @property string $status
  * @property string|null $reason
  * @property int|null $created_by
@@ -593,7 +596,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereUpdatedBy($value)
  */
-	class LeaveRequest extends \Eloquent {}
+	final class LeaveRequest extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -606,12 +609,12 @@ namespace App\Models\Leave{
  * @property string $transaction_type
  * @property numeric $days
  * @property string $transaction_date
- * @property string|null $start_date
- * @property string|null $end_date
+ * @property \Carbon\CarbonImmutable|null $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
  * @property numeric|null $balance_after
  * @property numeric|null $pay_rate
- * @property string|null $expires_at
- * @property string|null $payroll_processed_at
+ * @property \Carbon\CarbonImmutable|null $expires_at
+ * @property \Carbon\CarbonImmutable|null $payroll_processed_at
  * @property string|null $reference_type
  * @property int|null $reference_id
  * @property int|null $created_by
@@ -641,7 +644,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveTransaction whereTransactionType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveTransaction whereUpdatedAt($value)
  */
-	class LeaveTransaction extends \Eloquent {}
+	final class LeaveTransaction extends \Eloquent {}
 }
 
 namespace App\Models\Leave{
@@ -649,8 +652,8 @@ namespace App\Models\Leave{
  * @property int $id
  * @property int $no_of_days
  * @property numeric $pay_rate
- * @property string $effective_from
- * @property string|null $effective_to
+ * @property \Carbon\CarbonImmutable $effective_from
+ * @property \Carbon\CarbonImmutable|null $effective_to
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -671,7 +674,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SickLeaveRule whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SickLeaveRule whereUpdatedBy($value)
  */
-	class SickLeaveRule extends \Eloquent {}
+	final class SickLeaveRule extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -701,7 +704,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AcademicRank whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AcademicRank whereUpdatedBy($value)
  */
-	class AcademicRank extends \Eloquent {}
+	final class AcademicRank extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -731,7 +734,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdministrativeRank whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdministrativeRank whereUpdatedBy($value)
  */
-	class AdministrativeRank extends \Eloquent {}
+	final class AdministrativeRank extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -761,7 +764,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentType whereUpdatedBy($value)
  */
-	class AppointmentType extends \Eloquent {}
+	final class AppointmentType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -791,7 +794,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank whereUpdatedBy($value)
  */
-	class Bank extends \Eloquent {}
+	final class Bank extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -823,7 +826,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category whereUpdatedBy($value)
  */
-	class Category extends \Eloquent {}
+	final class Category extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -857,7 +860,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereUpdatedBy($value)
  */
-	class Country extends \Eloquent {}
+	final class Country extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -887,7 +890,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Deduction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Deduction whereUpdatedBy($value)
  */
-	class Deduction extends \Eloquent {}
+	final class Deduction extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -925,7 +928,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedBy($value)
  */
-	class Department extends \Eloquent {}
+	final class Department extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -955,7 +958,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Earning whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Earning whereUpdatedBy($value)
  */
-	class Earning extends \Eloquent {}
+	final class Earning extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -985,7 +988,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EducationalSublevel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EducationalSublevel whereUpdatedBy($value)
  */
-	class EducationalSublevel extends \Eloquent {}
+	final class EducationalSublevel extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1015,7 +1018,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyRelationship whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyRelationship whereUpdatedBy($value)
  */
-	class FamilyRelationship extends \Eloquent {}
+	final class FamilyRelationship extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1045,7 +1048,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Gender whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Gender whereUpdatedBy($value)
  */
-	class Gender extends \Eloquent {}
+	final class Gender extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1075,7 +1078,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GpaType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GpaType whereUpdatedBy($value)
  */
-	class GpaType extends \Eloquent {}
+	final class GpaType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1105,7 +1108,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IdentityType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IdentityType whereUpdatedBy($value)
  */
-	class IdentityType extends \Eloquent {}
+	final class IdentityType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1135,7 +1138,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IncludedSpecialization whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IncludedSpecialization whereUpdatedBy($value)
  */
-	class IncludedSpecialization extends \Eloquent {}
+	final class IncludedSpecialization extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1151,6 +1154,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\JobTitleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobTitle newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobTitle newQuery()
@@ -1165,7 +1169,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobTitle whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|JobTitle whereUpdatedBy($value)
  */
-	class JobTitle extends \Eloquent {}
+	final class JobTitle extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1197,7 +1201,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveType whereUpdatedBy($value)
  */
-	class LeaveType extends \Eloquent {}
+	final class LeaveType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1227,7 +1231,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerialRole whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerialRole whereUpdatedBy($value)
  */
-	class ManagerialRole extends \Eloquent {}
+	final class ManagerialRole extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1257,7 +1261,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MaritalStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MaritalStatus whereUpdatedBy($value)
  */
-	class MaritalStatus extends \Eloquent {}
+	final class MaritalStatus extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1287,7 +1291,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rating whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rating whereUpdatedBy($value)
  */
-	class Rating extends \Eloquent {}
+	final class Rating extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1317,7 +1321,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Religion whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Religion whereUpdatedBy($value)
  */
-	class Religion extends \Eloquent {}
+	final class Religion extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1347,7 +1351,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryComponent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryComponent whereUpdatedBy($value)
  */
-	class SalaryComponent extends \Eloquent {}
+	final class SalaryComponent extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1377,7 +1381,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryRevision whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryRevision whereUpdatedBy($value)
  */
-	class SalaryRevision extends \Eloquent {}
+	final class SalaryRevision extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1407,7 +1411,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ScientificDegree whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ScientificDegree whereUpdatedBy($value)
  */
-	class ScientificDegree extends \Eloquent {}
+	final class ScientificDegree extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1439,7 +1443,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveType whereUpdatedBy($value)
  */
-	class ShortLeaveType extends \Eloquent {}
+	final class ShortLeaveType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1469,7 +1473,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialNeed whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialNeed whereUpdatedBy($value)
  */
-	class SpecialNeed extends \Eloquent {}
+	final class SpecialNeed extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1501,7 +1505,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Speciality whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Speciality whereUpdatedBy($value)
  */
-	class Speciality extends \Eloquent {}
+	final class Speciality extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1531,7 +1535,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialityCategory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialityCategory whereUpdatedBy($value)
  */
-	class SpecialityCategory extends \Eloquent {}
+	final class SpecialityCategory extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1561,7 +1565,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudyType whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudyType whereUpdatedBy($value)
  */
-	class StudyType extends \Eloquent {}
+	final class StudyType extends \Eloquent {}
 }
 
 namespace App\Models\Lookup{
@@ -1591,7 +1595,7 @@ namespace App\Models\Lookup{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Workflow whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Workflow whereUpdatedBy($value)
  */
-	class Workflow extends \Eloquent {}
+	final class Workflow extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
@@ -1619,7 +1623,7 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeBank whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeBank whereUpdatedBy($value)
  */
-	class EmployeeBank extends \Eloquent {}
+	final class EmployeeBank extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
@@ -1659,16 +1663,16 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollPayslip whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollPayslip whereUpdatedBy($value)
  */
-	class PayrollPayslip extends \Eloquent {}
+	final class PayrollPayslip extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
 /**
  * @property int $id
  * @property string $name
- * @property string $start_date
- * @property string $end_date
- * @property string $pay_date
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable $end_date
+ * @property \Carbon\CarbonImmutable $pay_date
  * @property string $status
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -1691,7 +1695,7 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollPeriod whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollPeriod whereUpdatedBy($value)
  */
-	class PayrollPeriod extends \Eloquent {}
+	final class PayrollPeriod extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
@@ -1733,7 +1737,7 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollRun whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayrollRun whereUpdatedBy($value)
  */
-	class PayrollRun extends \Eloquent {}
+	final class PayrollRun extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
@@ -1763,7 +1767,7 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayslipDeduction whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayslipDeduction whereUpdatedBy($value)
  */
-	class PayslipDeduction extends \Eloquent {}
+	final class PayslipDeduction extends \Eloquent {}
 }
 
 namespace App\Models\Payroll{
@@ -1793,7 +1797,7 @@ namespace App\Models\Payroll{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayslipEarning whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|PayslipEarning whereUpdatedBy($value)
  */
-	class PayslipEarning extends \Eloquent {}
+	final class PayslipEarning extends \Eloquent {}
 }
 
 namespace App\Models\Payroll\Salary{
@@ -1802,8 +1806,8 @@ namespace App\Models\Payroll\Salary{
  * @property int $employee_id
  * @property int $component_id
  * @property numeric $amount
- * @property string $effective_from
- * @property string|null $effective_to
+ * @property \Carbon\CarbonImmutable $effective_from
+ * @property \Carbon\CarbonImmutable|null $effective_to
  * @property int $revision_id
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -1827,7 +1831,7 @@ namespace App\Models\Payroll\Salary{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereUpdatedBy($value)
  */
-	class EmployeeSalaryComponent extends \Eloquent {}
+	final class EmployeeSalaryComponent extends \Eloquent {}
 }
 
 namespace App\Models\Payroll\Salary{
@@ -1835,7 +1839,7 @@ namespace App\Models\Payroll\Salary{
  * @property int $id
  * @property int $employee_id
  * @property int $revision_type_id
- * @property string $effective_date
+ * @property \Carbon\CarbonImmutable $effective_date
  * @property numeric|null $previous_gross
  * @property numeric $new_gross
  * @property string $reason
@@ -1861,7 +1865,7 @@ namespace App\Models\Payroll\Salary{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryRevision whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryRevision whereUpdatedBy($value)
  */
-	class EmployeeSalaryRevision extends \Eloquent {}
+	final class EmployeeSalaryRevision extends \Eloquent {}
 }
 
 namespace App\Models\Qualifications{
@@ -1917,7 +1921,7 @@ namespace App\Models\Qualifications{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification whereUpdatedBy($value)
  */
-	class Qualification extends \Eloquent {}
+	final class Qualification extends \Eloquent {}
 }
 
 namespace App\Models\ShortLeave{
@@ -1925,9 +1929,9 @@ namespace App\Models\ShortLeave{
  * @property int $id
  * @property int $employee_id
  * @property int $short_leave_type_id
- * @property string $short_leave_date
- * @property string $short_leave_from
- * @property string $short_leave_to
+ * @property \Carbon\CarbonImmutable $short_leave_date
+ * @property \Carbon\CarbonImmutable $short_leave_from
+ * @property \Carbon\CarbonImmutable $short_leave_to
  * @property string $status
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -1951,7 +1955,7 @@ namespace App\Models\ShortLeave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveRequest whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveRequest whereUpdatedBy($value)
  */
-	class ShortLeaveRequest extends \Eloquent {}
+	final class ShortLeaveRequest extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -2006,7 +2010,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, ?string $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTeam($teams)
  */
-	class User extends \Eloquent implements \Laravel\Fortify\Contracts\PasskeyUser, \Laravel\Passkeys\Contracts\PasskeyUser {}
+	final class User extends \Eloquent implements \Laravel\Fortify\Contracts\PasskeyUser, \Laravel\Passkeys\Contracts\PasskeyUser {}
 }
 
 namespace App\Models\Workflow{
@@ -2017,7 +2021,7 @@ namespace App\Models\Workflow{
  * @property int $actionable_id
  * @property int $actor_id
  * @property int $role_id
- * @property string $action
+ * @property \App\Enums\WorkflowActionEnum $action
  * @property string|null $comment
  * @property int|null $created_by
  * @property int|null $updated_by
@@ -2042,7 +2046,7 @@ namespace App\Models\Workflow{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkflowAction whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkflowAction whereWorkflowStepId($value)
  */
-	class WorkflowAction extends \Eloquent {}
+	final class WorkflowAction extends \Eloquent {}
 }
 
 namespace App\Models\Workflow{
@@ -2078,6 +2082,6 @@ namespace App\Models\Workflow{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkflowStep whereUpdatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|WorkflowStep whereWorkflowId($value)
  */
-	class WorkflowStep extends \Eloquent {}
+	final class WorkflowStep extends \Eloquent {}
 }
 

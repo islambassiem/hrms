@@ -8,6 +8,7 @@ use App\Concerns\UserStamp;
 use Database\Factories\Lookup\JobTitleFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,4 +27,17 @@ final class JobTitle extends Model
     use HasFactory;
 
     use UserStamp;
+
+    /**
+     * @return Attribute<string, never>
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => match (app()->getLocale()) {
+                'ar' => $this->name_ar,
+                default => $this->name_en,
+            },
+        );
+    }
 }
