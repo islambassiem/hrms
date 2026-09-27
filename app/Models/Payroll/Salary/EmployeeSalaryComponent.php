@@ -12,12 +12,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
-    'employee_id',
+    'revision_id',
     'component_id',
     'amount',
     'effective_from',
     'effective_to',
-    'revision_id',
     'created_by',
     'updated_by',
 ])]

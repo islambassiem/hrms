@@ -35,10 +35,10 @@ trait EmployeeSalaryComponentValidationRules
     public function baseRules(): array
     {
         return [
-            'employee_id' => [
-                'required',
+            'revision_id' => [
+                'nullable',
                 'integer',
-                Rule::exists('employees', 'id'),
+                Rule::exists('payroll_employee_salary_revisions', 'id'),
             ],
             'component_id' => [
                 'required',
@@ -48,11 +48,6 @@ trait EmployeeSalaryComponentValidationRules
             'amount' => ['required', 'numeric', 'min:0'],
             'effective_from' => ['required', 'date'],
             'effective_to' => ['nullable', 'date', 'after_or_equal:effective_from'],
-            'revision_id' => [
-                'nullable',
-                'integer',
-                Rule::exists('payroll_employee_salary_revisions', 'id'),
-            ],
         ];
     }
 }

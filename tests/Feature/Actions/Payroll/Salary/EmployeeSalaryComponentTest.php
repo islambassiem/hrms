@@ -52,10 +52,6 @@ it('fails to update when :dataset', function (array $overrides, array $fields): 
 })->with('Employee Salary Component Dataset');
 
 dataset('Employee Salary Component Dataset', [
-    ...invalid('employee_id')
-        ->required()
-        // ->notInteger()
-        ->build(),
 
     ...invalid('component_id')
         ->required()

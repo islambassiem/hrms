@@ -10,7 +10,6 @@ use Spatie\LaravelData\Data;
 final class EmployeeSalaryComponentData extends Data
 {
     public function __construct(
-        public ?int $employee_id,
         public ?int $component_id,
         public float|int|null $amount,
         public ?CarbonImmutable $effective_from,

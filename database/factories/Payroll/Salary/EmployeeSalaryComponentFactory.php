@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Database\Factories\Payroll\Salary;
 
-use App\Models\Employee\Employee;
 use App\Models\Lookup\SalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryComponent;
 use App\Models\Payroll\Salary\EmployeeSalaryRevision;
@@ -24,12 +23,11 @@ class EmployeeSalaryComponentFactory extends Factory
     public function definition(): array
     {
         return [
-            'employee_id' => Employee::factory(),
+            'revision_id' => EmployeeSalaryRevision::factory(),
             'component_id' => SalaryComponent::factory(),
             'amount' => fake()->numberBetween(),
             'effective_from' => $startDate = Date::parse(fake()->date()),
             'effective_to' => fake()->randomElement([null, $startDate->copy()->addYears(fake()->numberBetween(1, 3))]),
-            'revision_id' => EmployeeSalaryRevision::factory(),
         ];
     }
 }
