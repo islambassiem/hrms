@@ -15,6 +15,8 @@ class ContractData extends Data
      */
     public function __construct(
         public int $employee_id,
+        public int $salary_revision_id,
+        public ?int $address_id,
         public CarbonImmutable $start_date,
         public int $duration,
         public int $probation_period,

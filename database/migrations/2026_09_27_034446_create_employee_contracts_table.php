@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('employee_contracts', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees');
+            $table->foreignId('salary_revision_id')->constrained('payroll_employee_salary_revisions');
+            $table->foreignId('address_id')->nullable()->constrained('employee_addresses');
             $table->date('start_date');
             $table->integer('duration');
             $table->integer('probation_period');

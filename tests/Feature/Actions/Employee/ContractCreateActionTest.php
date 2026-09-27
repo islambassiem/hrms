@@ -28,6 +28,15 @@ dataset('Contract Dataset', [
         ->notInteger()
         ->build(),
 
+    ...invalid('salary_revision_id')
+        ->required()
+        ->notInteger()
+        ->build(),
+
+    ...invalid('address_id')
+        ->notInteger()
+        ->build(),
+
     ...invalid('start_date')
         ->required()
         ->build(),

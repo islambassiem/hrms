@@ -4,7 +4,9 @@ namespace Database\Factories\Employee;
 
 use App\Enums\ContractTypeEnum;
 use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeAddress;
 use App\Models\Employee\EmployeeContract;
+use App\Models\Payroll\Salary\EmployeeSalaryRevision;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
@@ -25,6 +27,8 @@ class EmployeeContractFactory extends Factory
 
         return [
             'employee_id' => Employee::factory()->create(),
+            'salary_revision_id' => EmployeeSalaryRevision::factory()->create(),
+            'address_id' => EmployeeAddress::factory()->create(),
             'start_date' => $startDate = Date::parse(fake()->date()),
             'duration' => $duration,
             'probation_period' => fake()->randomElement(['90', '180']),

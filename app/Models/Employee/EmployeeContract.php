@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 
 #[Fillable([
     'employee_id',
+    'salary_revision_id',
+    'address_id',
     'start_date',
     'duration',
     'probation_period',

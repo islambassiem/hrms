@@ -8,6 +8,7 @@ use App\Concerns\UserStamp;
 use App\Enums\LeaveTypeEnum;
 use App\Models\Leave\LeaveBalance;
 use App\Models\Lookup\Department;
+use App\Models\Payroll\Salary\EmployeeSalaryRevision;
 use Database\Factories\Employee\EmployeeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -139,5 +140,14 @@ final class Employee extends Model
     public function identifications(): HasMany
     {
         return $this->hasMany(EmployeeIdentity::class);
+    }
+
+    /**
+     * @return HasOne<EmployeeSalaryRevision, $this>
+     */
+    public function latestSalaryRevision(): HasOne
+    {
+        return $this->hasOne(EmployeeSalaryRevision::class)
+            ->latestOfMany('effective_date');
     }
 }

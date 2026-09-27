@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
     'employee_id',
@@ -37,5 +38,13 @@ final class EmployeeSalaryRevision extends Model
         return [
             'effective_date' => 'immutable_date',
         ];
+    }
+
+    /**
+     * @return HasMany<EmployeeSalaryComponent, $this>
+     */
+    public function components(): HasMany
+    {
+        return $this->hasMany(EmployeeSalaryComponent::class, 'revision_id');
     }
 }
