@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
 
             // Data tables
             EmployeeSeeder::class,
+            EmployeeContractSeeder::class,
             RolesAndPermissionsSeeder::class,
             EmployeeIdentitySeeder::class,
             QualificationSeeder::class,
