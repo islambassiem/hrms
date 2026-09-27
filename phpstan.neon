@@ -14,4 +14,4 @@ parameters:
     level: max
 
     excludePaths:
-        - ./database/migrations/2026_09_16_170717_create_permission_tables.php
+        - ./database/migrations/2026_08_30_170717_create_permission_tables.php

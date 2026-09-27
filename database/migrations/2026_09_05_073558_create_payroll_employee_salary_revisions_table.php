@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees');
             $table->foreignId('revision_type_id')->constrained('lookup_payroll_salary_revisions');
             $table->date('effective_date')->index();
-            $table->decimal('previous_gross')->nullable();
-            $table->decimal('new_gross');
+            $table->decimal('previous_gross', 12, 2)->nullable();
+            $table->decimal('new_gross', 12, 2);
             $table->string('reason');
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');

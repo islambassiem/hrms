@@ -15,10 +15,14 @@ class EmployeeAddressSeeder extends Seeder
      */
     public function run(): void
     {
-        $employeeIds = Employee::query()->pluck('id');
-
-        EmployeeAddress::factory($employeeIds->count())->create([
-            'employee_id' => fn () => $employeeIds->pop(),
-        ]);
+        Employee::query()
+            ->each(function (Employee $employee): void {
+                EmployeeAddress::query()->updateOrCreate(
+                    ['employee_id' => $employee->id],
+                    EmployeeAddress::factory()->make([
+                        'employee_id' => $employee->id,
+                    ])->toArray(),
+                );
+            });
     }
 }

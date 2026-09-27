@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('revision_id')->constrained('lookup_payroll_salary_revisions')->cascadeOnDelete();
             $table->foreignId('component_id')->constrained('lookup_payroll_salary_components');
-            $table->decimal('amount');
+            $table->decimal('amount', 12, 2);
             $table->date('effective_from')->index();
             $table->date('effective_to')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
-
-            $table->index(['employee_id', 'effective_to']);
         });
     }
 

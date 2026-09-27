@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payslip_id')->constrained('payroll_payslips');
             $table->foreignId('deduction_id')->constrained('lookup_payroll_deductions');
-            $table->decimal('amount');
+            $table->decimal('amount', 12, 2);
             $table->text('description')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');

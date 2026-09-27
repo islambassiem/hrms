@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees');
             $table->foreignId('salary_revision_id')->constrained('payroll_employee_salary_revisions');
             $table->integer('days_worked')->nullable();
-            $table->decimal('gross_earnings')->default(0);
-            $table->decimal('total_deductions')->default(0);
-            $table->decimal('net_pay')->default(0);
+            $table->decimal('gross_earnings', 12, 2)->default(0);
+            $table->decimal('total_deductions', 12, 2)->default(0);
+            $table->decimal('net_pay', 12, 2)->default(0);
             $table->string('status');
             $table->string('remarks', 255)->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');

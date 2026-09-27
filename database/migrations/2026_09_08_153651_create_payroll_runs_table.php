@@ -20,9 +20,9 @@ return new class extends Migration
             $table->foreignId('processed_by')->constrained('employees');
             $table->foreignId('approved_by')->constrained('employees');
             $table->timestamp('approved_at');
-            $table->decimal('total_gross')->default(0);
-            $table->decimal('total_deductions')->default(0);
-            $table->decimal('total_net')->default(0);
+            $table->decimal('total_gross', 12, 2)->default(0);
+            $table->decimal('total_deductions', 12, 2)->default(0);
+            $table->decimal('total_net', 12, 2)->default(0);
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
