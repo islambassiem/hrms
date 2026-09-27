@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Lookup;
 
+use App\Concerns\HasLocalizedName;
 use App\Concerns\UserStamp;
 use Database\Factories\Lookup\DepartmentFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -29,5 +30,6 @@ final class Department extends Model
     /** @use HasFactory<DepartmentFactory> */
     use HasFactory;
 
+    use HasLocalizedName;
     use UserStamp;
 }

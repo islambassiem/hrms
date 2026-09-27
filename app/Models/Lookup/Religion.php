@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Lookup;
 
+use App\Concerns\HasLocalizedName;
 use App\Concerns\UserStamp;
 use Database\Factories\Lookup\ReligionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -25,5 +26,6 @@ final class Religion extends Model
     /** @use HasFactory<ReligionFactory> */
     use HasFactory;
 
+    use HasLocalizedName;
     use UserStamp;
 }

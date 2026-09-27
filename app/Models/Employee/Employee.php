@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace App\Models\Employee;
 
 use App\Concerns\UserStamp;
+use App\Enums\LeaveTypeEnum;
+use App\Models\Leave\LeaveBalance;
+use App\Models\Lookup\Department;
 use Database\Factories\Employee\EmployeeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -64,6 +69,19 @@ final class Employee extends Model
     }
 
     /**
+     * @return Attribute<string, never>
+     */
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): string => match (app()->getLocale()) {
+                'ar' => "{$this->first_name_ar} {$this->middle_name_ar} {$this->third_name_ar} {$this->last_name_ar}",
+                default => "{$this->first_name_en} {$this->middle_name_en} {$this->third_name_en} {$this->last_name_en}"
+            },
+        );
+    }
+
+    /**
      * @return HasMany<EmployeeJobTitle, $this>
      */
     public function jobTitles(): HasMany
@@ -88,5 +106,38 @@ final class Employee extends Model
         return $this->currentJobTitles()
             ->one()
             ->latestOfMany('start_date');
+    }
+
+    /**
+     * @return BelongsTo<Department, $this>
+     */
+    public function department(): BelongsTo
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * @return BelongsTo<Employee, $this>
+     */
+    public function head(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * @return HasOne<LeaveBalance, $this>
+     */
+    public function annualLeaveBalance(): HasOne
+    {
+        return $this->hasOne(LeaveBalance::class)
+            ->where('leave_type_id', LeaveTypeEnum::ANNUAL->value);
+    }
+
+    /**
+     * @return HasMany<EmployeeIdentity, $this>
+     */
+    public function identifications(): HasMany
+    {
+        return $this->hasMany(EmployeeIdentity::class);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Lookup;
 
+use App\Concerns\HasLocalizedName;
 use App\Concerns\UserStamp;
 use Database\Factories\Lookup\LeaveTypeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -26,5 +27,6 @@ final class LeaveType extends Model
     /** @use HasFactory<LeaveTypeFactory> */
     use HasFactory;
 
+    use HasLocalizedName;
     use UserStamp;
 }

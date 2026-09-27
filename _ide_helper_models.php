@@ -50,10 +50,19 @@ namespace App\Models\Employee{
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \App\Models\Leave\LeaveBalance|null $annualLeaveBalance
  * @property-read \App\Models\User|null $creator
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeJobTitle> $currentJobTitles
  * @property-read int|null $current_job_titles_count
+ * @property-read \App\Models\Lookup\Department $department
  * @property-read \App\Models\User|null $editor
+ * @property-read Employee|null $head
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeIdentity> $identifications
+ * @property-read int|null $identifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeJobTitle> $jobTitles
+ * @property-read int|null $job_titles_count
+ * @property-read \App\Models\Employee\EmployeeJobTitle|null $latestCurrentJobTitle
+ * @property-read mixed $name
  * @method static \Database\Factories\Employee\EmployeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newQuery()
@@ -178,19 +187,20 @@ namespace App\Models\Employee{
 
 namespace App\Models\Employee{
 /**
+ * @property-read CarbonImmutable|null $issue_date
+ * @property-read CarbonImmutable|null $expiry_date
  * @property int $id
  * @property int $employee_id
  * @property int $identity_type_id
  * @property string $identity_number
  * @property string|null $place_of_issue
- * @property \Carbon\CarbonImmutable|null $issue_date
- * @property \Carbon\CarbonImmutable|null $expiry_date
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read \App\Models\Lookup\IdentityType $type
  * @method static \Database\Factories\Employee\EmployeeIdentityFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeIdentity newQuery()
@@ -690,6 +700,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\AcademicRankFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AcademicRank newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AcademicRank newQuery()
@@ -720,6 +731,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\AdministrativeRankFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdministrativeRank newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AdministrativeRank newQuery()
@@ -750,6 +762,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\AppointmentTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AppointmentType newQuery()
@@ -780,6 +793,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\BankFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Bank newQuery()
@@ -811,6 +825,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\CategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category newQuery()
@@ -844,6 +859,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\CountryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country newQuery()
@@ -876,6 +892,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\DeductionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Deduction newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Deduction newQuery()
@@ -910,6 +927,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\DepartmentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
@@ -944,6 +962,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\EarningFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Earning newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Earning newQuery()
@@ -974,6 +993,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\EducationalSublevelFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EducationalSublevel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EducationalSublevel newQuery()
@@ -1004,6 +1024,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\FamilyRelationshipFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyRelationship newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyRelationship newQuery()
@@ -1034,6 +1055,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\GenderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Gender newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Gender newQuery()
@@ -1064,6 +1086,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\GpaTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GpaType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|GpaType newQuery()
@@ -1094,6 +1117,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\IdentityTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IdentityType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IdentityType newQuery()
@@ -1124,6 +1148,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\IncludedSpecializationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IncludedSpecialization newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|IncludedSpecialization newQuery()
@@ -1186,6 +1211,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\LeaveTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveType newQuery()
@@ -1217,6 +1243,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\ManagerialRoleFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerialRole newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerialRole newQuery()
@@ -1247,6 +1274,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\MaritalStatusFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MaritalStatus newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|MaritalStatus newQuery()
@@ -1277,6 +1305,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\RatingFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rating newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Rating newQuery()
@@ -1307,6 +1336,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\ReligionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Religion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Religion newQuery()
@@ -1337,6 +1367,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\SalaryComponentFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryComponent newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryComponent newQuery()
@@ -1367,6 +1398,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\SalaryRevisionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryRevision newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SalaryRevision newQuery()
@@ -1397,6 +1429,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\ScientificDegreeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ScientificDegree newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ScientificDegree newQuery()
@@ -1428,6 +1461,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\ShortLeaveTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ShortLeaveType newQuery()
@@ -1459,6 +1493,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\SpecialNeedFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialNeed newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialNeed newQuery()
@@ -1490,6 +1525,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\SpecialityFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Speciality newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Speciality newQuery()
@@ -1521,6 +1557,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\SpecialityCategoryFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialityCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|SpecialityCategory newQuery()
@@ -1551,6 +1588,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\StudyTypeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudyType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|StudyType newQuery()
@@ -1581,6 +1619,7 @@ namespace App\Models\Lookup{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
  * @method static \Database\Factories\Lookup\WorkflowFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Workflow newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Workflow newQuery()

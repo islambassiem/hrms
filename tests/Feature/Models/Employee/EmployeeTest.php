@@ -4,6 +4,21 @@ use App\Models\Employee\Employee;
 use App\Models\Employee\EmployeeJobTitle;
 use App\Models\Lookup\JobTitle;
 
+it('gets the full name in English', function (): void {
+    $employee = Employee::factory()->create();
+
+    expect($employee->name)
+        ->toBe("{$employee->first_name_en} {$employee->middle_name_en} {$employee->third_name_en} {$employee->last_name_en}");
+});
+
+it('gets the full name in Arabic', function (): void {
+    app()->setLocale('ar');
+    $employee = Employee::factory()->create();
+
+    expect($employee->name)
+        ->toBe("{$employee->first_name_ar} {$employee->middle_name_ar} {$employee->third_name_ar} {$employee->last_name_ar}");
+});
+
 it('fetches all current job titles', function (): void {
     $employee = Employee::factory()->create();
 
