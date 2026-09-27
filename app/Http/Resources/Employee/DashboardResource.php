@@ -27,6 +27,9 @@ class DashboardResource extends JsonResource
         /** @var CarbonImmutable $joiningDate */
         $joiningDate = $this->joining_date;
 
+        /** @var CarbonImmutable|null $contractEndDate */
+        $contractEndDate = $this->latestContract?->end_date;
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -35,6 +38,7 @@ class DashboardResource extends JsonResource
             'department' => $this->department?->name,
             'head' => $this->head?->name,
             'annualLeaveBalance' => $this->annualLeaveBalance,
+            'contractEndDate' => $contractEndDate?->toDateString(),
 
             'identifications' => $identifications->map(
                 function (EmployeeIdentity $identification): array {

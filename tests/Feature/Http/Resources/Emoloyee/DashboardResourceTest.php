@@ -2,11 +2,16 @@
 
 use App\Http\Resources\Employee\DashboardResource;
 use App\Models\Employee\Employee;
+use App\Models\Employee\EmployeeContract;
 use App\Models\Lookup\IdentityType;
 
 it('transforms an employee into the dashboard resource', function (): void {
     $employee = Employee::factory()->create([
         'head_id' => Employee::factory()->create()->id,
+    ]);
+
+    $contract = EmployeeContract::factory()->create([
+        'employee_id' => $employee->id,
     ]);
 
     $type = IdentityType::factory(2)->create();
@@ -34,6 +39,7 @@ it('transforms an employee into the dashboard resource', function (): void {
         'department' => $employee->department->name,
         'head' => $employee->head->name,
         'annualLeaveBalance' => $employee->annualLeaveBalance,
+        'contractEndDate' => $contract->end_date->toDateString(),
         'identifications' => [
             [
                 'id' => $type[0]->id,

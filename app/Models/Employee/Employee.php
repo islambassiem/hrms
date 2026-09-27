@@ -150,4 +150,13 @@ final class Employee extends Model
         return $this->hasOne(EmployeeSalaryRevision::class)
             ->latestOfMany('effective_date');
     }
+
+    /**
+     * @return HasOne<EmployeeContract, $this>
+     */
+    public function latestContract(): HasOne
+    {
+        return $this->hasOne(EmployeeContract::class)
+            ->latestOfMany('start_date');
+    }
 }

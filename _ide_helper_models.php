@@ -61,8 +61,10 @@ namespace App\Models\Employee{
  * @property-read int|null $identifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeJobTitle> $jobTitles
  * @property-read int|null $job_titles_count
+ * @property-read \App\Models\Employee\EmployeeContract|null $latestContract
  * @property-read \App\Models\Employee\EmployeeJobTitle|null $latestCurrentJobTitle
- * @property-read mixed $name
+ * @property-read \App\Models\Payroll\Salary\EmployeeSalaryRevision|null $latestSalaryRevision
+ * @property-read string $name
  * @method static \Database\Factories\Employee\EmployeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newQuery()
@@ -143,6 +145,42 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeAddress whereUpdatedBy($value)
  */
 	final class EmployeeAddress extends \Eloquent {}
+}
+
+namespace App\Models\Employee{
+/**
+ * @property int $id
+ * @property int $employee_id
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property int $duration
+ * @property int $probation_period
+ * @property int $notice_period
+ * @property \App\Enums\ContractTypeEnum $type
+ * @property \Carbon\CarbonImmutable $end_date
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \App\Models\User|null $creator
+ * @property-read \App\Models\User|null $editor
+ * @method static \Database\Factories\Employee\EmployeeContractFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereEmployeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereNoticePeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereProbationPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereUpdatedBy($value)
+ */
+	class EmployeeContract extends \Eloquent {}
 }
 
 namespace App\Models\Employee{
@@ -1842,12 +1880,11 @@ namespace App\Models\Payroll{
 namespace App\Models\Payroll\Salary{
 /**
  * @property int $id
- * @property int $employee_id
+ * @property int $revision_id
  * @property int $component_id
  * @property numeric $amount
  * @property \Carbon\CarbonImmutable $effective_from
  * @property \Carbon\CarbonImmutable|null $effective_to
- * @property int $revision_id
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
@@ -1864,7 +1901,6 @@ namespace App\Models\Payroll\Salary{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereEffectiveFrom($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereEffectiveTo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereEmployeeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereRevisionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeSalaryComponent whereUpdatedAt($value)
@@ -1886,6 +1922,8 @@ namespace App\Models\Payroll\Salary{
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Payroll\Salary\EmployeeSalaryComponent> $components
+ * @property-read int|null $components_count
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
  * @method static \Database\Factories\Payroll\Salary\EmployeeSalaryRevisionFactory factory($count = null, $state = [])
