@@ -2,7 +2,6 @@ import { Link } from '@inertiajs/react';
 import { LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
-import { NavUser } from '@/components/nav-user';
 import {
     Sidebar,
     SidebarContent,
@@ -42,8 +41,10 @@ export function AppSidebar() {
                 <NavMain items={mainNavItems} />
             </SidebarContent>
 
-            <SidebarFooter>
-                <NavUser />
+            <SidebarFooter className="mt-auto shrink-0 p-4 group-data-[collapsible=icon]:hidden">
+                <p className="border-sidebar-border text-muted-foreground border-t pt-4 text-xs">
+                    © 2026 IMC Platform
+                </p>
             </SidebarFooter>
         </Sidebar>
     );

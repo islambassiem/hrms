@@ -11,8 +11,11 @@ export default function AppLogo() {
                 <AppLogoIcon className="h-8 w-10" />
             </div>
             <div className="ml-1 grid flex-1 text-left text-sm">
-                <span className="mb-0.5 truncate leading-tight font-semibold">
+                <span className="truncate leading-tight font-semibold">
                     {name}
+                </span>
+                <span className="text-muted-foreground truncate text-[10px] font-semibold tracking-wider uppercase">
+                    HR Management System
                 </span>
             </div>
         </>
