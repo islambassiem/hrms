@@ -151,6 +151,8 @@ namespace App\Models\Employee{
 /**
  * @property int $id
  * @property int $employee_id
+ * @property int $salary_revision_id
+ * @property int|null $address_id
  * @property \Carbon\CarbonImmutable $start_date
  * @property int $duration
  * @property int $probation_period
@@ -167,6 +169,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereAddressId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereDuration($value)
@@ -175,6 +178,7 @@ namespace App\Models\Employee{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereNoticePeriod($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereProbationPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereSalaryRevisionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeContract whereUpdatedAt($value)
@@ -2043,14 +2047,14 @@ namespace App\Models{
  * @property string $email
  * @property \Carbon\CarbonImmutable|null $email_verified_at
  * @property string $password
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property \Carbon\CarbonImmutable|null $two_factor_confirmed_at
  * @property string|null $remember_token
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
- * @property string|null $two_factor_secret
- * @property string|null $two_factor_recovery_codes
- * @property \Carbon\CarbonImmutable|null $two_factor_confirmed_at
  * @property-read User|null $creator
  * @property-read User|null $editor
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications

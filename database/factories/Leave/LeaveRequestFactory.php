@@ -28,12 +28,16 @@ class LeaveRequestFactory extends Factory
         $startDate = Date::parse(fake()->date());
         $endDate = $startDate->addDays(fake()->randomDigit() + 1);
 
+        /** @var WorkflowActionEnum $status */
+        $status = fake()->randomElement(WorkflowActionEnum::cases());
+
         return [
             'leave_type_id' => $typeIds->random(),
             'employee_id' => $employeeIds->random(),
             'start_date' => $startDate,
             'end_date' => $endDate,
-            'status' => fake()->randomElement(WorkflowActionEnum::cases()),
+            'no_of_days' => (int) $startDate->diffInDays($endDate) + 1,
+            'status' => $status->value,
             'reason' => fake()->optional()->sentence(),
         ];
     }

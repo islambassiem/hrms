@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees');
             $table->date('start_date')->index();
             $table->date('end_date')->index();
+            $table->integer('no_of_days');
             $table->string('status')->default('pending');
             $table->string('reason')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');

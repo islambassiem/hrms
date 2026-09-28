@@ -27,6 +27,7 @@ final class LeaveRequestCreateAction
             /** @var array<string, mixed> $payload */
             $payload = [
                 ...$data->toArray(),
+                'no_of_days' => $this->days($data),
                 'created_by' => $currentUserId,
                 'updated_by' => $currentUserId,
             ];
@@ -36,5 +37,10 @@ final class LeaveRequestCreateAction
 
             return $leaveRequest;
         });
+    }
+
+    private function days(LeaveRequestData $data): int
+    {
+        return (int) $data->start_date->diffInDays($data->end_date) + 1;
     }
 }

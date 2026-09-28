@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'employee_id',
@@ -36,5 +37,13 @@ final class EmployeeLeavePolicy extends Model
             'start_date' => 'immutable_date',
             'end_date' => 'immutable_date',
         ];
+    }
+
+    /**
+     * @return BelongsTo<LeavePolicy, $this>
+     */
+    public function policy(): BelongsTo
+    {
+        return $this->belongsTo(LeavePolicy::class, 'leave_policy_id');
     }
 }

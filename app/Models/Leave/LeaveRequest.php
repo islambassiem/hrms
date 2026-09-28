@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
     'employee_id',
     'start_date',
     'end_date',
+    'no_of_days',
     'status',
     'reason',
     'created_by',
