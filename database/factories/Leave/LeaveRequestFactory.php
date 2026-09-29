@@ -23,8 +23,6 @@ class LeaveRequestFactory extends Factory
      */
     public function definition(): array
     {
-        $typeIds = LeaveType::query()->pluck('id');
-        $employeeIds = Employee::query()->pluck('id');
         $startDate = Date::parse(fake()->date());
         $endDate = $startDate->addDays(fake()->randomDigit() + 1);
 
@@ -32,8 +30,8 @@ class LeaveRequestFactory extends Factory
         $status = fake()->randomElement(WorkflowActionEnum::cases());
 
         return [
-            'leave_type_id' => $typeIds->random(),
-            'employee_id' => $employeeIds->random(),
+            'leave_type_id' => LeaveType::factory()->create()->id,
+            'employee_id' => Employee::factory()->create()->id,
             'start_date' => $startDate,
             'end_date' => $endDate,
             'no_of_days' => (int) $startDate->diffInDays($endDate) + 1,
