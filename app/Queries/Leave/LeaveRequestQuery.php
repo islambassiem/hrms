@@ -15,7 +15,6 @@ final class LeaveRequestQuery
         public ?LeaveRequestSortData $sort = null
     ) {}
 
-
     public function run(): Builder
     {
         $query = LeaveRequest::query()
@@ -54,8 +53,8 @@ final class LeaveRequestQuery
                 fn (Builder $query, CarbonImmutable $endDate) => $query->whereDate('end_date', '<=', $endDate)
             )->latest();
 
-        if($this->sort){
-            $query->orderBy($this->sort->field, $this->sort->order);
+        if ($this->sort instanceof LeaveRequestSortData) {
+            $query->orderBy($this->sort->field, $this->sort->order->value);
         }
 
         return $query;

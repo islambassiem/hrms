@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Data\Leave;
+
+use App\Enums\SortDirectionEnum;
 
 class LeaveRequestSortData
 {
@@ -9,9 +13,8 @@ class LeaveRequestSortData
      */
     public function __construct(
         public string $field = 'created_at',
-        public string $order = 'desc',
-    )
-    {
+        public SortDirectionEnum $order = SortDirectionEnum::DESCENDING,
+    ) {
         //
     }
 }
