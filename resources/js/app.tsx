@@ -5,11 +5,14 @@ import { initializeTheme } from '@/hooks/use-appearance';
 import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
+import HrLayout from './layouts/hr-layout';
+import HeadLayout from './layouts/head-layout';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
+
     layout: (name) => {
         switch (true) {
             case name === 'welcome':
@@ -18,6 +21,10 @@ void createInertiaApp({
                 return AuthLayout;
             case name.startsWith('settings/'):
                 return [AppLayout, SettingsLayout];
+            case name.startsWith('hr/'):
+                return [HrLayout];
+            case name.startsWith('head/'):
+                return [HeadLayout];
             default:
                 return AppLayout;
         }

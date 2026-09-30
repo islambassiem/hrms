@@ -1,3 +1,5 @@
+import type { PageProps } from '@inertiajs/core';
+
 export type User = {
     id: number;
     name: string;
@@ -30,3 +32,15 @@ export type TwoFactorSetupData = {
 export type TwoFactorSecretKey = {
     secretKey: string;
 };
+
+export interface Space {
+    key: 'employee' | 'hr' | 'head';
+    name: string;
+    description: string;
+    href: string;
+}
+
+export interface SharedData extends PageProps {
+    spaces: Space[];
+    currentSpace: Space['key'];
+}

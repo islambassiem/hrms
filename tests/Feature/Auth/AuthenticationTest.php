@@ -15,7 +15,7 @@ test('users can authenticate using the login screen', function (): void {
     $user = User::factory()->create();
 
     $response = $this->post(route('login.store'), [
-        'username' => $user->email,
+        'email' => $user->email,
         'password' => 'password',
     ]);
 
@@ -34,7 +34,7 @@ test('users with two factor enabled are redirected to two factor challenge', fun
     $user = User::factory()->withTwoFactor()->create();
 
     $response = $this->post(route('login'), [
-        'username' => $user->email,
+        'email' => $user->email,
         'password' => 'password',
     ]);
 
@@ -47,7 +47,7 @@ test('users can not authenticate with invalid password', function (): void {
     $user = User::factory()->create();
 
     $this->post(route('login.store'), [
-        'username' => $user->email,
+        'email' => $user->email,
         'password' => 'wrong-password',
     ]);
 
@@ -70,7 +70,7 @@ test('users are rate limited', function (): void {
     RateLimiter::increment(md5('login'.implode('|', [$user->email, '127.0.0.1'])), amount: 5);
 
     $response = $this->post(route('login.store'), [
-        'username' => $user->email,
+        'email' => $user->email,
         'password' => 'wrong-password',
     ]);
 
@@ -84,7 +84,7 @@ test('users can authenticate with employee_code', function (): void {
     ]);
 
     $response = $this->post(route('login.store'), [
-        'username' => $employee->employee_code,
+        'email' => $employee->employee_code,
         'password' => 'password',
     ]);
 

@@ -29,19 +29,26 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::create(['name' => $permission->value]);
         }
 
-        $departmentHead = User::query()->findOrFail(1);
+        $admin = User::query()->findOrFail(1);
+
+        foreach ($roles as $role) {
+            $admin->assignRole($role->value);
+        }
+
+        foreach ($permissions as $permission) {
+            $admin->givePermissionTo($permission->value);
+        }
+
+        $departmentHead = User::query()->findOrFail(2);
         /** @var Role $headRole */
         $headRole = Role::query()->where('name', RoleEnum::DEPARTMENT_HEAD->value)->first();
         $departmentHead->assignRole(RoleEnum::DEPARTMENT_HEAD->value);
         $headRole->givePermissionTo(PermissionEnum::HEAD_PAGE->value);
-        $headRole->givePermissionTo(PermissionEnum::PERSONAL_PAGE->value);
 
-        $hrPersonnel = User::query()->findOrFail(2);
-
-        /** @var Role $hrRole */
+        $hrPersonnel = User::query()->findOrFail(3);
         $hrRole = Role::query()->where('name', RoleEnum::HR_PERSONNEL->value)->first();
+        /** @var Role $hrRole */
         $hrPersonnel->assignRole(RoleEnum::HR_PERSONNEL->value);
         $hrRole->givePermissionTo(PermissionEnum::HR_PAGE->value);
-        $hrRole->givePermissionTo(PermissionEnum::PERSONAL_PAGE->value);
     }
 }

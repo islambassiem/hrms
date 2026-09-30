@@ -110,19 +110,22 @@ final class FortifyServiceProvider extends ServiceProvider
 
     private function authenticate(): void
     {
-        Fortify::authenticateUsing(function (Request $request) {
-            $username = $request->string(Fortify::username())->value();
+        Fortify::authenticateUsing(function (Request $request): ?User {
+            $identifier = $request->string('email')->value();
 
             $user = User::query()
-                ->where('email', $username)
-                ->orWhereHas('employee', function (Builder $query) use ($username): void {
-                    $query->where('employee_code', $username);
-                })->first();
+                ->where('email', $identifier)
+                ->orWhereHas('employee', function (Builder $query) use ($identifier): void {
+                    $query->where('employee_code', $identifier);
+                })
+                ->first();
 
-            if ($user &&
-            Hash::check($request->string('password')->value(), $user->password)) {
-                return $user;
-            }
+            return $user && Hash::check(
+                $request->string('password')->value(),
+                $user->password
+            )
+                ? $user
+                : null;
         });
     }
 }
