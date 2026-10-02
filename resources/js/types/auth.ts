@@ -41,6 +41,7 @@ export interface Space {
 }
 
 export interface SharedData extends PageProps {
+    locale: 'en' | 'ar';
     spaces: Space[];
     currentSpace: Space['key'];
 }

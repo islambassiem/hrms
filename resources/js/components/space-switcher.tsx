@@ -23,6 +23,7 @@ import {
     useSidebar,
 } from '@/components/ui/sidebar';
 import type { SharedData, Space } from '@/types';
+import { useTranslation } from 'react-i18next';
 
 const icons: Record<Space['key'], LucideIcon> = {
     employee: User,
@@ -42,6 +43,7 @@ function SpaceIcon({ space }: { space: Space }) {
 export function SpaceSwitcher() {
     const { spaces, currentSpace } = usePage<SharedData>().props;
     const { isMobile, state } = useSidebar();
+    const { t, i18n } = useTranslation();
 
     const active = spaces.find((s) => s.key === currentSpace) ?? spaces[0];
     if (!active) return null;
@@ -51,7 +53,7 @@ export function SpaceSwitcher() {
             <SpaceIcon space={active} />
             <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{active.name}</span>
-                <span className="text-muted-foreground truncate text-xs">
+                <span className="text-muted-foreground truncate text-xs rtl:text-right">
                     {active.description}
                 </span>
             </div>
@@ -64,9 +66,7 @@ export function SpaceSwitcher() {
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="sm" asChild>
-                        <Link href={active.href} prefetch>
-                            {content}
-                        </Link>
+                        <Link href={active.href}>{content}</Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
             </SidebarMenu>
@@ -79,7 +79,7 @@ export function SpaceSwitcher() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton
-                            size="sm"
+                            size="lg"
                             className="data-[state=open]:bg-sidebar-accent"
                         >
                             {content}
@@ -87,8 +87,8 @@ export function SpaceSwitcher() {
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
-                        className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                        align="end"
+                        className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg text-left rtl:text-right"
+                        align={i18n.dir() === 'rtl' ? 'start' : 'end'}
                         side={
                             isMobile
                                 ? 'bottom'
@@ -99,16 +99,18 @@ export function SpaceSwitcher() {
                         sideOffset={4}
                     >
                         <DropdownMenuLabel className="text-muted-foreground text-xs">
-                            Switch space
+                            {t('Switch space')}
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         {spaces.map((space) => (
                             <DropdownMenuItem
                                 key={space.key}
+
                                 asChild
                                 className="gap-2 p-2"
+                                dir={i18n.dir() === 'rtl' ? 'rtl' : 'ltr'}
                             >
-                                <Link href={space.href} prefetch>
+                                <Link href={space.href}>
                                     <SpaceIcon space={space} />
                                     <div className="grid flex-1 leading-tight">
                                         <span className="text-sm font-medium">

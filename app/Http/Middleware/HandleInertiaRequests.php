@@ -45,6 +45,7 @@ final class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'locale' => app()->getLocale(),
             'auth' => [
                 'user' => $user ? AuthResource::make($request->user()) : null,
             ],
@@ -75,22 +76,22 @@ final class HandleInertiaRequests extends Middleware
         $spaces = [
             [
                 'key' => 'employee',
-                'name' => 'Employee Space',
-                'description' => 'My work & requests',
+                'name' => __('spaces.employee_space'),
+                'description' => __('spaces.employee_description'),
                 'href' => '/dashboard',
                 'permission' => null,
             ],
             [
                 'key' => 'hr',
-                'name' => 'HR Space',
-                'description' => 'People & policies',
+                'name' => __('spaces.hr_space'),
+                'description' => __('spaces.hr_description'),
                 'href' => '/hr',
                 'permission' => PermissionEnum::HR_PAGE->value,
             ],
             [
                 'key' => 'head',
-                'name' => 'Head Space',
-                'description' => 'Manage subordinates',
+                'name' => __('spaces.head_space'),
+                'description' => __('spaces.head_description'),
                 'href' => '/head',
                 'permission' => PermissionEnum::HEAD_PAGE->value,
             ],

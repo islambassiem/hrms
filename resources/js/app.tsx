@@ -7,6 +7,8 @@ import AuthLayout from '@/layouts/auth-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import HrLayout from './layouts/hr-layout';
 import HeadLayout from './layouts/head-layout';
+import './i18n';
+import RootLayout from './layouts/root-layout';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -20,13 +22,13 @@ void createInertiaApp({
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
-                return [AppLayout, SettingsLayout];
+                return [RootLayout, AppLayout, SettingsLayout];
             case name.startsWith('hr/'):
-                return [HrLayout];
+                return [RootLayout, HrLayout];
             case name.startsWith('head/'):
-                return [HeadLayout];
+                return [RootLayout, HeadLayout];
             default:
-                return AppLayout;
+                return [RootLayout, AppLayout];
         }
     },
     strictMode: true,

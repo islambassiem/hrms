@@ -3,6 +3,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import type { BreadcrumbItem as BreadcrumbItemType } from '@/types';
 import { SpaceSwitcher } from './space-switcher';
 import AppearanceSwitcher from './appearance-switcher';
+import LanguageSwitcher from './locale-switcher';
 
 export function AppSidebarHeader({
     breadcrumbs = [],
@@ -17,6 +18,7 @@ export function AppSidebarHeader({
                 <Breadcrumbs breadcrumbs={breadcrumbs} />
             </div>
             <div className="flex items-center gap-2">
+                <LanguageSwitcher />
                 <AppearanceSwitcher />
                 <SpaceSwitcher />
             </div>

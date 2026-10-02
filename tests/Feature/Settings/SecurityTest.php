@@ -6,7 +6,7 @@ use Inertia\Testing\AssertableInertia as Assert;
 use Laravel\Fortify\Features;
 
 test('security page is displayed', function (): void {
-    // $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
+    $this->skipUnlessFortifyHas(Features::twoFactorAuthentication());
 
     Features::twoFactorAuthentication([
         'confirm' => true,

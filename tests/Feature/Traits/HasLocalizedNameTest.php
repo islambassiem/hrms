@@ -8,18 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 test('test the trait', function (): void {
+    $model = new
     #[Fillable('name_en', 'name_ar')]
-    /** @property string $name */
-    class TestModal extends Model
+    class(['name_en' => 'Software Engineer', 'name_ar' => 'مهندس برمجيات']) extends Model
     {
         use HasFactory;
         use HasLocalizedName;
-    }
-
-    $model = new TestModal([
-        'name_en' => 'Software Engineer',
-        'name_ar' => 'مهندس برمجيات',
-    ]);
+    };
 
     app()->setLocale('en');
 

@@ -15,17 +15,25 @@ import {
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
-    },
-];
+import { useTranslation } from 'react-i18next';
 
 export function AppSidebar() {
+    const { t, i18n } = useTranslation();
+
+    const mainNavItems: NavItem[] = [
+        {
+            title: t('Dashboard'),
+            href: dashboard(),
+            icon: LayoutGrid,
+        },
+    ];
+
     return (
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar
+            side={i18n.dir() === 'rtl' ? 'right' : 'left'}
+            collapsible="icon"
+            variant="inset"
+        >
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
