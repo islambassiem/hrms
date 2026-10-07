@@ -35,5 +35,8 @@ jobs:
       - name: Setup Application
         run: composer setup
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: Run CI Checks
         run: composer ci:check
