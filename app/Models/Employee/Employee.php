@@ -159,4 +159,21 @@ final class Employee extends Model
         return $this->hasOne(EmployeeContract::class)
             ->latestOfMany('start_date');
     }
+
+    /**
+     * @return HasMany<EmployeeOrganization, $this>
+     */
+    public function sponsorships(): HasMany
+    {
+        return $this->hasMany(EmployeeOrganization::class);
+    }
+
+    /**
+     * @return HasOne<EmployeeOrganization, $this>
+     */
+    public function sponsorship(): HasOne
+    {
+        return $this->hasOne(EmployeeOrganization::class)
+            ->whereNull('end_date');
+    }
 }

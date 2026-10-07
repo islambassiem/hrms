@@ -46,9 +46,11 @@ class DatabaseSeeder extends Seeder
             ShortLeaveTypeSeeder::class,
             LeaveTypeSeeder::class,
             WorkflowSeeder::class,
+            OrganizationSeeder::class,
 
             // Data tables
             EmployeeSeeder::class,
+            EmployeeOrganizationSeeder::class,
             EmployeeContractSeeder::class,
             RolesAndPermissionsSeeder::class,
             EmployeeIdentitySeeder::class,

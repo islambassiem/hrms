@@ -125,6 +125,26 @@ dataset('identity dataset', [
         ->build(),
 ]);
 
+dataset('employee organization dataset', [
+    ...invalid('employee_id')
+        ->required()
+        ->notInteger()
+        ->build(),
+
+    ...invalid('organization_id')
+        ->required()
+        ->notInteger()
+        ->build(),
+
+    ...invalid('start_date')
+        ->required()
+        ->build(),
+
+    ...invalid('end_date')
+        ->invalidDateOrder('start_date', 'end_date')
+        ->build(),
+]);
+
 dataset('job title dataset', [
     ...invalid('employee_id')
         ->required()

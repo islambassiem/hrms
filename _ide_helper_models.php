@@ -65,6 +65,9 @@ namespace App\Models\Employee{
  * @property-read \App\Models\Employee\EmployeeJobTitle|null $latestCurrentJobTitle
  * @property-read \App\Models\Payroll\Salary\EmployeeSalaryRevision|null $latestSalaryRevision
  * @property-read string $name
+ * @property-read \App\Models\Employee\EmployeeOrganization|null $sponsorship
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Employee\EmployeeOrganization> $sponsorships
+ * @property-read int|null $sponsorships_count
  * @method static \Database\Factories\Employee\EmployeeFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Employee newQuery()
@@ -323,6 +326,36 @@ namespace App\Models\Employee{
 	final class EmployeeManagerialRole extends \Eloquent {}
 }
 
+namespace App\Models\Employee{
+/**
+ * @property int $id
+ * @property int $employee_id
+ * @property int $organization_id
+ * @property \Carbon\CarbonImmutable $start_date
+ * @property \Carbon\CarbonImmutable|null $end_date
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \App\Models\User|null $creator
+ * @property-read \App\Models\User|null $editor
+ * @method static \Database\Factories\Employee\EmployeeOrganizationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereEmployeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereOrganizationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereUpdatedBy($value)
+ */
+	class EmployeeOrganization extends \Eloquent {}
+}
+
 namespace App\Models\Leave{
 /**
  * @property int $id
@@ -336,6 +369,7 @@ namespace App\Models\Leave{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read \App\Models\Leave\LeavePolicy $policy
  * @method static \Database\Factories\Leave\EmployeeLeavePolicyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeLeavePolicy newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeLeavePolicy newQuery()
@@ -624,6 +658,7 @@ namespace App\Models\Leave{
  * @property int $employee_id
  * @property \Carbon\CarbonImmutable $start_date
  * @property \Carbon\CarbonImmutable $end_date
+ * @property int $no_of_days
  * @property string $status
  * @property string|null $reason
  * @property int|null $created_by
@@ -632,6 +667,7 @@ namespace App\Models\Leave{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read \App\Models\Employee\Employee $employee
  * @method static \Database\Factories\Leave\LeaveRequestFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest newQuery()
@@ -642,6 +678,7 @@ namespace App\Models\Leave{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereEndDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereLeaveTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereNoOfDays($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereReason($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LeaveRequest whereStatus($value)
@@ -1679,6 +1716,39 @@ namespace App\Models\Lookup{
 	final class Workflow extends \Eloquent {}
 }
 
+namespace App\Models\Organization{
+/**
+ * @property int $id
+ * @property string $name_en
+ * @property string $name_ar
+ * @property string|null $id_number
+ * @property string|null $cr_number
+ * @property string|null $code
+ * @property int|null $created_by
+ * @property int|null $updated_by
+ * @property \Carbon\CarbonImmutable|null $created_at
+ * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property-read \App\Models\User|null $creator
+ * @property-read \App\Models\User|null $editor
+ * @property-read mixed $name
+ * @method static \Database\Factories\Organization\OrganizationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCrNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereIdNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereNameAr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedBy($value)
+ */
+	class Organization extends \Eloquent {}
+}
+
 namespace App\Models\Payroll{
 /**
  * @property int $id
@@ -2047,14 +2117,14 @@ namespace App\Models{
  * @property string $email
  * @property \Carbon\CarbonImmutable|null $email_verified_at
  * @property string $password
- * @property string|null $two_factor_secret
- * @property string|null $two_factor_recovery_codes
- * @property \Carbon\CarbonImmutable|null $two_factor_confirmed_at
  * @property string|null $remember_token
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at
  * @property \Carbon\CarbonImmutable|null $updated_at
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property \Carbon\CarbonImmutable|null $two_factor_confirmed_at
  * @property-read User|null $creator
  * @property-read User|null $editor
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
