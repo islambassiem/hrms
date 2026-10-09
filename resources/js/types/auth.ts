@@ -4,7 +4,11 @@ export type User = {
     id: number;
     name: string;
     email: string;
-    avatar?: string;
+    avatar?: string | null;
+    employee_code?: string | null;
+    name_en?: string | null;
+    name_ar?: string | null;
+    permissions?: string[];
     email_verified_at: string | null;
     two_factor_enabled?: boolean;
     created_at: string;

@@ -51,9 +51,11 @@ export function SpaceSwitcher() {
     const content = (
         <>
             <SpaceIcon space={active} />
-            <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{active.name}</span>
-                <span className="text-muted-foreground truncate text-xs rtl:text-right">
+            <div className="grid min-w-0 flex-1 text-left leading-tight">
+                <span className="text-xs font-semibold whitespace-nowrap sm:truncate sm:text-sm">
+                    {active.name}
+                </span>
+                <span className="text-muted-foreground hidden truncate text-xs sm:block rtl:text-right">
                     {active.description}
                 </span>
             </div>
@@ -63,9 +65,13 @@ export function SpaceSwitcher() {
     // Only the employee space available: no dropdown needed.
     if (spaces.length === 1) {
         return (
-            <SidebarMenu>
+            <SidebarMenu className="w-auto">
                 <SidebarMenuItem>
-                    <SidebarMenuButton size="sm" asChild>
+                    <SidebarMenuButton
+                        size="sm"
+                        asChild
+                        className="w-auto px-1.5 sm:px-2"
+                    >
                         <Link href={active.href}>{content}</Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -74,13 +80,13 @@ export function SpaceSwitcher() {
     }
 
     return (
-        <SidebarMenu>
+        <SidebarMenu className="w-auto">
             <SidebarMenuItem>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <SidebarMenuButton
                             size="lg"
-                            className="data-[state=open]:bg-sidebar-accent"
+                            className="data-[state=open]:bg-sidebar-accent w-auto px-1.5 sm:px-2"
                         >
                             {content}
                             <ChevronsUpDown className="ml-auto size-4" />

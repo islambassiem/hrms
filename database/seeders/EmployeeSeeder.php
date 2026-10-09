@@ -30,7 +30,7 @@ class EmployeeSeeder extends Seeder
         $departmentIds = Department::query()->pluck('id');
 
         foreach ($users as $user) {
-            Employee::factory()->create([
+            $employee = Employee::factory()->create([
                 'user_id' => $user->id,
                 'marital_status_id' => fn () => $maritalStatisIds->random(),
                 'religion_id' => fn () => $religionIds->random(),
@@ -40,6 +40,10 @@ class EmployeeSeeder extends Seeder
                 'department_id' => fn () => $departmentIds->random(),
                 'nationality_id' => fn () => $countryIds->random(),
                 'place_of_birth_id' => fn () => $countryIds->random(),
+            ]);
+
+            $user->update([
+                'name' => $employee->refresh()->full_name_en,
             ]);
         }
 
