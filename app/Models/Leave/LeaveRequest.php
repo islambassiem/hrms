@@ -6,6 +6,7 @@ namespace App\Models\Leave;
 
 use App\Concerns\UserStamp;
 use App\Models\Employee\Employee;
+use App\Models\Lookup\LeaveType;
 use Database\Factories\Leave\LeaveRequestFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,5 +48,13 @@ final class LeaveRequest extends Model
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * @return BelongsTo<LeaveType, $this>
+     */
+    public function leaveType(): BelongsTo
+    {
+        return $this->belongsTo(LeaveType::class);
     }
 }
