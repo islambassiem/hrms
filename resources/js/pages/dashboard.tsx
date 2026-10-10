@@ -19,7 +19,7 @@ export default function Dashboard({
         <>
             <Head title={t('Employee dashboard')} />
             <div className="bg-background w-full">
-                <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6 p-4 sm:p-6">
+                <div className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6">
                     <EmployeeSummaryCard
                         employee={employeeDashboard}
                         avatar={auth.user.avatar}

@@ -10,11 +10,11 @@ use App\Models\Leave\LeaveRequest;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 
-final class EmployeeDashboardLeaveRequestQuery
+final readonly class EmployeeDashboardLeaveRequestQuery
 {
     public function __construct(
-        private readonly Employee $employee,
-        private readonly CarbonImmutable $asOfDate,
+        private Employee $employee,
+        private CarbonImmutable $asOfDate,
     ) {}
 
     /**
@@ -39,7 +39,7 @@ final class EmployeeDashboardLeaveRequestQuery
             ->where('employee_id', $this->employee->id)
             ->where('status', WorkflowActionEnum::APPROVED->value)
             ->whereDate('end_date', '>=', $this->asOfDate)
-            ->orderBy('start_date')
+            ->oldest('start_date')
             ->orderBy('id');
     }
 }

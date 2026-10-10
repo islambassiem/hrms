@@ -6,12 +6,13 @@ namespace App\Concerns\Leave;
 
 use App\Enums\WorkflowActionEnum;
 use App\Models\Leave\LeaveRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
 
 /** Provides validation rules for leave requests. */
 trait LeaveRequestValidationRules
 {
-    /** @return array<string, mixed> */
+    /** @return array<string, ValidationRule|array<mixed>|string> */
     public function baseRules(): array
     {
         return [
@@ -24,14 +25,14 @@ trait LeaveRequestValidationRules
         ];
     }
 
-    /** @return array<string, mixed> */
+    /** @return array<string, ValidationRule|array<mixed>|string> */
     public function createRules(): array
     {
         return [...self::baseRules()];
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function updateRules(LeaveRequest $leaveRequest): array
     {

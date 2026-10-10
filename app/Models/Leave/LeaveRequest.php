@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 #[Fillable([
     'leave_type_id',
@@ -24,11 +26,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'created_by',
     'updated_by',
 ])]
-final class LeaveRequest extends Model
+final class LeaveRequest extends Model implements HasMedia
 {
     /** @use HasFactory<LeaveRequestFactory> */
     use HasFactory;
 
+    use InteractsWithMedia;
     use UserStamp;
 
     /**

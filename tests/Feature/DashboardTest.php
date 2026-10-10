@@ -95,7 +95,7 @@ test('authenticated employees receive unavailable Leave and document values when
 test('authenticated employees receive only their Regular Leave dashboard requests', function (): void {
     $employee = Employee::factory()->create();
     $leaveType = LeaveType::factory()->create();
-    $today = now()->startOfDay();
+    $today = today();
 
     $olderPendingRequest = LeaveRequest::factory()->create([
         'employee_id' => $employee->id,

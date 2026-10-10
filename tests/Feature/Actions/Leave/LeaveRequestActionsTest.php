@@ -10,6 +10,8 @@ use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveRequest;
 use App\Models\Lookup\LeaveType;
 use Carbon\CarbonImmutable;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 it('creates and updates a leave request', function (): void {
@@ -21,6 +23,62 @@ it('creates and updates a leave request', function (): void {
     expect($request)->toBeInstanceOf(LeaveRequest::class)
         ->and($updated)->toBeInstanceOf(LeaveRequest::class)
         ->and($updated->status)->toBe('approved');
+});
+
+it('creates a leave request without attachment', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+    $employee = Employee::factory()->create();
+    $leaveType = LeaveType::factory()->create();
+    $request = (new LeaveRequestCreateAction)->handle(new LeaveRequestData($leaveType->id, $employee->id, CarbonImmutable::parse('2026-10-01'), CarbonImmutable::parse('2026-10-03')));
+
+    $leaveRequest = resolve(LeaveRequestCreateAction::class)
+        ->handle(LeaveRequestData::from($request));
+
+    expect($leaveRequest)->toBeInstanceOf(LeaveRequest::class);
+
+    $media = $leaveRequest->getMedia();
+
+    expect($media)->toHaveCount(0);
+});
+
+it('creates a leave request with an attachment', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+    $employee = Employee::factory()->create();
+    $leaveType = LeaveType::factory()->create();
+    $request = (new LeaveRequestCreateAction)->handle(new LeaveRequestData($leaveType->id, $employee->id, CarbonImmutable::parse('2026-10-01'), CarbonImmutable::parse('2026-10-03')));
+
+    $attachment = UploadedFile::fake()->create(
+        'medical-certificate.pdf',
+        100,
+        'application/pdf',
+    );
+
+    $leaveRequest = resolve(LeaveRequestCreateAction::class)
+        ->handle(LeaveRequestData::from($request), $attachment);
+
+    expect($leaveRequest)->toBeInstanceOf(LeaveRequest::class);
+
+    $media = $leaveRequest->getMedia();
+
+    expect($media)->toHaveCount(1)
+        ->and($media->first()->model_id)->toBe($leaveRequest->getKey());
+});
+
+it('creates a leave request with multiple attachments', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+    $employee = Employee::factory()->create();
+    $leaveType = LeaveType::factory()->create();
+    $request = (new LeaveRequestCreateAction)->handle(new LeaveRequestData($leaveType->id, $employee->id, CarbonImmutable::parse('2026-10-01'), CarbonImmutable::parse('2026-10-03')));
+
+    $attachments = [
+        UploadedFile::fake()->create('certificate.pdf', 100, 'application/pdf'),
+        UploadedFile::fake()->create('supporting-document.pdf', 150, 'application/pdf'),
+    ];
+
+    $leaveRequest = resolve(LeaveRequestCreateAction::class)
+        ->handle(LeaveRequestData::from($request), $attachments);
+
+    expect($leaveRequest->getMedia())->toHaveCount(2);
 });
 
 it('creates a valid leave request', function (): void {
