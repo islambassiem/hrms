@@ -18,7 +18,7 @@ class QualificationUpdateAction
         Validator::make(
             $data->toArray(),
             /** @var array<string, mixed> */
-            $this->updateRules($qualification),
+            $this->updateRules(),
         )->validate();
 
         /** @var int|null $currentUserId */

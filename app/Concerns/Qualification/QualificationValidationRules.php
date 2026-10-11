@@ -2,18 +2,14 @@
 
 namespace App\Concerns\Qualification;
 
-use App\Models\Qualifications\Qualification;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Exists;
 
 trait QualificationValidationRules
 {
     /**
-     * @phpstan-type ValidationRule string|\Illuminate\Validation\Rules\Exists|\Illuminate\Validation\Rules\Unique|\Illuminate\Validation\Rule
-     */
-
-    /**
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function createRules(): array
     {
@@ -25,9 +21,9 @@ trait QualificationValidationRules
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function updateRules(Qualification $qualification): array
+    public function updateRules(): array
     {
         return [
             ...self::baseRules(),
@@ -37,7 +33,7 @@ trait QualificationValidationRules
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function baseRules(): array
     {
