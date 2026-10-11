@@ -1,16 +1,62 @@
 <?php
 
 use App\Actions\Qualification\QualificationCreateAction;
+use App\Actions\Qualification\QualificationDeleteAction;
 use App\Actions\Qualification\QualificationUpdateAction;
 use App\Data\Qualification\QualificationData;
+use App\Exceptions\CannotDeleteRecord;
+use App\Models\Employee\Employee;
 use App\Models\Qualifications\Qualification;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 it('creates a qualification', function (): void {
+    Storage::fake(config('media-library.disk_name'));
     $data = QualificationData::from(Qualification::factory()->make());
     $qualification = resolve(QualificationCreateAction::class)->handle($data);
 
     expect($qualification)->toBeInstanceOf(Qualification::class);
     $this->assertDatabaseHas('qualifications', $qualification->getAttributes());
+    $media = $qualification->getMedia();
+    expect($media)->toHaveCount(0);
+});
+
+it('creates a qualification with an attachment', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+    $data = QualificationData::from(Qualification::factory()->make());
+    $attachment = UploadedFile::fake()->create(
+        'qualification.pdf',
+        100,
+        'application/pdf',
+    );
+    $qualification = resolve(QualificationCreateAction::class)->handle($data, $attachment);
+
+    expect($qualification)->toBeInstanceOf(Qualification::class);
+    $this->assertDatabaseHas('qualifications', $qualification->getAttributes());
+
+    $media = $qualification->getMedia();
+
+    expect($media)->toHaveCount(1)
+        ->and($media->first()->model_id)->toBe($qualification->getKey());
+});
+
+it('creates a qualification with multiple attachment', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+    $data = QualificationData::from(Qualification::factory()->make());
+
+    $attachments = [
+        UploadedFile::fake()->create('certificate.pdf', 100, 'application/pdf'),
+        UploadedFile::fake()->create('supporting-document.pdf', 150, 'application/pdf'),
+    ];
+    $qualification = resolve(QualificationCreateAction::class)->handle($data, $attachments);
+
+    expect($qualification)->toBeInstanceOf(Qualification::class);
+    $this->assertDatabaseHas('qualifications', $qualification->getAttributes());
+
+    $media = $qualification->getMedia();
+
+    expect($media)->toHaveCount(2)
+        ->and($media->first()->model_id)->toBe($qualification->getKey());
 });
 
 test('action fails when required fields are missing', function (): void {
@@ -53,6 +99,29 @@ it('fails to update when :dataset', function (array $overrides, array $fields): 
         ), $fields
     );
 })->with('Qualification Dataset');
+
+it('deletes a qualification if there are many', function (): void {
+    $employee = Employee::factory()->create();
+    $qualifications = Qualification::factory(2)->create([
+        'employee_id' => $employee->id,
+    ]);
+    $toBeDeleted = $qualifications->random();
+
+    resolve(QualificationDeleteAction::class)->handle($toBeDeleted);
+
+    $this->assertDatabaseMissing($toBeDeleted);
+
+});
+
+it('fails to delete only qualification', function (): void {
+
+    $qualification = Qualification::factory()->create();
+
+    expect(
+        fn () => resolve(QualificationDeleteAction::class)->handle($qualification)
+    )->toThrow(CannotDeleteRecord::class);
+
+});
 
 dataset('Qualification Dataset', [
     ...invalid('employee_id')

@@ -9,6 +9,8 @@ use Database\Factories\Qualifications\QualificationFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 #[Fillable([
     'employee_id',
@@ -32,10 +34,11 @@ use Illuminate\Database\Eloquent\Model;
     'created_by',
     'updated_by',
 ])]
-final class Qualification extends Model
+final class Qualification extends Model implements HasMedia
 {
     /** @use HasFactory<QualificationFactory> */
     use HasFactory;
 
+    use InteractsWithMedia;
     use UserStamp;
 }

@@ -2,9 +2,11 @@
 
 namespace App\Actions\Qualification;
 
+use App\Actions\AttachMediaAction;
 use App\Concerns\Qualification\QualificationValidationRules;
 use App\Data\Qualification\QualificationData;
 use App\Models\Qualifications\Qualification;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -13,8 +15,15 @@ class QualificationCreateAction
 {
     use QualificationValidationRules;
 
-    public function handle(QualificationData $data): Qualification
-    {
+    /**
+     * Summary of handle
+     *
+     * @param  UploadedFile|array<UploadedFile>|null  $attachments
+     */
+    public function handle(
+        QualificationData $data,
+        UploadedFile|array|null $attachments = null,
+    ): Qualification {
         Validator::make(
             $data->toArray(),
             /** @var array<string, mixed> */
@@ -24,7 +33,7 @@ class QualificationCreateAction
         /** @var int|null $currentUserId */
         $currentUserId = Auth::id();
 
-        return DB::transaction(function () use ($data, $currentUserId): Qualification {
+        $created = DB::transaction(function () use ($data, $currentUserId): Qualification {
             /** @var array<string, mixed> $payload */
             $payload = [
                 ...$data->toArray(),
@@ -37,5 +46,11 @@ class QualificationCreateAction
 
             return $qualification;
         });
+
+        if ($attachments !== null) {
+            resolve(AttachMediaAction::class)->handle($created, $attachments);
+        }
+
+        return $created;
     }
 }
