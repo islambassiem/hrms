@@ -8,9 +8,10 @@ use App\Actions\Qualification\QualificationUpdateAction;
 use App\Data\Qualification\QualificationData;
 use App\Http\Requests\Employee\Qualification\StoreQualificationRequest;
 use App\Http\Requests\Employee\Qualification\UpdateQualificationRequest;
+use App\Http\Resources\Employee\QualificationResource;
+use App\Http\Resources\Lookup\QualificationFormDropdown;
 use App\Models\Qualifications\Qualification;
 use App\Queries\Qualification\EmployeeQualificationsQuery;
-use App\Services\Employee\QualificationFormData;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -27,12 +28,11 @@ class QualificationController
     {
         $this->authorize('viewAny', Qualification::class);
 
-        // TODO return a resource instead
         $qualifications = resolve(EmployeeQualificationsQuery::class)
             ->run(auth()->user()?->employee)->get();
 
         return Inertia::render('employee/qualification/index', [
-            'qualifications' => $qualifications,
+            'qualifications' => QualificationResource::collection($qualifications),
         ]);
     }
 
@@ -43,9 +43,8 @@ class QualificationController
     {
         $this->authorize('create', Qualification::class);
 
-        // TODO returns the data for dropdowns
         return Inertia::render('employee/qualification/create', [
-            ...resolve(QualificationFormData::class)->dropdowns(),
+            'props' => resolve(QualificationFormDropdown::class)->dropdowns(),
         ]);
     }
 
@@ -83,10 +82,9 @@ class QualificationController
     {
         $this->authorize('view', $qualification);
 
-        // TODO returns the data for dropdowns
         return Inertia::render('employee/qualification/edit', [
             'qualification' => $qualification,
-            ...resolve(QualificationFormData::class)->dropdowns(),
+            ...resolve(QualificationFormDropdown::class)->dropdowns(),
         ]);
     }
 

@@ -328,30 +328,12 @@ namespace App\Models\Employee{
 
 namespace App\Models\Employee{
 /**
- * @property int $id
- * @property int $employee_id
- * @property int $organization_id
- * @property \Carbon\CarbonImmutable $start_date
- * @property \Carbon\CarbonImmutable|null $end_date
- * @property int|null $created_by
- * @property int|null $updated_by
- * @property \Carbon\CarbonImmutable|null $created_at
- * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
  * @method static \Database\Factories\Employee\EmployeeOrganizationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereEmployeeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereEndDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereOrganizationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereStartDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|EmployeeOrganization whereUpdatedBy($value)
  */
 	class EmployeeOrganization extends \Eloquent {}
 }
@@ -1721,24 +1703,6 @@ namespace App\Models\Lookup{
 
 namespace App\Models{
 /**
- * @property int $id
- * @property string $model_type
- * @property int $model_id
- * @property string|null $uuid
- * @property string $collection_name
- * @property string $name
- * @property string $file_name
- * @property string|null $mime_type
- * @property string $disk
- * @property string|null $conversions_disk
- * @property int $size
- * @property array<array-key, mixed> $manipulations
- * @property array<array-key, mixed> $custom_properties
- * @property array<array-key, mixed> $generated_conversions
- * @property array<array-key, mixed> $responsive_images
- * @property int|null $order_column
- * @property \Carbon\CarbonImmutable|null $created_at
- * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read mixed $extension
  * @property-read mixed $human_readable_size
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $model
@@ -1751,40 +1715,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Media newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Media ordered()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Media query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereCollectionName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereConversionsDisk($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereCustomProperties($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereDisk($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereFileName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereGeneratedConversions($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereManipulations($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereMimeType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereModelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereModelType($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereOrderColumn($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereResponsiveImages($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Media whereUuid($value)
  */
 	class Media extends \Eloquent {}
 }
 
 namespace App\Models\Organization{
 /**
- * @property int $id
- * @property string $name_en
- * @property string $name_ar
- * @property string|null $id_number
- * @property string|null $cr_number
- * @property string|null $code
- * @property int|null $created_by
- * @property int|null $updated_by
- * @property \Carbon\CarbonImmutable|null $created_at
- * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
  * @property-read mixed $name
@@ -1792,16 +1728,6 @@ namespace App\Models\Organization{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCrNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereIdNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereNameAr($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereNameEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedBy($value)
  */
 	class Organization extends \Eloquent {}
 }
@@ -2087,7 +2013,7 @@ namespace App\Models\Qualifications{
  * @property string|null $institution_name
  * @property string|null $college_name
  * @property int|null $scientific_degree_id
- * @property string|null $graduation_date
+ * @property \Carbon\CarbonImmutable|null $graduation_date
  * @property int|null $graduation_country_id
  * @property int $is_last_qualification
  * @property int|null $rating_id
@@ -2102,6 +2028,16 @@ namespace App\Models\Qualifications{
  * @property \Carbon\CarbonImmutable|null $updated_at
  * @property-read \App\Models\User|null $creator
  * @property-read \App\Models\User|null $editor
+ * @property-read \App\Models\Lookup\EducationalSublevel|null $educationalSublevel
+ * @property-read \App\Models\Lookup\Country|null $graduationCountry
+ * @property-read \App\Models\Lookup\IncludedSpecialization|null $includedSpecialty
+ * @property-read \App\Models\Lookup\Speciality $major
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \App\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \App\Models\Lookup\Speciality|null $minor
+ * @property-read \App\Models\Lookup\Rating|null $rating
+ * @property-read \App\Models\Lookup\ScientificDegree|null $scientificDegree
+ * @property-read \App\Models\Lookup\StudyType|null $studyType
  * @method static \Database\Factories\Qualifications\QualificationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification newQuery()
@@ -2129,7 +2065,7 @@ namespace App\Models\Qualifications{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Qualification whereUpdatedBy($value)
  */
-	final class Qualification extends \Eloquent {}
+	final class Qualification extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models\ShortLeave{

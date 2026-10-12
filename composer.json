@@ -76,7 +76,7 @@
             "npm run types:check",
             "npm run build",
             "./vendor/bin/pint --parallel",
-            "./vendor/bin/phpstan analyse",
+            "./vendor/bin/phpstan analyse --memory-limit=2048M",
             "./vendor/bin/rector",
             "@test"
         ],
