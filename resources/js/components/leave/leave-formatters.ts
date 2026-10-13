@@ -34,3 +34,15 @@ export function formatLeaveTime(value: string, language: string): string {
         timeZone: 'UTC',
     }).format(time);
 }
+import type { LeaveRequestStatus, StatusTone } from '@/types';
+
+export function leaveRequestStatusTone(status: LeaveRequestStatus): StatusTone {
+    const tones: Record<LeaveRequestStatus, StatusTone> = {
+        pending: 'warning',
+        approved: 'success',
+        rejected: 'destructive',
+        cancelled: 'muted',
+    };
+
+    return tones[status];
+}

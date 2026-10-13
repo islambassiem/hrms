@@ -33,31 +33,24 @@ export type LeaveTypeEligibility =
 export type LeaveTypeOption = {
     id: number;
     label: string;
-    description?: string;
-    eligibility: LeaveTypeEligibility;
-    attachmentLabel?: string;
+    description: string | null;
+    eligibility?: LeaveTypeEligibility;
 };
 
 export type EmployeeLeaveProfile = {
     name: string;
-    employeeCode?: string;
-    department?: string;
-    jobTitle?: string;
+    employeeCode: string | null;
+    department: string | null;
+    jobTitle: string | null;
 };
 
 export type AnnualLeaveSummary = {
     availableDays: number;
-    entitlementDays: number;
+    accruedDays: number;
     usedDays: number;
     pendingDays: number;
     expiringDays?: number;
     expiryDate?: string;
-};
-
-export type SickLeaveUsageSummary = {
-    usedDays: number;
-    currentTierLabel: string;
-    nextTierNote?: string;
 };
 
 export type PendingLeaveCounts = {
@@ -66,13 +59,10 @@ export type PendingLeaveCounts = {
     totalCount: number;
 };
 
-export type UpcomingApprovedLeave = {
-    id: number;
-    leaveTypeName: string;
-    startDate: string;
-    endDate: string;
-    durationLabel: string;
-    returnToWorkDate?: string;
+export type SickLeaveUsageSummary = {
+    usedDays: number;
+    currentTierLabel: string;
+    nextTierNote?: string;
 };
 
 export type RecentStatusUpdate = {
@@ -95,28 +85,36 @@ export type ApprovalTimelineStep = {
     comment?: string;
 };
 
+export type UpcomingApprovedLeave = {
+    id: number;
+    leaveType: LeaveRequestLeaveType | null;
+    startDate: string;
+    endDate: string;
+    durationDays: number;
+};
+
 export type LeaveAttachment = {
     id: number;
     name: string;
-    sizeLabel?: string;
-    downloadAvailable: boolean;
+    sizeBytes: number;
+};
+
+export type LeaveRequestLeaveType = {
+    id: number;
+    name: string;
 };
 
 export type RegularLeaveRequest = {
     id: number;
-    leaveTypeId: number;
-    leaveTypeName: string;
+    leaveType: LeaveRequestLeaveType | null;
     startDate: string;
     endDate: string;
-    durationLabel: string;
-    appliedAt: string;
+    durationDays: number;
+    submittedDate: string;
     status: LeaveRequestStatus;
-    statusLabel: string;
-    statusTone: StatusTone;
-    currentStage?: string;
-    reason?: string;
+    reason: string | null;
     attachments: LeaveAttachment[];
-    approvalTimeline: ApprovalTimelineStep[];
+    approvalTimeline: ApprovalTimelineStep[] | null;
     canCancel: boolean;
 };
 
@@ -146,9 +144,13 @@ export type EmployeeLeavePageData = {
     sickLeave: SickLeaveUsageSummary | null;
     pendingCounts: PendingLeaveCounts;
     upcomingApprovedLeave: UpcomingApprovedLeave | null;
-    recentUpdates: RecentStatusUpdate[];
+    recentUpdates: RecentStatusUpdate[] | null;
     regularRequests: RegularLeaveRequest[];
-    availableLeaveTypes: LeaveTypeOption[];
+    leaveTypes: LeaveTypeOption[];
+};
+
+export type EmployeeLeavePageProps = {
+    leavePage: EmployeeLeavePageData | null;
 };
 
 export type ShortLeavePageData = {

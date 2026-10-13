@@ -1,3 +1,4 @@
+import { useForm } from '@inertiajs/react';
 import { CalendarDays, CircleAlert, Info, Paperclip } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
@@ -22,6 +23,7 @@ import {
     SheetTitle,
 } from '@/components/ui/sheet';
 import { Skeleton } from '@/components/ui/skeleton';
+import { store } from '@/routes/leave';
 import type { LeaveTypeEligibility, LeaveTypeOption } from '@/types';
 
 import { formatLeaveNumber } from './leave-formatters';
@@ -34,17 +36,32 @@ type LeaveApplyDrawerProps = {
     errorMessage?: string;
 };
 
-type FormFeedback =
-    | { kind: 'validation'; message: string }
-    | { kind: 'unavailable'; message: string }
-    | null;
+type FormFeedback = { kind: 'validation'; message: string } | null;
+
+type LeaveRequestForm = {
+    leave_type_id: string;
+    start_date: string;
+    end_date: string;
+    reason: string;
+    attachments: File | null;
+};
 
 function EligibilitySummary({
     eligibility,
 }: {
-    eligibility: LeaveTypeEligibility;
+    eligibility: LeaveTypeEligibility | undefined;
 }) {
     const { t, i18n } = useTranslation();
+
+    if (!eligibility) {
+        return (
+            <p className="text-muted-foreground text-sm">
+                {t(
+                    'Eligibility information will be available when the leave policy is supplied.',
+                )}
+            </p>
+        );
+    }
 
     if (eligibility.kind === 'annual-balance') {
         return (
@@ -148,22 +165,36 @@ export function LeaveApplyDrawer({
     errorMessage,
 }: LeaveApplyDrawerProps) {
     const { t, i18n } = useTranslation();
-    const [leaveTypeId, setLeaveTypeId] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [reason, setReason] = useState('');
     const [feedback, setFeedback] = useState<FormFeedback>(null);
+    const [submissionMessage, setSubmissionMessage] = useState<string | null>(
+        null,
+    );
+    const form = useForm<LeaveRequestForm>({
+        leave_type_id: '',
+        start_date: '',
+        end_date: '',
+        reason: '',
+        attachments: null,
+    });
 
     const selectedLeaveType = leaveTypes.find(
-        (leaveType) => leaveType.id === Number(leaveTypeId),
+        (leaveType) => leaveType.id === Number(form.data.leave_type_id),
     );
 
-    const resetFeedback = () => setFeedback(null);
+    const resetFeedback = () => {
+        setFeedback(null);
+        setSubmissionMessage(null);
+        form.clearErrors();
+    };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!selectedLeaveType || !startDate || !endDate) {
+        if (
+            !selectedLeaveType ||
+            !form.data.start_date ||
+            !form.data.end_date
+        ) {
             setFeedback({
                 kind: 'validation',
                 message: t(
@@ -173,7 +204,7 @@ export function LeaveApplyDrawer({
             return;
         }
 
-        if (endDate < startDate) {
+        if (form.data.end_date < form.data.start_date) {
             setFeedback({
                 kind: 'validation',
                 message: t('The end date must be on or after the start date.'),
@@ -181,16 +212,27 @@ export function LeaveApplyDrawer({
             return;
         }
 
-        setFeedback({
-            kind: 'unavailable',
-            message: t(
-                'Leave submission is not connected yet. No request or Leave data has been changed.',
-            ),
+        resetFeedback();
+        form.post(store().url, {
+            forceFormData: true,
+            preserveScroll: true,
+            onSuccess: () => {
+                form.reset();
+                setSubmissionMessage(t('Leave request submitted.'));
+            },
         });
     };
 
+    const handleOpenChange = (nextOpen: boolean) => {
+        if (!nextOpen) {
+            resetFeedback();
+        }
+
+        onOpenChange(nextOpen);
+    };
+
     return (
-        <Sheet open={open} onOpenChange={onOpenChange}>
+        <Sheet open={open} onOpenChange={handleOpenChange}>
             <SheetContent
                 dir={i18n.dir()}
                 className="w-full gap-0 overflow-y-auto p-0 sm:max-w-xl"
@@ -236,22 +278,26 @@ export function LeaveApplyDrawer({
                         className="flex min-h-full flex-col"
                     >
                         <div className="space-y-6 p-6">
-                            {feedback ? (
-                                <Alert
-                                    variant={
-                                        feedback.kind === 'validation'
-                                            ? 'destructive'
-                                            : 'default'
-                                    }
-                                >
+                            {feedback || form.hasErrors ? (
+                                <Alert variant="destructive">
                                     <CircleAlert aria-hidden="true" />
                                     <AlertTitle>
-                                        {feedback.kind === 'validation'
-                                            ? t('Check the form')
-                                            : t('Submission unavailable')}
+                                        {t('Check the form')}
                                     </AlertTitle>
                                     <AlertDescription>
-                                        {feedback.message}
+                                        {feedback?.message ??
+                                            Object.values(form.errors)[0]}
+                                    </AlertDescription>
+                                </Alert>
+                            ) : null}
+
+                            {submissionMessage ? (
+                                <Alert>
+                                    <AlertTitle>
+                                        {t('Leave request submitted')}
+                                    </AlertTitle>
+                                    <AlertDescription>
+                                        {submissionMessage}
                                     </AlertDescription>
                                 </Alert>
                             ) : null}
@@ -261,17 +307,20 @@ export function LeaveApplyDrawer({
                                     {t('Leave type')}
                                 </Label>
                                 <Select
-                                    value={leaveTypeId}
+                                    value={form.data.leave_type_id}
                                     onValueChange={(value) => {
-                                        setLeaveTypeId(value);
+                                        form.setData('leave_type_id', value);
                                         resetFeedback();
                                     }}
                                 >
                                     <SelectTrigger
                                         id="leave-apply-type"
                                         aria-invalid={
-                                            feedback?.kind === 'validation' &&
-                                            !selectedLeaveType
+                                            Boolean(
+                                                form.errors.leave_type_id,
+                                            ) ||
+                                            (feedback?.kind === 'validation' &&
+                                                !selectedLeaveType)
                                         }
                                         className="w-full"
                                     >
@@ -281,7 +330,7 @@ export function LeaveApplyDrawer({
                                             )}
                                         />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent dir={i18n.dir()}>
                                         {leaveTypes.map((leaveType) => (
                                             <SelectItem
                                                 key={leaveType.id}
@@ -332,13 +381,19 @@ export function LeaveApplyDrawer({
                                     <Input
                                         id="leave-apply-start-date"
                                         type="date"
-                                        value={startDate}
+                                        dir={i18n.dir()}
+                                        lang={i18n.language}
+                                        value={form.data.start_date}
                                         aria-invalid={
-                                            feedback?.kind === 'validation' &&
-                                            !startDate
+                                            Boolean(form.errors.start_date) ||
+                                            (feedback?.kind === 'validation' &&
+                                                !form.data.start_date)
                                         }
                                         onChange={(event) => {
-                                            setStartDate(event.target.value);
+                                            form.setData(
+                                                'start_date',
+                                                event.target.value,
+                                            );
                                             resetFeedback();
                                         }}
                                     />
@@ -350,13 +405,21 @@ export function LeaveApplyDrawer({
                                     <Input
                                         id="leave-apply-end-date"
                                         type="date"
-                                        value={endDate}
+                                        dir={i18n.dir()}
+                                        lang={i18n.language}
+                                        value={form.data.end_date}
                                         aria-invalid={
-                                            feedback?.kind === 'validation' &&
-                                            (!endDate || endDate < startDate)
+                                            Boolean(form.errors.end_date) ||
+                                            (feedback?.kind === 'validation' &&
+                                                (!form.data.end_date ||
+                                                    form.data.end_date <
+                                                        form.data.start_date))
                                         }
                                         onChange={(event) => {
-                                            setEndDate(event.target.value);
+                                            form.setData(
+                                                'end_date',
+                                                event.target.value,
+                                            );
                                             resetFeedback();
                                         }}
                                     />
@@ -369,10 +432,15 @@ export function LeaveApplyDrawer({
                                 </Label>
                                 <textarea
                                     id="leave-apply-reason"
-                                    value={reason}
-                                    onChange={(event) =>
-                                        setReason(event.target.value)
-                                    }
+                                    value={form.data.reason}
+                                    aria-invalid={Boolean(form.errors.reason)}
+                                    onChange={(event) => {
+                                        form.setData(
+                                            'reason',
+                                            event.target.value,
+                                        );
+                                        resetFeedback();
+                                    }}
                                     className="border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring min-h-28 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-2"
                                     placeholder={t(
                                         'Add any information relevant to your request',
@@ -396,32 +464,51 @@ export function LeaveApplyDrawer({
                                         >
                                             {t('Attachment')}
                                         </h2>
-                                        {selectedLeaveType?.attachmentLabel ? (
-                                            <p className="text-muted-foreground text-sm">
-                                                {
-                                                    selectedLeaveType.attachmentLabel
-                                                }
-                                            </p>
-                                        ) : (
-                                            <p className="text-muted-foreground text-sm">
-                                                {t(
-                                                    'Attachment requirements are not available for this leave type.',
-                                                )}
-                                            </p>
-                                        )}
                                         <p className="text-muted-foreground text-sm">
                                             {t(
-                                                'Upload will be available when the secure server attachment flow is connected.',
+                                                'Attachment requirements are enforced by the server.',
+                                            )}
+                                        </p>
+                                        <p className="text-muted-foreground text-sm">
+                                            {t(
+                                                'Accepted files: PDF, PNG, JPEG, or JPG up to 3 MB.',
                                             )}
                                         </p>
                                     </div>
+                                </div>
+                                <div className="mt-4 space-y-2">
+                                    <Label htmlFor="leave-apply-attachment">
+                                        {t('Select attachment')}
+                                    </Label>
+                                    <Input
+                                        id="leave-apply-attachment"
+                                        type="file"
+                                        accept=".pdf,.png,.jpeg,.jpg"
+                                        aria-invalid={Boolean(
+                                            form.errors.attachments,
+                                        )}
+                                        onChange={(event) => {
+                                            form.setData(
+                                                'attachments',
+                                                event.target.files?.[0] ?? null,
+                                            );
+                                            resetFeedback();
+                                        }}
+                                    />
+                                    {form.errors.attachments ? (
+                                        <p className="text-destructive text-sm">
+                                            {form.errors.attachments}
+                                        </p>
+                                    ) : null}
                                 </div>
                             </section>
                         </div>
 
                         <SheetFooter className="border-t p-6">
-                            <Button type="submit">
-                                {t('Continue to submission')}
+                            <Button type="submit" disabled={form.processing}>
+                                {form.processing
+                                    ? t('Submitting Leave request')
+                                    : t('Submit Leave request')}
                             </Button>
                         </SheetFooter>
                     </form>

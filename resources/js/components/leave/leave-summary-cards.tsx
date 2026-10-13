@@ -145,9 +145,9 @@ export function LeaveSummaryCards({
                             </p>
                             <dl className="grid grid-cols-3 gap-2 text-sm">
                                 <Metric
-                                    label={t('Total')}
+                                    label={t('Accrued')}
                                     value={formatLeaveNumber(
-                                        annualLeave.entitlementDays,
+                                        annualLeave.accruedDays,
                                         i18n.language,
                                     )}
                                 />
@@ -261,7 +261,8 @@ export function LeaveSummaryCards({
                     {upcomingApprovedLeave ? (
                         <div className="space-y-2 text-sm">
                             <p className="font-medium">
-                                {upcomingApprovedLeave.leaveTypeName}
+                                {upcomingApprovedLeave.leaveType?.name ??
+                                    t('Not available')}
                             </p>
                             <p className="text-muted-foreground">
                                 {formatLeaveDate(
@@ -274,17 +275,14 @@ export function LeaveSummaryCards({
                                     i18n.language,
                                 )}
                             </p>
-                            <p>{upcomingApprovedLeave.durationLabel}</p>
-                            {upcomingApprovedLeave.returnToWorkDate ? (
-                                <p className="text-muted-foreground">
-                                    {t('Return to work', {
-                                        date: formatLeaveDate(
-                                            upcomingApprovedLeave.returnToWorkDate,
-                                            i18n.language,
-                                        ),
-                                    })}
-                                </p>
-                            ) : null}
+                            <p>
+                                {t('Leave days', {
+                                    days: formatLeaveNumber(
+                                        upcomingApprovedLeave.durationDays,
+                                        i18n.language,
+                                    ),
+                                })}
+                            </p>
                         </div>
                     ) : (
                         <p className="text-muted-foreground text-sm">
@@ -308,47 +306,50 @@ export function LeaveSummaryCards({
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="px-5">
-                        {data.recentUpdates.length > 0 ? (
-                            <ul className="divide-border divide-y" role="list">
-                                {data.recentUpdates.map((update) => (
-                                    <li
-                                        key={update.id}
-                                        className="flex flex-col gap-2 py-3 first:pt-0 sm:flex-row sm:items-start sm:justify-between"
-                                    >
-                                        <div className="min-w-0 space-y-1 text-start">
-                                            <p className="font-medium">
-                                                {update.title}
-                                            </p>
-                                            {update.description ? (
-                                                <p className="text-muted-foreground text-sm">
-                                                    {update.description}
+                        {data.recentUpdates ? (
+                            data.recentUpdates.length > 0 ? (
+                                <ul
+                                    className="divide-border divide-y"
+                                    role="list"
+                                >
+                                    {data.recentUpdates.map((update) => (
+                                        <li
+                                            key={update.id}
+                                            className="flex flex-col gap-2 py-3 first:pt-0 sm:flex-row sm:items-start sm:justify-between"
+                                        >
+                                            <div className="min-w-0 space-y-1 text-start">
+                                                <p className="font-medium">
+                                                    {update.title}
                                                 </p>
-                                            ) : null}
-                                            <p className="text-muted-foreground text-sm">
-                                                {formatLeaveDate(
-                                                    update.occurredAt,
-                                                    i18n.language,
-                                                )}
-                                            </p>
-                                        </div>
-                                        <StatusBadge tone={update.statusTone}>
-                                            {update.statusLabel}
-                                        </StatusBadge>
-                                    </li>
-                                ))}
-                            </ul>
+                                                {update.description ? (
+                                                    <p className="text-muted-foreground text-sm">
+                                                        {update.description}
+                                                    </p>
+                                                ) : null}
+                                                <p className="text-muted-foreground text-sm">
+                                                    {formatLeaveDate(
+                                                        update.occurredAt,
+                                                        i18n.language,
+                                                    )}
+                                                </p>
+                                            </div>
+                                            <StatusBadge
+                                                tone={update.statusTone}
+                                            >
+                                                {update.statusLabel}
+                                            </StatusBadge>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <EmptyRecentUpdates />
+                            )
                         ) : (
-                            <div className="text-muted-foreground flex min-h-32 flex-col items-center justify-center gap-2 text-center text-sm">
-                                <CircleAlert
-                                    className="size-5"
-                                    aria-hidden="true"
-                                />
-                                <p>
-                                    {t(
-                                        'No recent Leave status updates are available.',
-                                    )}
-                                </p>
-                            </div>
+                            <p className="text-muted-foreground text-sm">
+                                {t(
+                                    'Recent Leave status updates are not available.',
+                                )}
+                            </p>
                         )}
                     </CardContent>
                 </Card>
@@ -388,6 +389,17 @@ export function LeaveSummaryCards({
                     </CardContent>
                 </Card>
             </section>
+        </div>
+    );
+}
+
+function EmptyRecentUpdates() {
+    const { t } = useTranslation();
+
+    return (
+        <div className="text-muted-foreground flex min-h-32 flex-col items-center justify-center gap-2 text-center text-sm">
+            <CircleAlert className="size-5" aria-hidden="true" />
+            <p>{t('No recent Leave status updates are available.')}</p>
         </div>
     );
 }

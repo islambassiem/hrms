@@ -1,24 +1,25 @@
-import { CalendarDays, FileText, Paperclip, ShieldCheck } from 'lucide-react';
+import { CalendarDays, Paperclip, ShieldCheck } from 'lucide-react';
 import type { RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@/components/ui/button';
 import {
     Sheet,
     SheetContent,
     SheetDescription,
-    SheetFooter,
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet';
 import type {
     ApprovalTimelineStep,
-    LeaveAttachment,
     RegularLeaveRequest,
     StatusTone,
 } from '@/types';
 
-import { formatLeaveDate } from './leave-formatters';
+import {
+    formatLeaveDate,
+    formatLeaveNumber,
+    leaveRequestStatusTone,
+} from './leave-formatters';
 import { StatusBadge } from './status-badge';
 
 type LeaveDetailDrawerProps = {
@@ -26,8 +27,6 @@ type LeaveDetailDrawerProps = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     returnFocusTarget?: RefObject<HTMLElement | null>;
-    onCancelRequest?: (request: RegularLeaveRequest) => void;
-    onViewAttachment?: (attachment: LeaveAttachment) => void;
 };
 
 const timelineTone: Record<ApprovalTimelineStep['status'], StatusTone> = {
@@ -42,8 +41,6 @@ export function LeaveDetailDrawer({
     open,
     onOpenChange,
     returnFocusTarget,
-    onCancelRequest,
-    onViewAttachment,
 }: LeaveDetailDrawerProps) {
     const { t, i18n } = useTranslation();
 
@@ -76,15 +73,19 @@ export function LeaveDetailDrawer({
             >
                 <SheetHeader className="border-b p-6 pe-12">
                     <div className="flex flex-wrap items-center gap-2">
-                        <SheetTitle>{request.leaveTypeName}</SheetTitle>
-                        <StatusBadge tone={request.statusTone}>
-                            {request.statusLabel}
+                        <SheetTitle>
+                            {request.leaveType?.name ?? t('Not available')}
+                        </SheetTitle>
+                        <StatusBadge
+                            tone={leaveRequestStatusTone(request.status)}
+                        >
+                            {t(`Leave status ${request.status}`)}
                         </StatusBadge>
                     </div>
                     <SheetDescription>
                         {t('Leave request submitted on', {
                             date: formatLeaveDate(
-                                request.appliedAt,
+                                request.submittedDate,
                                 i18n.language,
                             ),
                         })}
@@ -122,13 +123,12 @@ export function LeaveDetailDrawer({
                             />
                             <Detail
                                 label={t('Duration')}
-                                value={request.durationLabel}
-                            />
-                            <Detail
-                                label={t('Current stage')}
-                                value={
-                                    request.currentStage ?? t('Not available')
-                                }
+                                value={t('Leave days', {
+                                    days: formatLeaveNumber(
+                                        request.durationDays,
+                                        i18n.language,
+                                    ),
+                                })}
                             />
                         </dl>
                         {request.reason ? (
@@ -165,26 +165,13 @@ export function LeaveDetailDrawer({
                                             <p className="truncate text-sm font-medium">
                                                 {attachment.name}
                                             </p>
-                                            {attachment.sizeLabel ? (
-                                                <p className="text-muted-foreground text-sm">
-                                                    {attachment.sizeLabel}
-                                                </p>
-                                            ) : null}
+                                            <p className="text-muted-foreground text-sm">
+                                                {formatFileSize(
+                                                    attachment.sizeBytes,
+                                                    i18n.language,
+                                                )}
+                                            </p>
                                         </div>
-                                        <Button
-                                            type="button"
-                                            size="sm"
-                                            variant="outline"
-                                            disabled={
-                                                !attachment.downloadAvailable ||
-                                                !onViewAttachment
-                                            }
-                                            onClick={() =>
-                                                onViewAttachment?.(attachment)
-                                            }
-                                        >
-                                            {t('View attachment')}
-                                        </Button>
                                     </li>
                                 ))}
                             </ul>
@@ -210,53 +197,65 @@ export function LeaveDetailDrawer({
                                 {t('Approval timeline')}
                             </h2>
                         </div>
-                        {request.approvalTimeline.length > 0 ? (
-                            <ol className="border-border space-y-4 border-s ps-4">
-                                {request.approvalTimeline.map((step) => (
-                                    <li
-                                        key={step.id}
-                                        className="relative space-y-1"
-                                    >
-                                        <span className="bg-border absolute -start-5 top-1 size-2 rounded-full" />
-                                        <div className="flex flex-wrap items-center gap-2">
-                                            <p className="font-medium">
-                                                {step.stageName}
-                                            </p>
-                                            <StatusBadge
-                                                tone={timelineTone[step.status]}
-                                            >
-                                                {timelineStatusLabel(
-                                                    step.status,
-                                                )}
-                                            </StatusBadge>
-                                        </div>
-                                        {step.approverName ||
-                                        step.approverRole ? (
-                                            <p className="text-muted-foreground text-sm">
-                                                {[
-                                                    step.approverName,
-                                                    step.approverRole,
-                                                ]
-                                                    .filter(Boolean)
-                                                    .join(' · ')}
-                                            </p>
-                                        ) : null}
-                                        {step.occurredAt ? (
-                                            <p className="text-muted-foreground text-sm">
-                                                {formatLeaveDate(
-                                                    step.occurredAt,
-                                                    i18n.language,
-                                                )}
-                                            </p>
-                                        ) : null}
-                                        {step.comment ? (
-                                            <p className="text-muted-foreground text-sm">
-                                                {step.comment}
-                                            </p>
-                                        ) : null}
-                                    </li>
-                                ))}
-                            </ol>
+                        {request.approvalTimeline ? (
+                            request.approvalTimeline.length > 0 ? (
+                                <ol className="border-border space-y-4 border-s ps-4">
+                                    {request.approvalTimeline.map((step) => (
+                                        <li
+                                            key={step.id}
+                                            className="relative space-y-1"
+                                        >
+                                            <span className="bg-border absolute -start-5 top-1 size-2 rounded-full" />
+                                            <div className="flex flex-wrap items-center gap-2">
+                                                <p className="font-medium">
+                                                    {step.stageName}
+                                                </p>
+                                                <StatusBadge
+                                                    tone={
+                                                        timelineTone[
+                                                            step.status
+                                                        ]
+                                                    }
+                                                >
+                                                    {timelineStatusLabel(
+                                                        step.status,
+                                                    )}
+                                                </StatusBadge>
+                                            </div>
+                                            {step.approverName ||
+                                            step.approverRole ? (
+                                                <p className="text-muted-foreground text-sm">
+                                                    {[
+                                                        step.approverName,
+                                                        step.approverRole,
+                                                    ]
+                                                        .filter(Boolean)
+                                                        .join(' · ')}
+                                                </p>
+                                            ) : null}
+                                            {step.occurredAt ? (
+                                                <p className="text-muted-foreground text-sm">
+                                                    {formatLeaveDate(
+                                                        step.occurredAt,
+                                                        i18n.language,
+                                                    )}
+                                                </p>
+                                            ) : null}
+                                            {step.comment ? (
+                                                <p className="text-muted-foreground text-sm">
+                                                    {step.comment}
+                                                </p>
+                                            ) : null}
+                                        </li>
+                                    ))}
+                                </ol>
+                            ) : (
+                                <p className="text-muted-foreground text-sm">
+                                    {t(
+                                        'An approval timeline is not available for this request.',
+                                    )}
+                                </p>
+                            )
                         ) : (
                             <p className="text-muted-foreground text-sm">
                                 {t(
@@ -266,30 +265,17 @@ export function LeaveDetailDrawer({
                         )}
                     </section>
                 </div>
-
-                {request.canCancel ? (
-                    <SheetFooter className="border-t p-6">
-                        <Button
-                            type="button"
-                            variant="outline"
-                            disabled={!onCancelRequest}
-                            onClick={() => onCancelRequest?.(request)}
-                        >
-                            <FileText className="size-4" aria-hidden="true" />
-                            {t('Cancel or withdraw')}
-                        </Button>
-                        {!onCancelRequest ? (
-                            <p className="text-muted-foreground text-sm">
-                                {t(
-                                    'Cancellation will be enabled when the authorized server action is connected.',
-                                )}
-                            </p>
-                        ) : null}
-                    </SheetFooter>
-                ) : null}
             </SheetContent>
         </Sheet>
     );
+}
+
+function formatFileSize(sizeBytes: number, language: string): string {
+    return new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : 'en-US', {
+        style: 'unit',
+        unit: 'kilobyte',
+        maximumFractionDigits: 1,
+    }).format(sizeBytes / 1024);
 }
 
 function Detail({ label, value }: { label: string; value: string | null }) {

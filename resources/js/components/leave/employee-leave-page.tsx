@@ -25,8 +25,7 @@ export function EmployeeLeavePage({
         });
     };
 
-    const leaveTypes =
-        state.status === 'ready' ? state.data.availableLeaveTypes : [];
+    const leaveTypes = state.status === 'ready' ? state.data.leaveTypes : [];
 
     return (
         <div className="mx-auto w-full max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8">
