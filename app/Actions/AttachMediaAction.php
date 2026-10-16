@@ -23,13 +23,6 @@ final class AttachMediaAction
         string $collection = 'default',
     ): Media|Collection {
 
-        if (\is_array($files) && $files === []) {
-            /** @var Collection<int, Media> $media */
-            $media = collect();
-
-            return $media;
-        }
-
         if ($files instanceof UploadedFile) {
             return $this->attach($model, $files, $collection);
         }
