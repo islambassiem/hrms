@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\LeaveController;
+use App\Http\Controllers\Employee\QualificationAttachmentController;
 use App\Http\Controllers\Employee\QualificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,8 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     Route::resource('leave', LeaveController::class)->only(['index', 'store']);
     Route::resource('qualifications', QualificationController::class);
+
+    Route::prefix('qualifications')->name('qualifications.')->group(function (): void {
+        Route::post('/attach', [QualificationAttachmentController::class, 'store'])->name('attach');
+    });
 });

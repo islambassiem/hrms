@@ -17,7 +17,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 final class LeavePageEmployeeResource extends JsonResource
 {
-    public static $wrap = null;
+    public static $wrap;
 
     /** @return array<string, mixed> */
     public function toArray(Request $request): array

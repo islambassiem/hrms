@@ -28,8 +28,16 @@ class QualificationController
     {
         $this->authorize('viewAny', Qualification::class);
 
+        $authEmployee = auth()->user()?->employee;
+
+        if (! $authEmployee) {
+            return Inertia::render('employee/qualification/index', [
+                'qualifications' => [],
+            ]);
+        }
+
         $qualifications = resolve(EmployeeQualificationsQuery::class)
-            ->run(auth()->user()?->employee)->get();
+            ->run($authEmployee)->get();
 
         return Inertia::render('employee/qualification/index', [
             'qualifications' => QualificationResource::collection($qualifications),

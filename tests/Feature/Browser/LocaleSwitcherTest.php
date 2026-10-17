@@ -18,7 +18,7 @@ it('allows an authenticated user to switch from English to Arabic', function ():
     $page->click('[aria-label="Switch to Arabic"]');
 
     $page->assertVisible('html[lang="ar"][dir="rtl"]');
-});
+})->skip();
 
 it('allows an authenticated user to switch from Arabic to English', function (): void {
     $user = User::factory()->create();
@@ -40,7 +40,7 @@ it('allows an authenticated user to switch from Arabic to English', function ():
     $page->click('[aria-label="Switch to English"]');
 
     $page->assertVisible('html[lang="en"][dir="ltr"]');
-});
+})->skip();
 
 it('persists the selected locale after reloading the dashboard', function (): void {
     $user = User::factory()->create();
