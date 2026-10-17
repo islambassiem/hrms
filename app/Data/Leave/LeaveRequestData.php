@@ -7,6 +7,8 @@ namespace App\Data\Leave;
 use App\Concerns\Leave\LeaveRequestValidationRules;
 use App\Enums\WorkflowActionEnum;
 use Carbon\CarbonImmutable;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 /** Data transfer object for a leave request. */
@@ -18,7 +20,9 @@ final class LeaveRequestData extends Data
     public function __construct(
         public int $leave_type_id,
         public int $employee_id,
+        #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public CarbonImmutable $start_date,
+        #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public CarbonImmutable $end_date,
         public string $status = WorkflowActionEnum::PENDING->value,
         public ?string $reason = null

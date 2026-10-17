@@ -10,6 +10,7 @@ Route::get('/', fn () => Inertia::render('welcome'))->name('home');
 
 Route::post('/locale/{locale}', [LanguageController::class, 'update'])->name('locale.update');
 
+require __DIR__.'/employee.php';
 require __DIR__.'/settings.php';
 require __DIR__.'/employee.php';
 require __DIR__.'/hr.php';

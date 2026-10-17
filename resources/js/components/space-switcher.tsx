@@ -89,7 +89,7 @@ export function SpaceSwitcher() {
                             className="data-[state=open]:bg-sidebar-accent w-auto px-1.5 sm:px-2"
                         >
                             {content}
-                            <ChevronsUpDown className="ml-auto size-4" />
+                            <ChevronsUpDown className="ms-auto size-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent

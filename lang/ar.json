@@ -73,6 +73,7 @@
     "Recent status updates": "آخر تحديثات الحالة",
     "Updates supplied by the Leave service.": "تحديثات يوفرها نظام الإجازات.",
     "No recent Leave status updates are available.": "لا توجد تحديثات حديثة لحالة الإجازات.",
+    "Recent Leave status updates are not available.": "تحديثات حالة الإجازات الأخيرة غير متاحة.",
     "Employee information": "معلومات الموظف",
     "Information supplied with your Leave workspace.": "المعلومات المتوفرة ضمن مساحة الإجازات الخاصة بك.",
     "Employee": "الموظف",
@@ -121,6 +122,7 @@
     "Add any information relevant to your request": "أضف أي معلومات متعلقة بطلبك",
     "Attachment": "مرفق",
     "Attachment requirements are not available for this leave type.": "متطلبات المرفقات غير متاحة لهذا النوع من الإجازات.",
+    "Attachment requirements are enforced by the server.": "يتم فرض متطلبات المرفقات من قبل الخادم.",
     "Available": "المتاح",
     "Check the form": "تحقق من النموذج",
     "Continue to submission": "المتابعة إلى التقديم",
@@ -158,5 +160,12 @@
     "Supplied by the authorized Short Leave policy.": "مقدمة من سياسة الإجازة القصيرة المصرح بها.",
     "The Short Leave application layout is awaiting policy and workflow confirmation.": "تخطيط تقديم الإجازة القصيرة بانتظار تأكيد السياسة وسير العمل.",
     "Usage information is not available.": "معلومات الاستخدام غير متاحة.",
-    "Usage summary": "ملخص الاستخدام"
+    "Usage summary": "ملخص الاستخدام",
+    "Accepted files: PDF, PNG, JPEG, or JPG up to 3 MB.": "الملفات المقبولة: PDF أو PNG أو JPEG أو JPG حتى 3 ميجابايت.",
+    "Leave request submitted": "تم تقديم طلب الإجازة",
+    "Leave request submitted.": "تم تقديم طلب إجازتك.",
+    "Select attachment": "اختيار مرفق",
+    "Submit Leave request": "تقديم طلب الإجازة",
+    "Submitting Leave request": "جارٍ تقديم طلب الإجازة",
+    "Leave information is unavailable because no employee profile is linked to this account.": "معلومات الإجازات غير متاحة لأن هذا الحساب غير مرتبط بملف موظف."
 }

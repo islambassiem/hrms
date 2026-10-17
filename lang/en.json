@@ -73,6 +73,7 @@
     "Recent status updates": "Recent status updates",
     "Updates supplied by the Leave service.": "Updates supplied by the Leave service.",
     "No recent Leave status updates are available.": "No recent Leave status updates are available.",
+    "Recent Leave status updates are not available.": "Recent Leave status updates are not available.",
     "Employee information": "Employee information",
     "Information supplied with your Leave workspace.": "Information supplied with your Leave workspace.",
     "Employee": "Employee",
@@ -121,6 +122,7 @@
     "Add any information relevant to your request": "Add any information relevant to your request",
     "Attachment": "Attachment",
     "Attachment requirements are not available for this leave type.": "Attachment requirements are not available for this leave type.",
+    "Attachment requirements are enforced by the server.": "Attachment requirements are enforced by the server.",
     "Available": "Available",
     "Check the form": "Check the form",
     "Continue to submission": "Continue to submission",
@@ -158,5 +160,12 @@
     "Supplied by the authorized Short Leave policy.": "Supplied by the authorized Short Leave policy.",
     "The Short Leave application layout is awaiting policy and workflow confirmation.": "The Short Leave application layout is awaiting policy and workflow confirmation.",
     "Usage information is not available.": "Usage information is not available.",
-    "Usage summary": "Usage summary"
+    "Usage summary": "Usage summary",
+    "Accepted files: PDF, PNG, JPEG, or JPG up to 3 MB.": "Accepted files: PDF, PNG, JPEG, or JPG up to 3 MB.",
+    "Leave request submitted": "Leave request submitted",
+    "Leave request submitted.": "Your Leave request was submitted.",
+    "Select attachment": "Select attachment",
+    "Submit Leave request": "Submit Leave request",
+    "Submitting Leave request": "Submitting Leave request",
+    "Leave information is unavailable because no employee profile is linked to this account.": "Leave information is unavailable because no employee profile is linked to this account."
 }

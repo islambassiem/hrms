@@ -25,7 +25,11 @@ import type {
 } from '@/types';
 
 import { LeaveDetailDrawer } from './leave-detail-drawer';
-import { formatLeaveDate, formatLeaveNumber } from './leave-formatters';
+import {
+    formatLeaveDate,
+    formatLeaveNumber,
+    leaveRequestStatusTone,
+} from './leave-formatters';
 import { StatusBadge } from './status-badge';
 
 type LeaveHistoryTableProps = {
@@ -85,7 +89,7 @@ export function LeaveHistoryTable({
             .filter((request) => {
                 const matchesQuery =
                     !normalizedQuery ||
-                    request.leaveTypeName
+                    (request.leaveType?.name ?? '')
                         .toLocaleLowerCase(i18n.language)
                         .includes(normalizedQuery) ||
                     request.reason
@@ -93,7 +97,7 @@ export function LeaveHistoryTable({
                         .includes(normalizedQuery);
                 const matchesLeaveType =
                     leaveTypeId === 'all' ||
-                    request.leaveTypeId === Number(leaveTypeId);
+                    request.leaveType?.id === Number(leaveTypeId);
                 const matchesStatus =
                     status === 'all' || request.status === status;
 
@@ -105,7 +109,7 @@ export function LeaveHistoryTable({
                 );
             })
             .sort((first, second) =>
-                second.appliedAt.localeCompare(first.appliedAt),
+                second.submittedDate.localeCompare(first.submittedDate),
             );
     }, [fromDate, i18n.language, leaveTypeId, query, requests, status, toDate]);
 
@@ -214,7 +218,7 @@ export function LeaveHistoryTable({
                                     placeholder={t('All leave types')}
                                 />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent dir={i18n.dir()}>
                                 <SelectItem value="all">
                                     {t('All leave types')}
                                 </SelectItem>
@@ -251,7 +255,7 @@ export function LeaveHistoryTable({
                             >
                                 <SelectValue placeholder={t('All statuses')} />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent dir={i18n.dir()}>
                                 <SelectItem value="all">
                                     {t('All statuses')}
                                 </SelectItem>
@@ -273,6 +277,8 @@ export function LeaveHistoryTable({
                         <Input
                             id="leave-history-from"
                             type="date"
+                            dir={i18n.dir()}
+                            lang={i18n.language}
                             value={fromDate}
                             onChange={(event) => {
                                 setFromDate(event.target.value);
@@ -285,6 +291,8 @@ export function LeaveHistoryTable({
                         <Input
                             id="leave-history-to"
                             type="date"
+                            dir={i18n.dir()}
+                            lang={i18n.language}
                             value={toDate}
                             onChange={(event) => {
                                 setToDate(event.target.value);
@@ -333,9 +341,6 @@ export function LeaveHistoryTable({
                                         {t('Applied on')}
                                     </TableHeading>
                                     <TableHeading>
-                                        {t('Approval stage')}
-                                    </TableHeading>
-                                    <TableHeading>
                                         <span className="sr-only">
                                             {t('Details')}
                                         </span>
@@ -346,7 +351,8 @@ export function LeaveHistoryTable({
                                 {visibleRequests.map((request) => (
                                     <tr key={request.id}>
                                         <td className="px-4 py-3 font-medium">
-                                            {request.leaveTypeName}
+                                            {request.leaveType?.name ??
+                                                t('Not available')}
                                         </td>
                                         <td className="px-4 py-3">
                                             {formatLeaveDate(
@@ -361,24 +367,29 @@ export function LeaveHistoryTable({
                                             )}
                                         </td>
                                         <td className="px-4 py-3">
-                                            {request.durationLabel}
+                                            {t('Leave days', {
+                                                days: formatLeaveNumber(
+                                                    request.durationDays,
+                                                    i18n.language,
+                                                ),
+                                            })}
                                         </td>
                                         <td className="px-4 py-3">
                                             <StatusBadge
-                                                tone={request.statusTone}
+                                                tone={leaveRequestStatusTone(
+                                                    request.status,
+                                                )}
                                             >
-                                                {request.statusLabel}
+                                                {t(
+                                                    `Leave status ${request.status}`,
+                                                )}
                                             </StatusBadge>
                                         </td>
                                         <td className="px-4 py-3">
                                             {formatLeaveDate(
-                                                request.appliedAt,
+                                                request.submittedDate,
                                                 i18n.language,
                                             )}
-                                        </td>
-                                        <td className="px-4 py-3">
-                                            {request.currentStage ??
-                                                t('Not available')}
                                         </td>
                                         <td className="px-4 py-3 text-end">
                                             <Button
@@ -410,7 +421,8 @@ export function LeaveHistoryTable({
                                 <div className="flex flex-wrap items-start justify-between gap-2">
                                     <div>
                                         <p className="font-medium">
-                                            {request.leaveTypeName}
+                                            {request.leaveType?.name ??
+                                                t('Not available')}
                                         </p>
                                         <p className="text-muted-foreground text-sm">
                                             {formatLeaveDate(
@@ -424,31 +436,31 @@ export function LeaveHistoryTable({
                                             )}
                                         </p>
                                     </div>
-                                    <StatusBadge tone={request.statusTone}>
-                                        {request.statusLabel}
+                                    <StatusBadge
+                                        tone={leaveRequestStatusTone(
+                                            request.status,
+                                        )}
+                                    >
+                                        {t(`Leave status ${request.status}`)}
                                     </StatusBadge>
                                 </div>
                                 <dl className="grid grid-cols-2 gap-3 text-sm">
                                     <Detail
                                         label={t('Duration')}
-                                        value={request.durationLabel}
+                                        value={t('Leave days', {
+                                            days: formatLeaveNumber(
+                                                request.durationDays,
+                                                i18n.language,
+                                            ),
+                                        })}
                                     />
                                     <Detail
                                         label={t('Applied on')}
                                         value={formatLeaveDate(
-                                            request.appliedAt,
+                                            request.submittedDate,
                                             i18n.language,
                                         )}
                                     />
-                                    <div className="col-span-2">
-                                        <dt className="text-muted-foreground">
-                                            {t('Approval stage')}
-                                        </dt>
-                                        <dd className="font-medium">
-                                            {request.currentStage ??
-                                                t('Not available')}
-                                        </dd>
-                                    </div>
                                 </dl>
                                 <Button
                                     type="button"
