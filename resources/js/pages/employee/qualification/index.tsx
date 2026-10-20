@@ -1,7 +1,32 @@
-import React from 'react';
+import { Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-const index = () => {
-    return <div>index</div>;
+import { QualificationIndexPage } from '@/components/qualification/qualification-index-page';
+import { index as qualifications } from '@/routes/qualifications';
+import type { EmployeeQualificationIndexPageProps } from '@/types';
+
+export default function QualificationIndex({
+    qualifications: qualificationCollection,
+    canCreate,
+}: EmployeeQualificationIndexPageProps) {
+    const { t } = useTranslation();
+
+    return (
+        <>
+            <Head title={t('Qualifications')} />
+            <QualificationIndexPage
+                qualifications={qualificationCollection.data}
+                canCreate={canCreate}
+            />
+        </>
+    );
+}
+
+QualificationIndex.layout = {
+    breadcrumbs: [
+        {
+            title: 'Qualifications',
+            href: qualifications(),
+        },
+    ],
 };
-
-export default index;

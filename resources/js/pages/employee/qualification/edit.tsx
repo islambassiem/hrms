@@ -1,7 +1,37 @@
-import React from 'react';
+import { Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-const edit = () => {
-    return <div>edit</div>;
+import { QualificationForm } from '@/components/qualification/qualification-form';
+import { index as qualifications } from '@/routes/qualifications';
+import type { EmployeeQualificationEditPageProps } from '@/types';
+
+export default function EditQualification({
+    qualification,
+    props,
+}: EmployeeQualificationEditPageProps) {
+    const { t } = useTranslation();
+
+    return (
+        <>
+            <Head title={t('Edit qualification')} />
+            <QualificationForm
+                mode="edit"
+                qualification={qualification}
+                options={props}
+            />
+        </>
+    );
+}
+
+EditQualification.layout = {
+    breadcrumbs: [
+        {
+            title: 'Qualifications',
+            href: qualifications(),
+        },
+        {
+            title: 'Edit qualification',
+            href: qualifications(),
+        },
+    ],
 };
-
-export default edit;
