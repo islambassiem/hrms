@@ -74,11 +74,16 @@ class QualificationController
         $this->authorize('create', Qualification::class);
 
         resolve(QualificationCreateAction::class)->handle(
-            QualificationData::from($request)
+            QualificationData::from($request),
+            $request->file('attachments'),
         );
 
-        return back()
-            ->with('success', __('The qualification stored successfully'));
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+
+        return back();
     }
 
     /**
@@ -119,8 +124,12 @@ class QualificationController
                 QualificationData::from($request)
             );
 
-        return back()
-            ->with('success', __('Qualification updated successfully'));
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('Qualification updated successfully'),
+        ]);
+
+        return back();
     }
 
     /**

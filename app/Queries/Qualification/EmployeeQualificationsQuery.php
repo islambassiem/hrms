@@ -23,6 +23,7 @@ class EmployeeQualificationsQuery
             'rating',
             'gpaType',
             'studyType',
+            'media',
         ];
     }
 

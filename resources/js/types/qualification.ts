@@ -3,6 +3,13 @@ export type QualificationLookup = {
     name: string;
 };
 
+export type QualificationAttachment = {
+    id: number;
+    name: string;
+    size_bytes: number;
+    mime_type: string | null;
+};
+
 export type EmployeeQualification = {
     id: number;
     employee_code: number;
@@ -24,6 +31,7 @@ export type EmployeeQualification = {
     is_authenticated: boolean;
     created_by: QualificationLookup | null;
     updated_by: QualificationLookup | null;
+    attachments: QualificationAttachment[];
 };
 
 export type EmployeeQualificationCollection = {
@@ -62,6 +70,7 @@ export type QualificationFormData = {
     gpa_type_id: number | null;
     study_type_id: number | null;
     city: string;
+    attachments: File[];
 };
 
 export type EmployeeQualificationCreatePageProps = {

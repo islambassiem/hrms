@@ -28,7 +28,7 @@ export function EmployeeLeavePage({
     const leaveTypes = state.status === 'ready' ? state.data.leaveTypes : [];
 
     return (
-        <div className="mx-auto w-full max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6">
             <LeaveDashboard
                 state={state}
                 onApplyForLeave={() => setIsApplyDrawerOpen(true)}

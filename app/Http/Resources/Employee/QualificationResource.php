@@ -47,6 +47,9 @@ class QualificationResource extends JsonResource
             'is_authenticated' => $this->is_authenticated,
             'created_by' => $this->lookup('creator', $request),
             'updated_by' => $this->lookup('editor', $request),
+            'attachments' => QualificationAttachmentResource::collection(
+                $this->getMedia(),
+            )->resolve($request),
         ];
     }
 

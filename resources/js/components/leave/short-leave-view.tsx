@@ -196,7 +196,7 @@ function ShortLeaveContent({
                         )}
                     </p>
                 </SummaryCard>
-                <Card className="border-border/60 gap-4 py-5 shadow-xs">
+                <Card className="border-border/80 bg-sidebar gap-4 py-5 shadow-xs">
                     <CardHeader className="px-5">
                         <CardTitle className="text-base">
                             {t('Policy information')}
@@ -236,7 +236,7 @@ function ShortLeaveContent({
                     </p>
                 </div>
 
-                <div className="bg-card border-border/60 space-y-4 rounded-xl border p-4 shadow-xs">
+                <div className="border-border/80 bg-sidebar space-y-4 rounded-xl border p-4 shadow-xs">
                     <div className="flex items-center gap-2">
                         <SlidersHorizontal
                             className="text-muted-foreground size-4"
@@ -338,7 +338,7 @@ function ShortLeaveContent({
                         {requests.map((request) => (
                             <li
                                 key={request.id}
-                                className="bg-card border-border/60 flex flex-col gap-4 rounded-xl border p-4 shadow-xs sm:flex-row sm:items-start sm:justify-between"
+                                className="border-border/80 bg-sidebar flex flex-col gap-4 rounded-xl border p-4 shadow-xs sm:flex-row sm:items-start sm:justify-between"
                             >
                                 <div className="min-w-0 space-y-2 text-start">
                                     <div className="flex flex-wrap items-center gap-2">
@@ -380,7 +380,7 @@ function ShortLeaveContent({
                         ))}
                     </ul>
                 ) : (
-                    <div className="bg-card border-border/60 text-muted-foreground flex min-h-52 flex-col items-center justify-center gap-2 rounded-xl border p-6 text-center text-sm shadow-xs">
+                    <div className="border-border/80 bg-sidebar text-muted-foreground flex min-h-52 flex-col items-center justify-center gap-2 rounded-xl border p-6 text-center text-sm shadow-xs">
                         <Search className="size-5" aria-hidden="true" />
                         <p>
                             {t('No Short Leave requests match these filters.')}
@@ -442,7 +442,7 @@ function SummaryCard({
     children: ReactNode;
 }) {
     return (
-        <Card className="border-border/60 gap-4 py-5 shadow-xs">
+        <Card className="border-border/80 bg-sidebar gap-4 py-5 shadow-xs">
             <CardHeader className="flex-row items-start justify-between gap-3 px-5">
                 <div className="space-y-1">
                     <CardTitle className="text-base">{title}</CardTitle>

@@ -224,5 +224,21 @@
     "Assessment information recorded for this qualification.": "Assessment information recorded for this qualification.",
     "Not available": "Not available",
     "Yes": "Yes",
-    "No": "No"
+    "No": "No",
+    "Add documents that support this qualification.": "Add documents that support this qualification.",
+    "Documents attached to this qualification.": "Documents attached to this qualification.",
+    "Existing attachments": "Existing attachments",
+    "Remove a document only when it no longer belongs to this qualification.": "Remove a document only when it no longer belongs to this qualification.",
+    "No attachments have been added.": "No attachments have been added.",
+    "Add attachments": "Add attachments",
+    "Select attachments": "Select attachments",
+    "You can add up to five files.": "You can add up to five files.",
+    "Selected attachments": "Selected attachments",
+    "Remove": "Remove",
+    "Remove attachment": "Remove attachment",
+    "Removing attachment": "Removing attachment",
+    "{{size}} · {{type}}": "{{size}} · {{type}}",
+    "Confirm qualification save": "Confirm qualification save",
+    "Review the qualification details and attachments before saving. You can continue editing if changes are needed.": "Review the qualification details and attachments before saving. You can continue editing if changes are needed.",
+    "Continue editing": "Continue editing"
 }

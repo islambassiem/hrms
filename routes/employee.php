@@ -14,7 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::resource('leave', LeaveController::class)->only(['index', 'store']);
     Route::resource('qualifications', QualificationController::class);
 
-    Route::prefix('qualifications')->name('qualifications.')->group(function (): void {
-        Route::post('/attach', [QualificationAttachmentController::class, 'store'])->name('attach');
-    });
+    Route::prefix('qualifications/{qualification}/attachments')
+        ->name('qualifications.attachments.')
+        ->group(function (): void {
+            Route::post('/', [QualificationAttachmentController::class, 'store'])->name('store');
+            Route::delete('{media}', [QualificationAttachmentController::class, 'destroy'])->name('destroy');
+        });
 });

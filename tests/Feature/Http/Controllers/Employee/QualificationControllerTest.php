@@ -4,6 +4,8 @@ use App\Exceptions\CannotDeleteRecord;
 use App\Models\Employee\Employee;
 use App\Models\Qualifications\Qualification;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 
 test('index page has no qualifications when employee does not have qualificaiton', function (): void {
@@ -53,7 +55,7 @@ it('renders the form of qualification creation', function (): void {
         ->assertOk()
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/create')
-            ->has('props.countries')
+            ->has('props.countries.0.id')
             ->has('props.educational_sublevels')
             ->has('props.gpa_types')
             ->has('props.included_specializations')
@@ -92,8 +94,84 @@ it('stores a qualification record', function (): void {
         'is_authenticated' => false,
     ]);
 
-    $response->assertRedirectBack();
-    $response->assertSessionHas('success', __('The qualification stored successfully'));
+    $response->assertRedirectBack()
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+});
+
+test('employee can create a qualification with multiple attachments', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $employee->id,
+    ]);
+
+    $this->actingAs($user)
+        ->post(route('qualifications.store'), [
+            ...$qualification->toArray(),
+            'attachments' => [
+                UploadedFile::fake()->create(
+                    'degree-certificate.pdf',
+                    128,
+                    'application/pdf',
+                ),
+                UploadedFile::fake()->create(
+                    'transcript.png',
+                    128,
+                    'image/png',
+                ),
+            ],
+        ])
+        ->assertRedirectBack()
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+
+    $createdQualification = Qualification::query()
+        ->where('employee_id', $employee->id)
+        ->sole();
+
+    expect($createdQualification->getMedia())->toHaveCount(2)
+        ->and($createdQualification->getMedia()->pluck('file_name')->all())
+        ->toEqualCanonicalizing([
+            'degree-certificate.pdf',
+            'transcript.png',
+        ]);
+});
+
+test('qualification creation validates attachment files before storing the qualification', function (): void {
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $employee->id,
+    ]);
+
+    $this->actingAs($user)
+        ->from(route('qualifications.create'))
+        ->post(route('qualifications.store'), [
+            ...$qualification->toArray(),
+            'attachments' => [
+                UploadedFile::fake()->create(
+                    'qualification-notes.txt',
+                    128,
+                    'text/plain',
+                ),
+            ],
+        ])
+        ->assertRedirect(route('qualifications.create'))
+        ->assertSessionHasErrors('attachments.0');
+
+    expect(Qualification::query()->where('employee_id', $employee->id)->exists())
+        ->toBeFalse();
 });
 
 test('store derives the qualification employee from the authenticated user', function (): void {
@@ -226,7 +304,10 @@ test('employee can update his own qualificaiton', function (): void {
 
     $this->put(route('qualifications.update', ['qualification' => $qualification->id]), $newQualification->toArray())
         ->assertRedirectBack()
-        ->assertSessionHas('success', __('Qualification updated successfully'));
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('Qualification updated successfully'),
+        ]);
 
     $this->assertDatabaseHas('qualifications', [
         'id' => $qualification->id,

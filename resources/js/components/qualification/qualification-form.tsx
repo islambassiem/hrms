@@ -1,6 +1,7 @@
-import { Link, useForm } from '@inertiajs/react';
+import { Link, router, useForm } from '@inertiajs/react';
 import { CircleAlert, Save } from 'lucide-react';
 import type { FormEvent } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import InputError from '@/components/input-error';
@@ -15,6 +16,14 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
@@ -24,8 +33,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { QualificationAttachmentsCard } from '@/components/qualification/qualification-attachments-card';
 import { index, store, update } from '@/routes/qualifications';
+import qualificationAttachments from '@/routes/qualifications/attachments';
 import type {
+    QualificationAttachment,
     EmployeeQualification,
     QualificationFormData,
     QualificationFormOptions,
@@ -62,7 +74,15 @@ export function QualificationForm({
             ? formDataFromQualification(qualification)
             : emptyFormData,
     );
+    const appendAttachmentsForm = useForm<{ attachments: File[] }>({
+        attachments: [],
+    });
     const isEditing = mode === 'edit';
+    const [attachmentInputKey, setAttachmentInputKey] = useState(0);
+    const [removingAttachmentId, setRemovingAttachmentId] = useState<
+        number | null
+    >(null);
+    const [isSaveConfirmationOpen, setIsSaveConfirmationOpen] = useState(false);
 
     const setLookupValue = (field: LookupField, value: string) => {
         form.setData(
@@ -75,23 +95,106 @@ export function QualificationForm({
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+        setIsSaveConfirmationOpen(true);
+    };
+
+    const submitQualification = () => {
+        setIsSaveConfirmationOpen(false);
+
         if (isEditing && qualification) {
+            form.transform(({ attachments: _attachments, ...data }) => data);
             form.put(update(qualification).url, {
                 preserveScroll: true,
+                onSuccess: () => {
+                    if (appendAttachmentsForm.data.attachments.length === 0) {
+                        return;
+                    }
+
+                    appendAttachmentsForm.post(
+                        qualificationAttachments.store(qualification).url,
+                        {
+                            forceFormData: true,
+                            preserveScroll: true,
+                            onSuccess: resetAppendAttachments,
+                        },
+                    );
+                },
             });
 
             return;
         }
 
         form.post(store().url, {
+            forceFormData: true,
             preserveScroll: true,
+            onSuccess: resetCreateAttachments,
         });
+    };
+
+    const setCreateAttachments = (attachments: File[]) => {
+        form.setData('attachments', attachments);
+        form.clearErrors('attachments');
+    };
+
+    const setAppendAttachments = (attachments: File[]) => {
+        appendAttachmentsForm.setData('attachments', attachments);
+        appendAttachmentsForm.clearErrors('attachments');
+    };
+
+    const resetCreateAttachments = () => {
+        form.reset('attachments');
+        setAttachmentInputKey((key) => key + 1);
+    };
+
+    const resetAppendAttachments = () => {
+        appendAttachmentsForm.reset('attachments');
+        setAttachmentInputKey((key) => key + 1);
+    };
+
+    const removeExistingAttachment = (attachment: QualificationAttachment) => {
+        if (!qualification) {
+            return;
+        }
+
+        setRemovingAttachmentId(attachment.id);
+
+        router.delete(
+            qualificationAttachments.destroy({
+                qualification,
+                media: attachment,
+            }).url,
+            {
+                preserveScroll: true,
+                onFinish: () => setRemovingAttachmentId(null),
+            },
+        );
+    };
+
+    const selectedAttachments = isEditing
+        ? appendAttachmentsForm.data.attachments
+        : form.data.attachments;
+    const attachmentError = isEditing
+        ? appendAttachmentsForm.errors.attachments
+        : form.errors.attachments;
+    const attachmentFileError = (attachmentIndex: number) =>
+        isEditing
+            ? appendAttachmentsForm.errors[`attachments.${attachmentIndex}`]
+            : form.errors[`attachments.${attachmentIndex}`];
+    const setSelectedAttachments = isEditing
+        ? setAppendAttachments
+        : setCreateAttachments;
+    const removeSelectedAttachment = (attachmentIndex: number) => {
+        setSelectedAttachments(
+            selectedAttachments.filter(
+                (_attachment, index) => index !== attachmentIndex,
+            ),
+        );
     };
 
     return (
         <div
             dir={i18n.dir()}
-            className="mx-auto w-full max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8"
+            className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6"
         >
             <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div className="space-y-1">
@@ -127,7 +230,7 @@ export function QualificationForm({
                     </Alert>
                 ) : null}
 
-                <Card className="border-border/80 bg-card shadow-xs">
+                <Card className="border-border/80 bg-sidebar shadow-xs">
                     <CardHeader>
                         <CardTitle>{t('Academic details')}</CardTitle>
                         <CardDescription>
@@ -205,7 +308,7 @@ export function QualificationForm({
                     </CardContent>
                 </Card>
 
-                <Card className="border-border/80 bg-card shadow-xs">
+                <Card className="border-border/80 bg-sidebar shadow-xs">
                     <CardHeader>
                         <CardTitle>{t('Institution details')}</CardTitle>
                         <CardDescription>
@@ -292,7 +395,26 @@ export function QualificationForm({
                     </CardContent>
                 </Card>
 
-                <Card className="border-border/80 bg-card shadow-xs">
+                <QualificationAttachmentsCard
+                    attachments={selectedAttachments}
+                    attachmentError={attachmentError}
+                    existingAttachments={
+                        isEditing ? qualification?.attachments : undefined
+                    }
+                    inputKey={attachmentInputKey}
+                    disabled={
+                        form.processing || appendAttachmentsForm.processing
+                    }
+                    removingAttachmentId={removingAttachmentId}
+                    getAttachmentError={attachmentFileError}
+                    onAttachmentsChange={setSelectedAttachments}
+                    onRemoveSelectedAttachment={removeSelectedAttachment}
+                    onRemoveExistingAttachment={
+                        isEditing ? removeExistingAttachment : undefined
+                    }
+                />
+
+                <Card className="border-border/80 bg-sidebar shadow-xs">
                     <CardHeader>
                         <CardTitle>{t('Assessment')}</CardTitle>
                         <CardDescription>
@@ -338,7 +460,7 @@ export function QualificationForm({
                     </CardContent>
                 </Card>
 
-                <Card className="border-border/80 bg-card shadow-xs">
+                <Card className="border-border/80 bg-sidebar shadow-xs">
                     <CardHeader>
                         <CardTitle>{t('Record status')}</CardTitle>
                         <CardDescription>
@@ -379,7 +501,13 @@ export function QualificationForm({
                         <Button asChild type="button" variant="outline">
                             <Link href={index()}>{t('Cancel')}</Link>
                         </Button>
-                        <Button type="submit" disabled={form.processing}>
+                        <Button
+                            type="submit"
+                            disabled={
+                                form.processing ||
+                                appendAttachmentsForm.processing
+                            }
+                        >
                             <Save className="size-4" />
                             {form.processing
                                 ? isEditing
@@ -392,6 +520,46 @@ export function QualificationForm({
                     </CardFooter>
                 </Card>
             </form>
+
+            <Dialog
+                open={isSaveConfirmationOpen}
+                onOpenChange={setIsSaveConfirmationOpen}
+            >
+                <DialogContent dir={i18n.dir()}>
+                    <DialogHeader>
+                        <DialogTitle>
+                            {t('Confirm qualification save')}
+                        </DialogTitle>
+                        <DialogDescription>
+                            {t(
+                                'Review the qualification details and attachments before saving. You can continue editing if changes are needed.',
+                            )}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setIsSaveConfirmationOpen(false)}
+                        >
+                            {t('Continue editing')}
+                        </Button>
+                        <Button
+                            type="button"
+                            disabled={
+                                form.processing ||
+                                appendAttachmentsForm.processing
+                            }
+                            onClick={submitQualification}
+                        >
+                            <Save className="size-4" />
+                            {isEditing
+                                ? t('Save changes')
+                                : t('Save qualification')}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
@@ -498,6 +666,7 @@ const emptyFormData: QualificationFormData = {
     gpa_type_id: null,
     study_type_id: null,
     city: '',
+    attachments: [],
 };
 
 function formDataFromQualification(
@@ -519,5 +688,6 @@ function formDataFromQualification(
         gpa_type_id: qualification.gpa_type?.id ?? null,
         study_type_id: qualification.study_type?.id ?? null,
         city: qualification.city ?? '',
+        attachments: [],
     };
 }

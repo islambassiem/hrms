@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Employee\Qualification;
 
 use App\Concerns\AttachmentValidationRules;
+use App\Models\Qualifications\Qualification;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,7 +18,10 @@ class QualificationAttachmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $qualification = $this->route('qualification');
+
+        return $qualification instanceof Qualification
+            && $this->user()?->can('update', $qualification) === true;
     }
 
     /**

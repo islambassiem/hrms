@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Employee\Qualification;
 
+use App\Concerns\AttachmentValidationRules;
 use App\Concerns\Qualification\QualificationValidationRules;
 use App\Models\Employee\Employee;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreQualificationRequest extends FormRequest
 {
+    use AttachmentValidationRules;
     use QualificationValidationRules;
 
     /**
@@ -55,6 +57,18 @@ class StoreQualificationRequest extends FormRequest
      */
     public function rules(): array
     {
-        return $this->createRules();
+        $attachmentRules = $this->attachmentRules();
+
+        $attachmentRules['attachments'] = [
+            'sometimes',
+            'array',
+            'min:1',
+            'max:5',
+        ];
+
+        return [
+            ...$this->createRules(),
+            ...$attachmentRules,
+        ];
     }
 }

@@ -224,5 +224,21 @@
     "Assessment information recorded for this qualification.": "معلومات التقييم المسجلة لهذا المؤهل.",
     "Not available": "غير متاح",
     "Yes": "نعم",
-    "No": "لا"
+    "No": "لا",
+    "Add documents that support this qualification.": "أضف المستندات التي تدعم هذا المؤهل.",
+    "Documents attached to this qualification.": "المستندات المرفقة بهذا المؤهل.",
+    "Existing attachments": "المرفقات الحالية",
+    "Remove a document only when it no longer belongs to this qualification.": "أزل المستند فقط إذا لم يعد تابعًا لهذا المؤهل.",
+    "No attachments have been added.": "لم تتم إضافة أي مرفقات.",
+    "Add attachments": "إضافة مرفقات",
+    "Select attachments": "اختيار المرفقات",
+    "You can add up to five files.": "يمكنك إضافة ما يصل إلى خمسة ملفات.",
+    "Selected attachments": "المرفقات المحددة",
+    "Remove": "إزالة",
+    "Remove attachment": "إزالة المرفق",
+    "Removing attachment": "جارٍ إزالة المرفق",
+    "{{size}} · {{type}}": "{{size}} · {{type}}",
+    "Confirm qualification save": "تأكيد حفظ المؤهل",
+    "Review the qualification details and attachments before saving. You can continue editing if changes are needed.": "راجع تفاصيل المؤهل والمرفقات قبل الحفظ. يمكنك متابعة التعديل إذا كانت هناك تغييرات مطلوبة.",
+    "Continue editing": "متابعة التعديل"
 }

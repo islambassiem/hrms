@@ -169,7 +169,7 @@ export function LeaveHistoryTable({
                 </p>
             </div>
 
-            <div className="bg-card border-border/60 space-y-4 rounded-xl border p-4 shadow-xs">
+            <div className="border-border/80 bg-sidebar space-y-4 rounded-xl border p-4 shadow-xs">
                 <div className="flex items-center gap-2">
                     <SlidersHorizontal
                         className="text-muted-foreground size-4"
@@ -326,7 +326,7 @@ export function LeaveHistoryTable({
 
             {visibleRequests.length > 0 ? (
                 <>
-                    <div className="bg-card border-border/60 mt-4 hidden overflow-x-auto rounded-xl border shadow-xs lg:block">
+                    <div className="border-border/80 bg-sidebar mt-4 hidden overflow-x-auto rounded-xl border shadow-xs lg:block">
                         <table className="w-full min-w-max text-start text-sm">
                             <thead className="bg-muted/50 text-muted-foreground">
                                 <tr>
@@ -416,7 +416,7 @@ export function LeaveHistoryTable({
                         {visibleRequests.map((request) => (
                             <li
                                 key={request.id}
-                                className="bg-card border-border/60 space-y-4 rounded-xl border p-4 shadow-xs"
+                                className="border-border/80 bg-sidebar space-y-4 rounded-xl border p-4 shadow-xs"
                             >
                                 <div className="flex flex-wrap items-start justify-between gap-2">
                                     <div>
@@ -480,7 +480,7 @@ export function LeaveHistoryTable({
                     </ul>
                 </>
             ) : (
-                <div className="bg-card border-border/60 text-muted-foreground mt-4 flex min-h-52 flex-col items-center justify-center gap-2 rounded-xl border p-6 text-center text-sm shadow-xs">
+                <div className="border-border/80 bg-sidebar text-muted-foreground mt-4 flex min-h-52 flex-col items-center justify-center gap-2 rounded-xl border p-6 text-center text-sm shadow-xs">
                     <Search className="size-5" aria-hidden="true" />
                     <p>{t('No Regular Leave requests match these filters.')}</p>
                     <Button

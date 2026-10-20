@@ -38,7 +38,7 @@ export function QualificationIndexPage({
     return (
         <div
             dir={i18n.dir()}
-            className="mx-auto w-full max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8"
+            className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6"
         >
             <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div className="space-y-1">
@@ -77,7 +77,7 @@ function QualificationsList({
     const { t } = useTranslation();
 
     return (
-        <Card className="border-border/80 bg-card shadow-xs">
+        <Card className="border-border/80 bg-sidebar shadow-xs">
             <CardHeader>
                 <CardTitle>{t('Your qualifications')}</CardTitle>
                 <CardDescription>
@@ -202,7 +202,7 @@ function EmptyQualificationsState({ canCreate }: { canCreate: boolean }) {
     const { t } = useTranslation();
 
     return (
-        <Card className="border-border/80 bg-card shadow-xs">
+        <Card className="border-border/80 bg-sidebar shadow-xs">
             <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
                 <div className="bg-muted text-muted-foreground flex size-12 items-center justify-center rounded-lg">
                     <BookOpenCheck className="size-6" />

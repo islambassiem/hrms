@@ -14,6 +14,7 @@ import {
 import { edit, index } from '@/routes/qualifications';
 import type { EmployeeQualification, QualificationLookup } from '@/types';
 
+import { QualificationAttachmentListCard } from './qualification-attachment-list-card';
 import { formatQualificationDate } from './qualification-formatters';
 
 type QualificationDetailsPageProps = {
@@ -32,7 +33,7 @@ export function QualificationDetailsPage({
     return (
         <div
             dir={i18n.dir()}
-            className="mx-auto w-full max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8"
+            className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6"
         >
             <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div className="flex min-w-0 items-start gap-3">
@@ -140,6 +141,10 @@ export function QualificationDetailsPage({
                     ],
                 ]}
             />
+
+            <QualificationAttachmentListCard
+                attachments={qualification.attachments}
+            />
         </div>
     );
 }
@@ -154,7 +159,7 @@ function DetailsCard({
     fields: Array<[string, QualificationLookup | string | null]>;
 }) {
     return (
-        <Card className="border-border/80 bg-card shadow-xs">
+        <Card className="border-border/80 bg-sidebar shadow-xs">
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>
