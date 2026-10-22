@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use UnexpectedValueException;
 
 class QualificationAttachmentController
 {
@@ -24,9 +25,7 @@ class QualificationAttachmentController
 
         $attachments = $request->file('attachments');
 
-        if (! is_array($attachments)) {
-            throw new \UnexpectedValueException('Qualification attachments must be uploaded as an array.');
-        }
+        throw_unless(\is_array($attachments), UnexpectedValueException::class, 'Qualification attachments must be uploaded as an array.');
 
         /** @var array<int, UploadedFile> $attachments */
         resolve(AttachMediaAction::class)->handle($qualification, $attachments);
@@ -41,9 +40,7 @@ class QualificationAttachmentController
     ): RedirectResponse {
         $this->authorize('update', $qualification);
 
-        if (! $this->belongsToQualification($media, $qualification)) {
-            throw new NotFoundHttpException;
-        }
+        throw_unless($this->belongsToQualification($media, $qualification), NotFoundHttpException::class);
 
         resolve(DeleteMediaAction::class)->handle($media);
 
