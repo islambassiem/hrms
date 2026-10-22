@@ -167,10 +167,6 @@ dataset('Qualification Dataset', [
         ->notInteger()
         ->build(),
 
-    ...invalid('is_last_qualification')
-        ->notBoolean()
-        ->build(),
-
     ...invalid('rating_id')
         ->notInteger()
         ->build(),
@@ -193,7 +189,4 @@ dataset('Qualification Dataset', [
         ->tooLong(255)
         ->build(),
 
-    ...invalid('is_authenticated')
-        ->notBoolean()
-        ->build(),
 ]);

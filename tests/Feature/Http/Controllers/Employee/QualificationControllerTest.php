@@ -4,6 +4,8 @@ use App\Exceptions\CannotDeleteRecord;
 use App\Models\Employee\Employee;
 use App\Models\Qualifications\Qualification;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 
 test('index page has no qualifications when employee does not have qualificaiton', function (): void {
@@ -15,7 +17,8 @@ test('index page has no qualifications when employee does not have qualificaiton
         ->assertOk()
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/index')
-            ->where('qualifications', [])
+            ->count('qualifications.data', 0)
+            ->where('canCreate', false)
         );
 });
 
@@ -36,18 +39,23 @@ test('index page shows employee qualificaitons', function (): void {
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/index')
             ->count('qualifications.data', 6)
+            ->has('qualifications.data.0.gpa_type.id')
+            ->where('canCreate', true)
         );
 });
 
 it('renders the form of qualification creation', function (): void {
     $user = User::factory()->create();
+    Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
 
     $this->actingAs($user);
     $this->get(route('qualifications.create'))
         ->assertOk()
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/create')
-            ->has('props.countries')
+            ->has('props.countries.0.id')
             ->has('props.educational_sublevels')
             ->has('props.gpa_types')
             ->has('props.included_specializations')
@@ -56,6 +64,14 @@ it('renders the form of qualification creation', function (): void {
             ->has('props.specialities')
             ->has('props.study_types')
         );
+});
+
+test('user without an employee profile cannot access the qualification creation form', function (): void {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->get(route('qualifications.create'))
+        ->assertForbidden();
 });
 
 it('stores a qualification record', function (): void {
@@ -69,15 +85,145 @@ it('stores a qualification record', function (): void {
     $response = $this->post(route('qualifications.store'),
         Qualification::factory()->make([
             'employee_id' => $employee->id,
+            'is_authenticated' => true,
         ])->toArray(),
     );
 
     $this->assertDatabaseHas('qualifications', [
         'employee_id' => $employee->id,
+        'is_authenticated' => false,
     ]);
 
-    $response->assertRedirectBack();
-    $response->assertSessionHas('success', __('The qualification stored successfully'));
+    $response->assertRedirectBack()
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+});
+
+test('employee can create a qualification with multiple attachments', function (): void {
+    Storage::fake(config('media-library.disk_name'));
+
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $employee->id,
+    ]);
+
+    $this->actingAs($user)
+        ->post(route('qualifications.store'), [
+            ...$qualification->toArray(),
+            'attachments' => [
+                UploadedFile::fake()->create(
+                    'degree-certificate.pdf',
+                    128,
+                    'application/pdf',
+                ),
+                UploadedFile::fake()->create(
+                    'transcript.png',
+                    128,
+                    'image/png',
+                ),
+            ],
+        ])
+        ->assertRedirectBack()
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+
+    $createdQualification = Qualification::query()
+        ->where('employee_id', $employee->id)
+        ->sole();
+
+    expect($createdQualification->getMedia())->toHaveCount(2)
+        ->and($createdQualification->getMedia()->pluck('file_name')->all())
+        ->toEqualCanonicalizing([
+            'degree-certificate.pdf',
+            'transcript.png',
+        ]);
+});
+
+test('qualification creation validates attachment files before storing the qualification', function (): void {
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $employee->id,
+    ]);
+
+    $this->actingAs($user)
+        ->from(route('qualifications.create'))
+        ->post(route('qualifications.store'), [
+            ...$qualification->toArray(),
+            'attachments' => [
+                UploadedFile::fake()->create(
+                    'qualification-notes.txt',
+                    128,
+                    'text/plain',
+                ),
+            ],
+        ])
+        ->assertRedirect(route('qualifications.create'))
+        ->assertSessionHasErrors('attachments.0');
+
+    expect(Qualification::query()->where('employee_id', $employee->id)->exists())
+        ->toBeFalse();
+});
+
+test('store derives the qualification employee from the authenticated user', function (): void {
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $otherEmployee = Employee::factory()->create();
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $otherEmployee->id,
+        'institution_name' => 'Authenticated Employee University',
+    ]);
+
+    $this->actingAs($user)
+        ->post(route('qualifications.store'), $qualification->toArray())
+        ->assertRedirectBack();
+
+    $this->assertDatabaseHas('qualifications', [
+        'employee_id' => $employee->id,
+        'institution_name' => 'Authenticated Employee University',
+    ]);
+
+    $this->assertDatabaseMissing('qualifications', [
+        'employee_id' => $otherEmployee->id,
+        'institution_name' => 'Authenticated Employee University',
+    ]);
+});
+
+test('store validates an invalid last qualification value before creating a record', function (): void {
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $qualification = Qualification::factory()->make([
+        'employee_id' => $employee->id,
+        'is_last_qualification' => false,
+    ]);
+
+    $this->actingAs($user)
+        ->post(route('qualifications.store'), [
+            ...$qualification->toArray(),
+            'is_last_qualification' => ['not-a-boolean'],
+        ])
+        ->assertSessionHasErrors('is_last_qualification');
+});
+
+test('user without an employee profile cannot store a qualification', function (): void {
+    $user = User::factory()->create();
+
+    $this->actingAs($user)
+        ->post(route('qualifications.store'))
+        ->assertForbidden();
 });
 
 test('employee cannot view other qualifications', function (): void {
@@ -96,6 +242,7 @@ test('employee can view his own qualifications', function (): void {
     ]);
     $qualification = Qualification::factory()->create([
         'employee_id' => $employee->id,
+        'is_authenticated' => false,
     ]);
 
     $this->actingAs($user);
@@ -104,6 +251,7 @@ test('employee can view his own qualifications', function (): void {
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/show')
             ->where('qualification.id', $qualification->id)
+            ->where('qualification.gpa_type.id', $qualification->gpa_type_id)
         );
 });
 
@@ -114,6 +262,7 @@ test('employee can access edit form for his own qualificaiton', function (): voi
     ]);
     $qualification = Qualification::factory()->create([
         'employee_id' => $employee->id,
+        'is_authenticated' => false,
     ]);
 
     $this->actingAs($user);
@@ -122,6 +271,8 @@ test('employee can access edit form for his own qualificaiton', function (): voi
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/qualification/edit')
             ->where('qualification.id', $qualification->id)
+            ->has('props.countries')
+            ->has('props.gpa_types')
         );
 });
 
@@ -141,17 +292,22 @@ test('employee can update his own qualificaiton', function (): void {
     ]);
     $qualification = Qualification::factory()->create([
         'employee_id' => $employee->id,
+        'is_authenticated' => false,
     ]);
 
     $this->actingAs($user);
 
     $newQualification = Qualification::factory()->make([
         'employee_id' => $employee->id,
+        'is_authenticated' => true,
     ]);
 
     $this->put(route('qualifications.update', ['qualification' => $qualification->id]), $newQualification->toArray())
         ->assertRedirectBack()
-        ->assertSessionHas('success', __('Qualification updated successfully'));
+        ->assertInertiaFlash('toast', [
+            'type' => 'success',
+            'message' => __('Qualification updated successfully'),
+        ]);
 
     $this->assertDatabaseHas('qualifications', [
         'id' => $qualification->id,
@@ -159,6 +315,7 @@ test('employee can update his own qualificaiton', function (): void {
         'institution_name' => $newQualification->institution_name,
         'college_name' => $newQualification->college_name,
         'major_id' => $newQualification->major_id,
+        'is_authenticated' => false,
     ]);
 });
 
@@ -172,6 +329,34 @@ test('employee cannot update other qualificaiton', function (): void {
 
     $this->put(route('qualifications.update', ['qualification' => $qualification->id]), $newQualification->toArray())
         ->assertForbidden();
+});
+
+test('update keeps a qualification assigned to the authenticated employee', function (): void {
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create([
+        'user_id' => $user->id,
+    ]);
+    $otherEmployee = Employee::factory()->create();
+    $qualification = Qualification::factory()->create([
+        'employee_id' => $employee->id,
+    ]);
+    $updatedQualification = Qualification::factory()->make([
+        'employee_id' => $otherEmployee->id,
+        'institution_name' => 'Employee-owned updated institution',
+    ]);
+
+    $this->actingAs($user)
+        ->put(
+            route('qualifications.update', ['qualification' => $qualification->id]),
+            $updatedQualification->toArray(),
+        )
+        ->assertRedirectBack();
+
+    $this->assertDatabaseHas('qualifications', [
+        'id' => $qualification->id,
+        'employee_id' => $employee->id,
+        'institution_name' => 'Employee-owned updated institution',
+    ]);
 });
 
 test('employee cannot delete other qualificaiton', function (): void {

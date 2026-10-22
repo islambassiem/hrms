@@ -11,6 +11,7 @@ use App\Http\Requests\Employee\Qualification\UpdateQualificationRequest;
 use App\Http\Resources\Employee\QualificationResource;
 use App\Http\Resources\Lookup\QualificationFormDropdown;
 use App\Models\Qualifications\Qualification;
+use App\Models\User;
 use App\Queries\Qualification\EmployeeQualificationsQuery;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
@@ -32,7 +33,8 @@ class QualificationController
 
         if (! $authEmployee) {
             return Inertia::render('employee/qualification/index', [
-                'qualifications' => [],
+                'qualifications' => QualificationResource::collection([]),
+                'canCreate' => false,
             ]);
         }
 
@@ -41,6 +43,7 @@ class QualificationController
 
         return Inertia::render('employee/qualification/index', [
             'qualifications' => QualificationResource::collection($qualifications),
+            'canCreate' => true,
         ]);
     }
 
@@ -50,6 +53,13 @@ class QualificationController
     public function create(): Response
     {
         $this->authorize('create', Qualification::class);
+
+        $user = auth()->user();
+
+        abort_unless(
+            $user instanceof User && $user->employee()->exists(),
+            403,
+        );
 
         return Inertia::render('employee/qualification/create', [
             'props' => resolve(QualificationFormDropdown::class)->dropdowns(),
@@ -64,11 +74,16 @@ class QualificationController
         $this->authorize('create', Qualification::class);
 
         resolve(QualificationCreateAction::class)->handle(
-            QualificationData::from($request)
+            QualificationData::from($request),
+            $request->file('attachments'),
         );
 
-        return back()
-            ->with('success', __('The qualification stored successfully'));
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('The qualification stored successfully'),
+        ]);
+
+        return back();
     }
 
     /**
@@ -79,7 +94,7 @@ class QualificationController
         $this->authorize('view', $qualification);
 
         return Inertia::render('employee/qualification/show', [
-            'qualification' => $qualification,
+            'qualification' => $this->qualificationResource($qualification),
         ]);
     }
 
@@ -91,8 +106,8 @@ class QualificationController
         $this->authorize('view', $qualification);
 
         return Inertia::render('employee/qualification/edit', [
-            'qualification' => $qualification,
-            ...resolve(QualificationFormDropdown::class)->dropdowns(),
+            'qualification' => $this->qualificationResource($qualification),
+            'props' => resolve(QualificationFormDropdown::class)->dropdowns(),
         ]);
     }
 
@@ -109,8 +124,12 @@ class QualificationController
                 QualificationData::from($request)
             );
 
-        return back()
-            ->with('success', __('Qualification updated successfully'));
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => __('Qualification updated successfully'),
+        ]);
+
+        return back();
     }
 
     /**
@@ -128,5 +147,18 @@ class QualificationController
                 'success',
                 __('Qualification was deleted successfully')
             );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function qualificationResource(Qualification $qualification): array
+    {
+        /** @var array<string, mixed> $resource */
+        $resource = QualificationResource::make(
+            $qualification->loadMissing(EmployeeQualificationsQuery::resourceRelations()),
+        )->resolve(request());
+
+        return $resource;
     }
 }

@@ -12,7 +12,7 @@ export function EmployeeShortLeavePage({
     onRequestShortLeave,
 }: EmployeeShortLeavePageProps) {
     return (
-        <div className="mx-auto w-full max-w-7xl p-4 sm:p-6 lg:p-8">
+        <div className="mx-auto flex w-full max-w-360 flex-col gap-6 p-4 sm:p-6">
             <ShortLeaveView
                 state={state}
                 onRequestShortLeave={onRequestShortLeave}

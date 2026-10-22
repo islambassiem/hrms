@@ -21,14 +21,14 @@ class QualificationFormDropdown
     public function dropdowns(): array
     {
         return [
-            'countries' => IdNameResource::collection(Country::all()),
-            'educational_sublevels' => IdNameResource::collection(EducationalSublevel::all()),
-            'gpa_types' => IdNameResource::collection(GpaType::all()),
-            'included_specializations' => IdNameResource::collection(IncludedSpecialization::all()),
-            'ratings' => IdNameResource::collection(Rating::all()),
-            'scientific_degrees' => IdNameResource::collection(ScientificDegree::all()),
-            'specialities' => IdNameResource::collection(Speciality::all()),
-            'study_types' => IdNameResource::collection(StudyType::all()),
+            'countries' => IdNameResource::collection(Country::all())->resolve(),
+            'educational_sublevels' => IdNameResource::collection(EducationalSublevel::all())->resolve(),
+            'gpa_types' => IdNameResource::collection(GpaType::all())->resolve(),
+            'included_specializations' => IdNameResource::collection(IncludedSpecialization::all())->resolve(),
+            'ratings' => IdNameResource::collection(Rating::all())->resolve(),
+            'scientific_degrees' => IdNameResource::collection(ScientificDegree::all())->resolve(),
+            'specialities' => IdNameResource::collection(Speciality::all())->resolve(),
+            'study_types' => IdNameResource::collection(StudyType::all())->resolve(),
         ];
     }
 }

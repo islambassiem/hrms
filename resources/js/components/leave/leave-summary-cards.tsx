@@ -42,7 +42,7 @@ function SummaryCard({
     children,
 }: SummaryCardProps) {
     return (
-        <Card className="border-border/60 gap-4 py-5 shadow-xs">
+        <Card className="border-border/80 bg-sidebar gap-4 py-5 shadow-xs">
             <CardHeader className="flex-row items-start justify-between gap-3 px-5">
                 <div className="space-y-1">
                     <CardTitle className="text-base">{title}</CardTitle>
@@ -296,7 +296,7 @@ export function LeaveSummaryCards({
                 aria-labelledby="leave-status-updates-heading"
                 className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.7fr)]"
             >
-                <Card className="border-border/60 gap-4 py-5 shadow-xs">
+                <Card className="border-border/80 bg-sidebar gap-4 py-5 shadow-xs">
                     <CardHeader className="px-5">
                         <CardTitle id="leave-status-updates-heading">
                             {t('Recent status updates')}
@@ -354,7 +354,7 @@ export function LeaveSummaryCards({
                     </CardContent>
                 </Card>
 
-                <Card className="border-border/60 gap-4 py-5 shadow-xs">
+                <Card className="border-border/80 bg-sidebar gap-4 py-5 shadow-xs">
                     <CardHeader className="px-5">
                         <CardTitle>{t('Employee information')}</CardTitle>
                         <CardDescription>

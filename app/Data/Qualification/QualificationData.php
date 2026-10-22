@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Data\Qualification;
 
 use Carbon\CarbonImmutable;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 class QualificationData extends Data
@@ -21,6 +23,11 @@ class QualificationData extends Data
         public ?string $institution_name = null,
         public ?string $college_name = null,
         public ?int $scientific_degree_id = null,
+        #[WithCast(DateTimeInterfaceCast::class, [
+            'Y-m-d',
+            DATE_ATOM,
+            'Y-m-d\\TH:i:s.u\\Z',
+        ])]
         public ?CarbonImmutable $graduation_date = null,
         public ?int $graduation_country_id = null,
         public bool $is_last_qualification = false,
