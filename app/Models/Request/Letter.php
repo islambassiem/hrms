@@ -7,10 +7,8 @@ namespace App\Models\Request;
 use App\Concerns\UserStamp;
 use App\Enums\LetterStatusEnum;
 use App\Models\Employee\Employee;
-use App\Policies\Employee\LetterPolicy;
 use Database\Factories\Request\LetterFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'created_by',
     'updated_by',
 ])]
-#[UsePolicy(LetterPolicy::class)]
 /**
  * @property-read LetterStatusEnum $status
  */

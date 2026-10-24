@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Policies\Employee;
+namespace App\Policies;
 
 use App\Models\Qualifications\Qualification;
 use App\Models\User;

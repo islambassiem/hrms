@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Policies\Employee;
+namespace App\Policies;
 
 use App\Models\Request\FamilyVisit;
 use App\Models\User;

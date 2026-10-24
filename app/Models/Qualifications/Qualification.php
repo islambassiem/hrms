@@ -13,10 +13,8 @@ use App\Models\Lookup\Rating;
 use App\Models\Lookup\ScientificDegree;
 use App\Models\Lookup\Speciality;
 use App\Models\Lookup\StudyType;
-use App\Policies\Employee\QualificationPolicy;
 use Database\Factories\Qualifications\QualificationFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -45,7 +43,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
     'updated_by',
 ])]
 
-#[UsePolicy(QualificationPolicy::class)]
 final class Qualification extends Model implements HasMedia
 {
     /** @use HasFactory<QualificationFactory> */

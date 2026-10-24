@@ -4,10 +4,8 @@ namespace App\Models\Request;
 
 use App\Enums\FamilyVisitStatusEnum;
 use App\Models\Employee\Employee;
-use App\Policies\Employee\FamilyVisitPolicy;
 use Database\Factories\Request\FamilyVisitFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'created_by',
     'updated_by',
 ])]
-#[UsePolicy(FamilyVisitPolicy::class)]
+
 class FamilyVisit extends Model
 {
     /** @use HasFactory<FamilyVisitFactory> */
