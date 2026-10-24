@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Employee\Request\Letter;
 
-use App\Concerns\Request\Letter\LetterValidationRules;
+use App\Concerns\Request\LetterValidationRules;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 

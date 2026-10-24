@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Concerns\Request\Letter;
+namespace App\Concerns\Request;
 
 use App\Enums\LetterStatusEnum;
 use Illuminate\Contracts\Validation\ValidationRule;

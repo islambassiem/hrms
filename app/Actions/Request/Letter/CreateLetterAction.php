@@ -2,7 +2,7 @@
 
 namespace App\Actions\Request\Letter;
 
-use App\Concerns\Request\Letter\LetterValidationRules;
+use App\Concerns\Request\LetterValidationRules;
 use App\Data\Request\Letter\LetterData;
 use App\Enums\LetterStatusEnum;
 use App\Models\Request\Letter;
