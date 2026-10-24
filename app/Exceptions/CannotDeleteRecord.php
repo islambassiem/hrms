@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use RuntimeException;
+use DomainException;
 
-class CannotDeleteRecord extends RuntimeException
+class CannotDeleteRecord extends DomainException
 {
     //
 }

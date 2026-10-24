@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
             SickLeaveRuleSeeder::class,
             EmployeeSickLeaveCycleSeeder::class,
             ShortLeaveRequestSeeder::class,
+            LetterSeeder::class,
         ]);
     }
 }

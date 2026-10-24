@@ -12,6 +12,5 @@ Route::post('/locale/{locale}', [LanguageController::class, 'update'])->name('lo
 
 require __DIR__.'/employee.php';
 require __DIR__.'/settings.php';
-require __DIR__.'/employee.php';
 require __DIR__.'/hr.php';
 require __DIR__.'/head.php';
