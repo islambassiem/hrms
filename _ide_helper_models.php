@@ -2145,6 +2145,19 @@ namespace App\Models\Qualifications{
 
 namespace App\Models\Request{
 /**
+ * @property \App\Enums\FamilyVisitStatusEnum $status
+ * @property-read \App\Models\Employee\Employee|null $employee
+ * @method static \Database\Factories\Request\FamilyVisitFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyVisit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyVisit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FamilyVisit query()
+ */
+	class FamilyVisit extends \Eloquent {}
+}
+
+namespace App\Models\Request{
+/**
+ * @property-read LetterStatusEnum $status
  * @property int $id
  * @property int $employee_id
  * @property string $title
@@ -2152,7 +2165,6 @@ namespace App\Models\Request{
  * @property string|null $notes
  * @property int $include_salary
  * @property int $attested
- * @property \App\Enums\LetterStatusEnum $status
  * @property int|null $created_by
  * @property int|null $updated_by
  * @property \Carbon\CarbonImmutable|null $created_at

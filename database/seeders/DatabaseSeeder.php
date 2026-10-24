@@ -82,6 +82,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSickLeaveCycleSeeder::class,
             ShortLeaveRequestSeeder::class,
             LetterSeeder::class,
+            FamilyVisitSeeder::class,
         ]);
     }
 }

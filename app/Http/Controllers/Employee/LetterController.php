@@ -15,7 +15,6 @@ use App\Models\Request\Letter;
 use App\Queries\Request\Letter\EmployeeLetterQuery;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -125,7 +124,6 @@ class LetterController
     public function destroy(Letter $letter): RedirectResponse
     {
         $this->authorize('delete', $letter);
-        Log::info('User authorized');
 
         try {
             resolve(DeleteLetterAction::class)

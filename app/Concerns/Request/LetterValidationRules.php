@@ -34,7 +34,7 @@ trait LetterValidationRules
     /**
      * @return array<string, ValidationRule|array<mixed>|string>
      */
-    public function baseRules(): array
+    private function baseRules(): array
     {
         return [
             'title' => ['required', 'string', 'max:255'],
