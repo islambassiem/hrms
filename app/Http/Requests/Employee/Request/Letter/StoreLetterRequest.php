@@ -27,6 +27,6 @@ class StoreLetterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return $this->createRules();
+        return $this->baseRules();
     }
 }
