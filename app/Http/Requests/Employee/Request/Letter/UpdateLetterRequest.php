@@ -27,6 +27,6 @@ class UpdateLetterRequest extends FormRequest
      */
     public function rules(): array
     {
-        return $this->updateRules();
+        return $this->baseRules();
     }
 }
