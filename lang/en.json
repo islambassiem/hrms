@@ -240,5 +240,8 @@
     "{{size}} · {{type}}": "{{size}} · {{type}}",
     "Confirm qualification save": "Confirm qualification save",
     "Review the qualification details and attachments before saving. You can continue editing if changes are needed.": "Review the qualification details and attachments before saving. You can continue editing if changes are needed.",
-    "Continue editing": "Continue editing"
+    "Continue editing": "Continue editing",
+    "Requests": "Requests",
+    "Letter requests": "Letter requests",
+    "Family visit requests": "Family visit requests"
 }
