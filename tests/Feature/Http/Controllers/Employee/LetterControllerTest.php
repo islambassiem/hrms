@@ -32,6 +32,7 @@ test('authenticated users see letters index page', function (): void {
 test('authenticated users see own letters paginated index page with letters data', function (): void {
     Letter::factory(5)->create([
         'employee_id' => $this->employee->id,
+        'status' => LetterStatusEnum::PENDING->value,
     ]);
 
     Letter::factory(10)->create();
@@ -42,7 +43,7 @@ test('authenticated users see own letters paginated index page with letters data
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/request/letter/index')
             ->has('letters.data', 5)
-            ->where('letters.data.0.id', $this->employee->id)
+            ->where('letters.data.0.status', LetterStatusEnum::PENDING->value)
             ->has('letters.links')
             ->has('letters.meta')
         );
@@ -59,11 +60,15 @@ it('renders create page', function (): void {
 });
 
 it('stores a letter', function (): void {
+    $otherEmployee = Employee::factory()->create();
+
     $this
         ->actingAs($this->user)
         ->post(
             route('letters.store'),
-            Letter::factory()->make()->toArray()
+            Letter::factory()->make([
+                'employee_id' => $otherEmployee->id,
+            ])->toArray()
         )
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
@@ -71,6 +76,29 @@ it('stores a letter', function (): void {
             'toast.message',
             __('The letter stored successfully')
         );
+
+    expect(Letter::query()->latest('id')->value('employee_id'))
+        ->toBe($this->employee->id);
+});
+
+it('does not expose other employee letters when the authenticated user has no employee record', function (): void {
+    $user = User::factory()->create();
+
+    Letter::factory()->create();
+
+    $this
+        ->actingAs($user)
+        ->get(route('letters.index'))
+        ->assertForbidden();
+});
+
+it('does not store a letter when the authenticated user has no employee record', function (): void {
+    $user = User::factory()->create();
+
+    $this
+        ->actingAs($user)
+        ->post(route('letters.store'), Letter::factory()->make()->toArray())
+        ->assertForbidden();
 });
 
 it('updates a pending letter', function (): void {
@@ -79,16 +107,20 @@ it('updates a pending letter', function (): void {
         'status' => LetterStatusEnum::PENDING->value,
     ]);
 
+    $otherEmployee = Employee::factory()->create();
+
     $this
         ->actingAs($this->user)
         ->put(
             route('letters.update', $letter),
             Letter::factory()->make([
-                'employee_id' => $letter->employee_id,
+                'employee_id' => $otherEmployee->id,
             ])->toArray())
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
         ->assertInertiaFlash('toast.message', __('The letter updated successfully'));
+
+    expect($letter->refresh()->employee_id)->toBe($this->employee->id);
 });
 
 it('fails to update a done letter', function (): void {

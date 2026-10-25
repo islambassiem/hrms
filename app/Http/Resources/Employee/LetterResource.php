@@ -31,7 +31,7 @@ class LetterResource extends JsonResource
             'notes' => $letter->notes,
             'include_salary' => $letter->include_salary,
             'attested' => $letter->attested,
-            'status' => $letter->status,
+            'status' => $letter->status->value,
         ];
     }
 }

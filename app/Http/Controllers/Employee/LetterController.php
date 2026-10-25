@@ -11,10 +11,13 @@ use App\Exceptions\CannotUpdateRecord;
 use App\Http\Requests\Employee\Request\Letter\StoreLetterRequest;
 use App\Http\Requests\Employee\Request\Letter\UpdateLetterRequest;
 use App\Http\Resources\Employee\LetterResource;
+use App\Models\Employee\Employee;
 use App\Models\Request\Letter;
+use App\Models\User;
 use App\Queries\Request\Letter\EmployeeLetterQuery;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -25,14 +28,16 @@ class LetterController
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $this->authorize('viewAny', Letter::class);
+
+        $employee = $this->authenticatedEmployee($request);
 
         $letters = LetterResource::collection(
             resolve(EmployeeLetterQuery::class)
                 ->run(
-                    auth()->user()?->employee
+                    $employee
                 )->paginate()
         );
 
@@ -44,8 +49,12 @@ class LetterController
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(Request $request): Response
     {
+        $this->authorize('create', Letter::class);
+
+        $this->authenticatedEmployee($request);
+
         return Inertia::render('employee/request/letter/create');
     }
 
@@ -56,9 +65,15 @@ class LetterController
     {
         $this->authorize('create', Letter::class);
 
+        $employee = $this->authenticatedEmployee($request);
+
         resolve(CreateLetterAction::class)
             ->handle(
-                LetterData::from($request)
+                LetterData::from([
+                    ...$request->validated(),
+                    'employee_id' => $employee->id,
+                    'status' => null,
+                ])
             );
 
         Inertia::flash('toast', [
@@ -86,6 +101,8 @@ class LetterController
      */
     public function edit(Letter $letter): Response
     {
+        $this->authorize('update', $letter);
+
         return Inertia::render('employee/request/letter/edit');
     }
 
@@ -99,7 +116,11 @@ class LetterController
             resolve(UpdateLetterAction::class)
                 ->handle(
                     $letter,
-                    LetterData::from($request)
+                    LetterData::from([
+                        ...$request->validated(),
+                        'employee_id' => $letter->employee_id,
+                        'status' => $letter->status,
+                    ])
                 );
         } catch (CannotUpdateRecord $cannotUpdateRecord) {
             Inertia::flash('toast', [
@@ -144,5 +165,18 @@ class LetterController
         ]);
 
         return back();
+    }
+
+    private function authenticatedEmployee(Request $request): Employee
+    {
+        $user = $request->user();
+
+        abort_unless($user instanceof User, 403);
+
+        $employee = $user->employee;
+
+        abort_unless($employee instanceof Employee, 403);
+
+        return $employee;
     }
 }
