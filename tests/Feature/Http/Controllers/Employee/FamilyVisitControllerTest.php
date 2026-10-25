@@ -42,6 +42,7 @@ test('authenticated users see own visits paginated index page with visits data',
         ->assertInertia(fn (Assert $page): Assert => $page
             ->component('employee/request/family-visit/index')
             ->has('visits.data', 5)
+            ->has('visits.data.0.id')
             ->where('visits.data.0.employee.id', $this->employee->id)
             ->has('visits.links')
             ->has('visits.meta')
@@ -59,11 +60,15 @@ it('renders create page', function (): void {
 });
 
 it('stores a visit', function (): void {
+    $otherEmployee = Employee::factory()->create();
+
     $this
         ->actingAs($this->user)
         ->post(
             route('family-visits.store'),
-            FamilyVisit::factory()->make()->toArray()
+            FamilyVisit::factory()->make([
+                'employee_id' => $otherEmployee->id,
+            ])->toArray()
         )
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
@@ -71,6 +76,29 @@ it('stores a visit', function (): void {
             'toast.message',
             __('The visit stored successfully')
         );
+
+    expect(FamilyVisit::query()->latest('id')->value('employee_id'))
+        ->toBe($this->employee->id);
+});
+
+it('does not expose other employee visits when the authenticated user has no employee record', function (): void {
+    $user = User::factory()->create();
+
+    FamilyVisit::factory()->create();
+
+    $this
+        ->actingAs($user)
+        ->get(route('family-visits.index'))
+        ->assertForbidden();
+});
+
+it('does not store a visit when the authenticated user has no employee record', function (): void {
+    $user = User::factory()->create();
+
+    $this
+        ->actingAs($user)
+        ->post(route('family-visits.store'), FamilyVisit::factory()->make()->toArray())
+        ->assertForbidden();
 });
 
 it('updates a pending visit', function (): void {
@@ -79,16 +107,20 @@ it('updates a pending visit', function (): void {
         'status' => FamilyVisitStatusEnum::PENDING->value,
     ]);
 
+    $otherEmployee = Employee::factory()->create();
+
     $this
         ->actingAs($this->user)
         ->put(
             route('family-visits.update', $familyVisit),
             FamilyVisit::factory()->make([
-                'employee_id' => $familyVisit->employee_id,
+                'employee_id' => $otherEmployee->id,
             ])->toArray())
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
         ->assertInertiaFlash('toast.message', __('The visit updated successfully'));
+
+    expect($familyVisit->refresh()->employee_id)->toBe($this->employee->id);
 });
 
 it('fails to update an attested visit', function (): void {

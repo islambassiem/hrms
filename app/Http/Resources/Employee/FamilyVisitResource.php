@@ -24,6 +24,7 @@ class FamilyVisitResource extends JsonResource
         $visit = $this->resource;
 
         return [
+            'id' => $visit->id,
             'employee' => [
                 'id' => $visit->employee?->id,
                 'employee_code' => $visit->employee?->employee_code,
