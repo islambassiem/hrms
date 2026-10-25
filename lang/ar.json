@@ -289,5 +289,6 @@
     "Attested": "مصدق",
     "Family visit request pagination": "ترقيم صفحات طلبات الزيارة العائلية",
     "Delete family visit request": "حذف طلب الزيارة العائلية",
-    "This will permanently delete your pending family visit request.": "سيؤدي ذلك إلى حذف طلب الزيارة العائلية المعلق نهائيًا."
+    "This will permanently delete your pending family visit request.": "سيؤدي ذلك إلى حذف طلب الزيارة العائلية المعلق نهائيًا.",
+    "Requests": "الطلبات"
 }

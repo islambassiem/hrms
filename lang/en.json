@@ -289,5 +289,6 @@
     "Attested": "Attested",
     "Family visit request pagination": "Family visit request pagination",
     "Delete family visit request": "Delete family visit request",
-    "This will permanently delete your pending family visit request.": "This will permanently delete your pending family visit request."
+    "This will permanently delete your pending family visit request.": "This will permanently delete your pending family visit request.",
+    "Requests": "Requests"
 }
