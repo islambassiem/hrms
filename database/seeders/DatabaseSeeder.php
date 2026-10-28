@@ -83,6 +83,7 @@ class DatabaseSeeder extends Seeder
             ShortLeaveRequestSeeder::class,
             LetterSeeder::class,
             FamilyVisitSeeder::class,
+            VisaSeeder::class,
         ]);
     }
 }

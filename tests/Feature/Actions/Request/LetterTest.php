@@ -3,7 +3,7 @@
 use App\Actions\Request\Letter\CreateLetterAction;
 use App\Actions\Request\Letter\DeleteLetterAction;
 use App\Actions\Request\Letter\UpdateLetterAction;
-use App\Data\Request\Letter\LetterData;
+use App\Data\Request\LetterData;
 use App\Enums\LetterStatusEnum;
 use App\Exceptions\CannotDeleteRecord;
 use App\Exceptions\CannotUpdateRecord;
