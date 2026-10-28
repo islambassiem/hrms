@@ -74,7 +74,6 @@ class VisaController
     public function show(Visa $visa): Response
     {
         $this->authorize('view', $visa);
-        
 
         return Inertia::render('employee/request/visa/show', [
             'letter' => VisaResource::make($visa),

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Data\Request\Letter;
+namespace App\Data\Request;
 
 use App\Enums\LetterStatusEnum;
 use Spatie\LaravelData\Data;
