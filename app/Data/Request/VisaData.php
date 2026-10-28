@@ -8,6 +8,8 @@ use App\Enums\VisaPayerEnum;
 use App\Enums\VisaPaymentEnum;
 use App\Enums\VisaStatusEnum;
 use Carbon\CarbonImmutable;
+use Spatie\LaravelData\Attributes\WithCast;
+use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
 use Spatie\LaravelData\Data;
 
 class VisaData extends Data
@@ -17,7 +19,9 @@ class VisaData extends Data
      */
     public function __construct(
         public int $employee_id,
+        #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public CarbonImmutable $start_date,
+        #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public CarbonImmutable $end_date,
         public int $for_year,
         public ?VisaStatusEnum $status,

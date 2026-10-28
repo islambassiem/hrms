@@ -128,19 +128,22 @@ it('redirects the show route to the employee Visa index', function (): void {
         ->assertRedirect(route('visas.index'));
 });
 
-it('stores a Visa request for the authenticated employee and ignores workflow values', function (): void {
+it('stores browser date values for the authenticated employee and ignores workflow values', function (): void {
     $otherEmployee = Employee::factory()->create();
 
     $this
         ->actingAs($this->user)
         ->post(
             route('visas.store'),
-            Visa::factory()->make([
+            [
                 'employee_id' => $otherEmployee->id,
-                'payment' => VisaPaymentEnum::PAID,
-                'payer' => VisaPayerEnum::EMPLOYEE,
-                'status' => VisaStatusEnum::ISSUED,
-            ])->toArray()
+                'end_date' => '2026-11-15',
+                'for_year' => '2026',
+                'payment' => VisaPaymentEnum::PAID->value,
+                'payer' => VisaPayerEnum::EMPLOYEE->value,
+                'start_date' => '2026-10-31',
+                'status' => VisaStatusEnum::ISSUED->value,
+            ]
         )
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
@@ -152,6 +155,8 @@ it('stores a Visa request for the authenticated employee and ignores workflow va
     $visa = Visa::query()->latest('id')->firstOrFail();
 
     expect($visa->employee_id)->toBe($this->employee->id)
+        ->and($visa->start_date->toDateString())->toBe('2026-10-31')
+        ->and($visa->end_date->toDateString())->toBe('2026-11-15')
         ->and($visa->status)->toBe(VisaStatusEnum::PENDING)
         ->and($visa->payment)->toBe(VisaPaymentEnum::PENDING)
         ->and($visa->payer)->toBe(VisaPayerEnum::COMPANY);
@@ -180,12 +185,16 @@ it('updates a pending Visa without changing employee or workflow values', functi
         ->actingAs($this->user)
         ->put(
             route('visas.update', $visa),
-            Visa::factory()->make([
+            [
                 'employee_id' => $otherEmployee->id,
-                'payment' => VisaPaymentEnum::PAID,
-                'payer' => VisaPayerEnum::EMPLOYEE,
-                'status' => VisaStatusEnum::ISSUED,
-            ])->toArray())
+                'end_date' => '2026-11-15',
+                'for_year' => '2026',
+                'payment' => VisaPaymentEnum::PAID->value,
+                'payer' => VisaPayerEnum::EMPLOYEE->value,
+                'start_date' => '2026-10-31',
+                'status' => VisaStatusEnum::ISSUED->value,
+            ]
+        )
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'success')
         ->assertInertiaFlash('toast.message', __('The visa updated successfully'));
@@ -206,9 +215,13 @@ it('fails to update a processing Visa', function (): void {
         ->actingAs($this->user)
         ->put(
             route('visas.update', $visa),
-            Visa::factory()->make([
+            [
                 'employee_id' => $visa->employee_id,
-            ])->toArray())
+                'end_date' => '2026-11-15',
+                'for_year' => '2026',
+                'start_date' => '2026-10-31',
+            ]
+        )
         ->assertRedirectBack()
         ->assertInertiaFlash('toast.type', 'error')
         ->assertInertiaFlash('toast.message', __('Cannot update a visa unless it is pending'));
