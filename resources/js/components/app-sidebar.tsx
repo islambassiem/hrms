@@ -3,6 +3,7 @@ import { Award, CalendarDays, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
+import { EmployeeRequestsNavigation } from '@/components/request/employee-requests-navigation';
 import {
     Sidebar,
     SidebarContent,
@@ -60,6 +61,7 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                <EmployeeRequestsNavigation />
             </SidebarContent>
 
             <SidebarFooter>
