@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Actions\Request\Letter\CreateLetterAction;
 use App\Actions\Request\Letter\DeleteLetterAction;
 use App\Actions\Request\Letter\UpdateLetterAction;
-use App\Data\Request\Letter\LetterData;
+use App\Data\Request\LetterData;
 use App\Exceptions\CannotDeleteRecord;
 use App\Exceptions\CannotUpdateRecord;
 use App\Http\Requests\Employee\Request\Letter\StoreLetterRequest;
@@ -52,8 +52,6 @@ class LetterController
     public function create(Request $request): Response
     {
         $this->authorize('create', Letter::class);
-
-        $this->authenticatedEmployee($request);
 
         return Inertia::render('employee/request/letter/create');
     }
@@ -112,6 +110,7 @@ class LetterController
     public function update(UpdateLetterRequest $request, Letter $letter): RedirectResponse
     {
         $this->authorize('update', $letter);
+
         try {
             resolve(UpdateLetterAction::class)
                 ->handle(

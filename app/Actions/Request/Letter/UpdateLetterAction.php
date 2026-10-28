@@ -3,7 +3,7 @@
 namespace App\Actions\Request\Letter;
 
 use App\Concerns\Request\LetterValidationRules;
-use App\Data\Request\Letter\LetterData;
+use App\Data\Request\LetterData;
 use App\Enums\LetterStatusEnum;
 use App\Exceptions\CannotUpdateRecord;
 use App\Models\Request\Letter;
