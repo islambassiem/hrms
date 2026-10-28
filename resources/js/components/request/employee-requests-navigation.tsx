@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { ChevronRight, FileText, UsersRound } from 'lucide-react';
+import { ChevronRight, FileText, PlaneTakeoff, UsersRound } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -26,6 +26,7 @@ import {
 import { useCurrentUrl } from '@/hooks/use-current-url';
 import { index as familyVisits } from '@/routes/family-visits';
 import { index as letters } from '@/routes/letters';
+import { index as visas } from '@/routes/visas';
 import type { NavItem } from '@/types';
 
 export function EmployeeRequestsNavigation() {
@@ -42,6 +43,11 @@ export function EmployeeRequestsNavigation() {
             title: t('Family visit requests'),
             href: familyVisits(),
             icon: UsersRound,
+        },
+        {
+            title: t('Visa requests'),
+            href: visas(),
+            icon: PlaneTakeoff,
         },
     ];
     const isRequestActive = requestItems.some((item) =>

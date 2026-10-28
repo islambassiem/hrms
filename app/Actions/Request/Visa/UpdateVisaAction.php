@@ -17,9 +17,9 @@ class UpdateVisaAction
 
     public function handle(Visa $visa, VisaData $data): Visa
     {
-        if ($visa->status === VisaStatusEnum::ISSUED) {
+        if ($visa->status !== VisaStatusEnum::PENDING) {
             throw new CannotUpdateRecord(
-                __('Cannot update the visa after issuing')
+                __('Cannot update a visa unless it is pending')
             );
         }
 
@@ -35,6 +35,9 @@ class UpdateVisaAction
             /** @var array<string, mixed> $payload */
             $payload = [
                 ...$data->toArray(),
+                'status' => $visa->status,
+                'payment' => $visa->payment,
+                'payer' => $visa->payer,
                 'updated_by' => $currentUserId ?? $visa->updated_by,
             ];
 
