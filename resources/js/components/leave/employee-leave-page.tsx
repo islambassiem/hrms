@@ -8,13 +8,9 @@ import { LeaveHistoryTable } from './leave-history-table';
 
 type EmployeeLeavePageProps = {
     state: LeavePageState;
-    onOpenShortLeave?: () => void;
 };
 
-export function EmployeeLeavePage({
-    state,
-    onOpenShortLeave,
-}: EmployeeLeavePageProps) {
+export function EmployeeLeavePage({ state }: EmployeeLeavePageProps) {
     const [isApplyDrawerOpen, setIsApplyDrawerOpen] = useState(false);
     const historyRef = useRef<HTMLDivElement | null>(null);
 
@@ -33,7 +29,6 @@ export function EmployeeLeavePage({
                 state={state}
                 onApplyForLeave={() => setIsApplyDrawerOpen(true)}
                 onViewHistory={scrollToHistory}
-                onOpenShortLeave={onOpenShortLeave}
             />
 
             {state.status === 'ready' ? (
