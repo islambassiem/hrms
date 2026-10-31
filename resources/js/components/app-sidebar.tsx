@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { Award, CalendarDays, LayoutGrid } from 'lucide-react';
+import { Award, CalendarClock, CalendarDays, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -16,6 +16,7 @@ import {
 import { dashboard } from '@/routes';
 import { index as leave } from '@/routes/leave';
 import { index as qualifications } from '@/routes/qualifications';
+import { index as shortLeaves } from '@/routes/short-leaves';
 import type { NavItem } from '@/types';
 
 import { useTranslation } from 'react-i18next';
@@ -33,6 +34,11 @@ export function AppSidebar() {
             title: t('Leave'),
             href: leave(),
             icon: CalendarDays,
+        },
+        {
+            title: t('Short Leave'),
+            href: shortLeaves(),
+            icon: CalendarClock,
         },
         {
             title: t('Qualifications'),

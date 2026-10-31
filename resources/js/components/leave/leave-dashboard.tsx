@@ -11,7 +11,6 @@ type LeaveDashboardProps = {
     state: LeavePageState;
     onApplyForLeave?: () => void;
     onViewHistory?: () => void;
-    onOpenShortLeave?: () => void;
 };
 
 function LeaveDashboardLoading() {
@@ -41,7 +40,6 @@ export function LeaveDashboard({
     state,
     onApplyForLeave,
     onViewHistory,
-    onOpenShortLeave,
 }: LeaveDashboardProps) {
     const { t, i18n } = useTranslation();
 
@@ -64,7 +62,6 @@ export function LeaveDashboard({
             data={state.data}
             onApplyForLeave={onApplyForLeave}
             onViewHistory={onViewHistory}
-            onOpenShortLeave={onOpenShortLeave}
         />
     );
 }

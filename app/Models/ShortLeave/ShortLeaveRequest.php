@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Models\ShortLeave;
 
 use App\Concerns\UserStamp;
+use App\Models\Employee\Employee;
+use App\Models\Lookup\ShortLeaveType;
 use Database\Factories\ShortLeave\ShortLeaveRequestFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable([
     'employee_id',
@@ -37,5 +40,21 @@ final class ShortLeaveRequest extends Model
             'short_leave_from' => 'immutable_datetime',
             'short_leave_to' => 'immutable_datetime',
         ];
+    }
+
+    /**
+     * @return BelongsTo<Employee, $this>
+     */
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * @return BelongsTo<ShortLeaveType, $this>
+     */
+    public function shortLeaveType(): BelongsTo
+    {
+        return $this->belongsTo(ShortLeaveType::class);
     }
 }
