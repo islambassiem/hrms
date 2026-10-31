@@ -6,3 +6,4 @@ export type * from './navigation';
 export type * from './qualification';
 export type * from './request';
 export type * from './ui';
+export type * from './visa';

@@ -10,9 +10,9 @@ class DeleteVisaAction
 {
     public function handle(Visa $visa): void
     {
-        if ($visa->status === VisaStatusEnum::ISSUED) {
+        if ($visa->status !== VisaStatusEnum::PENDING) {
             throw new CannotDeleteRecord(
-                __('Cannot delete the visa after issuing')
+                __('Cannot delete a visa unless it is pending')
             );
         }
 

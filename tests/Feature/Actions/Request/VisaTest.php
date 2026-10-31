@@ -55,29 +55,38 @@ it('creates a visa request paid by the employee for the second time', function (
         ->and($created->payer)->toBe(VisaPayerEnum::EMPLOYEE);
 });
 
-it('updates a visa request if it is still pending', function (): void {
+it('updates a pending visa without changing its workflow fields', function (): void {
     $employee = Employee::factory()->create();
-    $letter = Visa::factory()->create(['status' => VisaStatusEnum::PENDING->value]);
+    $visa = Visa::factory()->create([
+        'employee_id' => $employee->id,
+        'payment' => VisaPaymentEnum::PENDING,
+        'payer' => VisaPayerEnum::COMPANY,
+        'status' => VisaStatusEnum::PENDING,
+    ]);
 
     $payload = Visa::factory()->make([
         'employee_id' => $employee->id,
-        'status' => VisaStatusEnum::PENDING->value,
+        'payment' => VisaPaymentEnum::PAID,
+        'payer' => VisaPayerEnum::EMPLOYEE,
+        'status' => VisaStatusEnum::ISSUED,
     ]);
 
     $updated = resolve(UpdateVisaAction::class)->handle(
-        $letter,
+        $visa,
         VisaData::from($payload)
     );
     expect($updated)->toBeInstanceOf(Visa::class)
         ->and($updated->employee_id)->toBe($employee->id)
-        ->and($updated->status)->toBe($payload->status);
+        ->and($updated->status)->toBe(VisaStatusEnum::PENDING)
+        ->and($updated->payment)->toBe(VisaPaymentEnum::PENDING)
+        ->and($updated->payer)->toBe(VisaPayerEnum::COMPANY);
 
 });
 
-it('fails to update issued visas', function (): void {
+it('fails to update a non-pending visa', function (VisaStatusEnum $status): void {
     $employee = Employee::factory()->create();
-    $letter = Visa::factory()->create([
-        'status' => VisaStatusEnum::ISSUED->value,
+    $visa = Visa::factory()->create([
+        'status' => $status,
     ]);
 
     $payload = Visa::factory()->make([
@@ -86,10 +95,13 @@ it('fails to update issued visas', function (): void {
 
     expect(
         fn () => resolve(UpdateVisaAction::class)->handle(
-            $letter,
+            $visa,
             VisaData::from($payload)
         ))->toThrow(CannotUpdateRecord::class);
-});
+})->with([
+    VisaStatusEnum::PROCESSING,
+    VisaStatusEnum::ISSUED,
+]);
 
 it('deletes a pending visa request', function (): void {
     $visa = Visa::factory()->create([
@@ -100,16 +112,19 @@ it('deletes a pending visa request', function (): void {
     $this->assertDatabaseMissing('visas', $visa->getAttributes());
 });
 
-it('fails to delete an issued visa request', function (): void {
+it('fails to delete a non-pending visa', function (VisaStatusEnum $status): void {
     $visa = Visa::factory()->create([
-        'status' => VisaStatusEnum::ISSUED,
+        'status' => $status,
     ]);
 
     expect(fn () => resolve(DeleteVisaAction::class)->handle($visa))
         ->toThrow(CannotDeleteRecord::class);
 
     $this->assertDatabaseHas('visas', $visa->getAttributes());
-});
+})->with([
+    VisaStatusEnum::PROCESSING,
+    VisaStatusEnum::ISSUED,
+]);
 
 it('fails creation with', function (array $overrides, array $fields): void {
     expectValidationError(
@@ -119,7 +134,7 @@ it('fails creation with', function (array $overrides, array $fields): void {
             )
         ), $fields
     );
-})->with('Visa Dataset');
+})->with('Visa Creation Dataset');
 
 it('fails to update with', function (array $overrides, array $fields): void {
     expectValidationError(
@@ -130,9 +145,9 @@ it('fails to update with', function (array $overrides, array $fields): void {
             )
         ), $fields
     );
-})->with('Visa Dataset');
+})->with('Visa Update Dataset');
 
-dataset('Visa Dataset', [
+dataset('Visa Creation Dataset', [
 
     ...invalid('employee_id')
         ->required()
@@ -153,16 +168,22 @@ dataset('Visa Dataset', [
         ->invalidDateOrder('start_date', 'end_date')
         ->build(),
 
-    ...invalid('status')
+]);
+
+dataset('Visa Update Dataset', [
+
+    ...invalid('for_year')
+        ->required()
+        ->notInteger()
+        ->build(),
+
+    ...invalid('start_date')
         ->required()
         ->build(),
 
-    ...invalid('payment')
+    ...invalid('end_date')
         ->required()
-        ->build(),
-
-    ...invalid('payer')
-        ->required()
+        ->invalidDateOrder('start_date', 'end_date')
         ->build(),
 
 ]);
