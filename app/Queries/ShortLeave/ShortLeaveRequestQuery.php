@@ -9,10 +9,10 @@ use App\Models\ShortLeave\ShortLeaveRequest;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Builder;
 
-final class ShortLeaveRequestQuery
+final readonly class ShortLeaveRequestQuery
 {
     public function __construct(
-        private readonly ShortLeaveRequestFiltersData $filters,
+        private ShortLeaveRequestFiltersData $filters,
     ) {}
 
     /**
@@ -25,14 +25,14 @@ final class ShortLeaveRequestQuery
             ->where('employee_id', $this->filters->employeeId)
             ->when(
                 $this->filters->shortLeaveTypeId,
-                fn (Builder $query, int $shortLeaveTypeId): Builder => $query->where(
+                fn ($query, int $shortLeaveTypeId): Builder => $query->where(
                     'short_leave_type_id',
                     $shortLeaveTypeId,
                 ),
             )
             ->when(
                 $this->filters->fromDate,
-                fn (Builder $query, CarbonImmutable $fromDate): Builder => $query->whereDate(
+                fn ($query, CarbonImmutable $fromDate): Builder => $query->whereDate(
                     'short_leave_date',
                     '>=',
                     $fromDate,
@@ -40,7 +40,7 @@ final class ShortLeaveRequestQuery
             )
             ->when(
                 $this->filters->toDate,
-                fn (Builder $query, CarbonImmutable $toDate): Builder => $query->whereDate(
+                fn ($query, CarbonImmutable $toDate): Builder => $query->whereDate(
                     'short_leave_date',
                     '<=',
                     $toDate,
