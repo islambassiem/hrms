@@ -5,6 +5,7 @@ import {
     FileClock,
     Stethoscope,
 } from 'lucide-react';
+import { Link } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,6 +18,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import type { EmployeeLeavePageData } from '@/types';
+import { index as shortLeaves } from '@/routes/short-leaves';
 
 import { formatLeaveDate, formatLeaveNumber } from './leave-formatters';
 import { StatusBadge } from './status-badge';
@@ -25,7 +27,6 @@ type LeaveSummaryCardsProps = {
     data: EmployeeLeavePageData;
     onApplyForLeave?: () => void;
     onViewHistory?: () => void;
-    onOpenShortLeave?: () => void;
 };
 
 type SummaryCardProps = {
@@ -61,7 +62,6 @@ export function LeaveSummaryCards({
     data,
     onApplyForLeave,
     onViewHistory,
-    onOpenShortLeave,
 }: LeaveSummaryCardsProps) {
     const { t, i18n } = useTranslation();
     const { annualLeave, pendingCounts, sickLeave, upcomingApprovedLeave } =
@@ -105,24 +105,13 @@ export function LeaveSummaryCards({
                         >
                             {t('View Leave History')}
                         </Button>
-                        <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={onOpenShortLeave}
-                            disabled={!onOpenShortLeave}
-                        >
-                            {t('Go to Short Leave')}
+                        <Button asChild type="button" variant="secondary">
+                            <Link href={shortLeaves()}>
+                                {t('Go to Short Leave')}
+                            </Link>
                         </Button>
                     </div>
                 </div>
-
-                {!onOpenShortLeave ? (
-                    <p className="text-muted-foreground text-sm">
-                        {t(
-                            'Short Leave navigation will be available when its authorized page route is connected.',
-                        )}
-                    </p>
-                ) : null}
             </section>
 
             <section
