@@ -29,7 +29,7 @@ it('returns only the authenticated employee Short Leave requests in reverse chro
     ]);
 
     $requests = (new ShortLeaveRequestQuery(
-        new ShortLeaveRequestFiltersData(employeeId: $employee->id),
+        new ShortLeaveRequestFiltersData(employeeIds: [$employee->id]),
     ))->run()->get();
 
     expect($requests->modelKeys())->toBe([
@@ -61,7 +61,7 @@ it('filters an employee Short Leave history by type and date range', function ()
 
     $requests = (new ShortLeaveRequestQuery(
         ShortLeaveRequestFiltersData::from([
-            'employeeId' => $employee->id,
+            'employeeIds' => [$employee->id],
             'fromDate' => '2026-10-10',
             'shortLeaveTypeId' => $matchingType->id,
             'toDate' => '2026-10-18',

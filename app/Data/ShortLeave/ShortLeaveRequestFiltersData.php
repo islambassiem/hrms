@@ -12,10 +12,14 @@ use Spatie\LaravelData\Data;
 final class ShortLeaveRequestFiltersData extends Data
 {
     public function __construct(
-        public int $employeeId,
+        /** @var int[]|null */
+        public ?array $employeeIds = null,
+
         public ?int $shortLeaveTypeId = null,
+
         #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public ?CarbonImmutable $fromDate = null,
+
         #[WithCast(DateTimeInterfaceCast::class, 'Y-m-d')]
         public ?CarbonImmutable $toDate = null,
     ) {}

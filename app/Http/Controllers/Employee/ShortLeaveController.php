@@ -211,7 +211,7 @@ final class ShortLeaveController
         ]);
 
         return ShortLeaveRequestFiltersData::from([
-            'employeeId' => $employee->id,
+            'employeeIds' => [$employee->id],
             'fromDate' => $validated['from_date'] ?? null,
             'shortLeaveTypeId' => $validated['short_leave_type_id'] ?? null,
             'toDate' => $validated['to_date'] ?? null,

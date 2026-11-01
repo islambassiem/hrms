@@ -22,7 +22,10 @@ final readonly class ShortLeaveRequestQuery
     {
         return ShortLeaveRequest::query()
             ->with('shortLeaveType')
-            ->where('employee_id', $this->filters->employeeId)
+            ->when(
+                $this->filters->employeeIds,
+                fn ($query, array $employeeIds) => $query->whereIn('employee_id', $employeeIds)
+            )
             ->when(
                 $this->filters->shortLeaveTypeId,
                 fn ($query, int $shortLeaveTypeId): Builder => $query->where(
