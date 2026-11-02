@@ -11,30 +11,26 @@ use Illuminate\Database\Eloquent\Builder;
 
 final readonly class ShortLeaveRequestQuery
 {
-    public function __construct(
-        private ShortLeaveRequestFiltersData $filters,
-    ) {}
-
     /**
      * @return Builder<ShortLeaveRequest>
      */
-    public function run(): Builder
+    public function run(ShortLeaveRequestFiltersData $filters): Builder
     {
         return ShortLeaveRequest::query()
             ->with('shortLeaveType')
             ->when(
-                $this->filters->employeeIds,
+                $filters->employeeIds,
                 fn ($query, array $employeeIds) => $query->whereIn('employee_id', $employeeIds)
             )
             ->when(
-                $this->filters->shortLeaveTypeId,
+                $filters->shortLeaveTypeId,
                 fn ($query, int $shortLeaveTypeId): Builder => $query->where(
                     'short_leave_type_id',
                     $shortLeaveTypeId,
                 ),
             )
             ->when(
-                $this->filters->fromDate,
+                $filters->fromDate,
                 fn ($query, CarbonImmutable $fromDate): Builder => $query->whereDate(
                     'short_leave_date',
                     '>=',
@@ -42,7 +38,7 @@ final readonly class ShortLeaveRequestQuery
                 ),
             )
             ->when(
-                $this->filters->toDate,
+                $filters->toDate,
                 fn ($query, CarbonImmutable $toDate): Builder => $query->whereDate(
                     'short_leave_date',
                     '<=',

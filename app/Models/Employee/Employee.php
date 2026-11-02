@@ -176,4 +176,13 @@ final class Employee extends Model
         return $this->hasOne(EmployeeOrganization::class)
             ->whereNull('end_date');
     }
+
+    /**
+     * @return HasMany<Employee, $this>
+     */
+    public function subordinates(): HasMany
+    {
+        return $this->hasMany(Employee::class, 'head_id')
+            ->where('head_id', $this->id);
+    }
 }

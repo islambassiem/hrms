@@ -63,8 +63,8 @@ final class ShortLeaveController
                 'toDate' => $filters->toDate?->toDateString(),
             ],
             'shortLeaveRequests' => ShortLeaveRequestResource::collection(
-                (new ShortLeaveRequestQuery($filters))
-                    ->run()
+                resolve(ShortLeaveRequestQuery::class)
+                    ->run($filters)
                     ->paginate()
                     ->withQueryString(),
             ),

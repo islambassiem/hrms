@@ -7,6 +7,7 @@ use App\Models\Employee\Employee;
 use App\Models\Lookup\ShortLeaveType;
 use App\Models\ShortLeave\ShortLeaveRequest;
 use App\Queries\ShortLeave\ShortLeaveRequestQuery;
+use Illuminate\Database\Eloquent\Collection;
 
 it('returns only the authenticated employee Short Leave requests in reverse chronological order', function (): void {
     $employee = Employee::factory()->create();
@@ -28,9 +29,13 @@ it('returns only the authenticated employee Short Leave requests in reverse chro
         'short_leave_type_id' => $shortLeaveType->id,
     ]);
 
-    $requests = (new ShortLeaveRequestQuery(
-        new ShortLeaveRequestFiltersData(employeeIds: [$employee->id]),
-    ))->run()->get();
+    $requests = resolve(ShortLeaveRequestQuery::class)
+        ->run(
+            ShortLeaveRequestFiltersData::from(
+                ['employeeIds' => [$employee->id]]
+            )
+        )
+        ->get();
 
     expect($requests->modelKeys())->toBe([
         $latestRequest->id,
@@ -59,15 +64,54 @@ it('filters an employee Short Leave history by type and date range', function ()
         'short_leave_type_id' => $otherType->id,
     ]);
 
-    $requests = (new ShortLeaveRequestQuery(
+    $requests = resolve(ShortLeaveRequestQuery::class)->run(
         ShortLeaveRequestFiltersData::from([
             'employeeIds' => [$employee->id],
             'fromDate' => '2026-10-10',
             'shortLeaveTypeId' => $matchingType->id,
             'toDate' => '2026-10-18',
-        ]),
-    ))->run()->get();
+        ])
+    )->get();
 
-    expect($requests->modelKeys())->toBe([$matchingRequest->id])
+    expect($requests->count())->toBe(1)
+        ->and($requests->modelKeys())->toBe([$matchingType->id])
         ->and($requests->first()?->relationLoaded('shortLeaveType'))->toBeTrue();
+});
+
+it('filters short leave requests by department head', function (): void {
+    $head = Employee::factory()->create();
+    $subordinate = Employee::factory()->create(['head_id' => $head->id]);
+    $otherEmployee = Employee::factory()->create();
+
+    $subordinateRequest = ShortLeaveRequest::factory(3)->create([
+        'employee_id' => $subordinate->id,
+    ]);
+    ShortLeaveRequest::factory(4)->create([
+        'employee_id' => $otherEmployee->id,
+    ]);
+
+    $requests = resolve(ShortLeaveRequestQuery::class)
+        ->run(ShortLeaveRequestFiltersData::from([
+            'employeeIds' => [$subordinate->id],
+            'headIds' => [$head->id],
+        ]))
+        ->get();
+
+    expect($requests->count())->toBe(3);
+    expect($requests->pluck('id'))
+        ->toEqualCanonicalizing($subordinateRequest->pluck('id'));
+});
+
+it('returns empty collection if the employee is not a department head', function (): void {
+    $employee = Employee::factory()->create();
+
+    $requests = resolve(ShortLeaveRequestQuery::class)
+        ->run(
+            ShortLeaveRequestFiltersData::from([
+                'employeeIds' => [$employee->id],
+            ])
+        )
+        ->get();
+    expect($requests)->toBeInstanceOf(Collection::class)
+        ->and($requests->count())->toBe(0);
 });

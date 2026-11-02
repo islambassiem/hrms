@@ -103,3 +103,17 @@ it('returns null when the employee has no current job titles', function (): void
     expect($employee->latestCurrentJobTitle)
         ->toBeNull();
 });
+
+it('fetches all subordinates', function (): void {
+    $employee = Employee::factory()->create();
+
+    $subordinates = Employee::factory(3)->create([
+        'head_id' => $employee->id,
+    ]);
+
+    Employee::factory(2)->create();
+
+    expect($subordinates)->toHaveCount(3);
+    expect($employee->subordinates->pluck('id'))
+        ->toEqualCanonicalizing($subordinates->pluck('id'));
+});
