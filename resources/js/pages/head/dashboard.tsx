@@ -1,18 +1,20 @@
-import { dashboard } from '@/routes/head';
 import { Head } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
-const Dashboard = () => {
+import { DepartmentHeadDashboard } from '@/components/head/department-head-dashboard';
+import { dashboard } from '@/routes/head';
+import type { HeadDashboardPageProps } from '@/types/head';
+
+export default function Dashboard({ headDashboard }: HeadDashboardPageProps) {
+    const { t } = useTranslation();
+
     return (
         <>
-            <Head title="Head Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                Head Dashboard
-            </div>
+            <Head title={t('Dashboard')} />
+            <DepartmentHeadDashboard data={headDashboard} />
         </>
     );
-};
-
-export default Dashboard;
+}
 
 Dashboard.layout = {
     breadcrumbs: [
