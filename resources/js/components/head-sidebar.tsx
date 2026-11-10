@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { LayoutGrid } from 'lucide-react';
+import { CalendarDays, ClipboardList, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -13,6 +13,8 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes/head';
+import { index as leaveRequests } from '@/routes/head/leaves';
+import { index as shortLeaveRequests } from '@/routes/head/short-leaves';
 import type { NavItem } from '@/types';
 import { useTranslation } from 'react-i18next';
 
@@ -21,9 +23,19 @@ export function AppSidebar() {
 
     const mainNavItems: NavItem[] = [
         {
-            title: t('Head Dashboard'),
+            title: t('Dashboard'),
             href: dashboard(),
             icon: LayoutGrid,
+        },
+        {
+            title: t('Leave Requests'),
+            href: leaveRequests(),
+            icon: CalendarDays,
+        },
+        {
+            title: t('Short Leave Requests'),
+            href: shortLeaveRequests(),
+            icon: ClipboardList,
         },
     ];
 
