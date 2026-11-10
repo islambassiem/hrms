@@ -26,9 +26,9 @@ class EmployeeContractFactory extends Factory
         $duration = fake()->randomElement([12, 24]);
 
         return [
-            'employee_id' => Employee::factory()->create(),
-            'salary_revision_id' => EmployeeSalaryRevision::factory()->create(),
-            'address_id' => EmployeeAddress::factory()->create(),
+            'employee_id' => Employee::factory(),
+            'salary_revision_id' => EmployeeSalaryRevision::factory(),
+            'address_id' => EmployeeAddress::factory(),
             'start_date' => $startDate = Date::parse(fake()->date()),
             'duration' => $duration,
             'probation_period' => fake()->randomElement(['90', '180']),
