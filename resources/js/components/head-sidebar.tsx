@@ -1,5 +1,10 @@
 import { Link } from '@inertiajs/react';
-import { CalendarDays, ClipboardList, LayoutGrid } from 'lucide-react';
+import {
+    CalendarDays,
+    ClipboardList,
+    LayoutGrid,
+    UsersRound,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -13,6 +18,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes/head';
+import { index as employees } from '@/routes/head/employees';
 import { index as leaveRequests } from '@/routes/head/leaves';
 import { index as shortLeaveRequests } from '@/routes/head/short-leaves';
 import type { NavItem } from '@/types';
@@ -26,6 +32,11 @@ export function AppSidebar() {
             title: t('Dashboard'),
             href: dashboard(),
             icon: LayoutGrid,
+        },
+        {
+            title: t('Employees'),
+            href: employees(),
+            icon: UsersRound,
         },
         {
             title: t('Leave Requests'),
