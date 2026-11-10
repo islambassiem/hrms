@@ -37,9 +37,7 @@ final class DepartmentHeadDashboardResource extends JsonResource
 
     private function dashboard(): DepartmentHeadDashboardData
     {
-        if (! $this->resource instanceof DepartmentHeadDashboardData) {
-            throw new LogicException('The Department Head dashboard resource requires dashboard data.');
-        }
+        throw_unless($this->resource instanceof DepartmentHeadDashboardData, LogicException::class, 'The Department Head dashboard resource requires dashboard data.');
 
         return $this->resource;
     }
