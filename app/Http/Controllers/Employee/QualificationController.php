@@ -13,21 +13,19 @@ use App\Http\Resources\Lookup\QualificationFormDropdown;
 use App\Models\Qualifications\Qualification;
 use App\Models\User;
 use App\Queries\Qualification\EmployeeQualificationsQuery;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class QualificationController
 {
-    use AuthorizesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        $this->authorize('viewAny', Qualification::class);
+        Gate::authorize('viewAny', Qualification::class);
 
         $authEmployee = auth()->user()?->employee;
 
@@ -52,7 +50,7 @@ class QualificationController
      */
     public function create(): Response
     {
-        $this->authorize('create', Qualification::class);
+        Gate::authorize('create', Qualification::class);
 
         $user = auth()->user();
 
@@ -71,7 +69,7 @@ class QualificationController
      */
     public function store(StoreQualificationRequest $request): RedirectResponse
     {
-        $this->authorize('create', Qualification::class);
+        Gate::authorize('create', Qualification::class);
 
         resolve(QualificationCreateAction::class)->handle(
             QualificationData::from($request),
@@ -91,7 +89,7 @@ class QualificationController
      */
     public function show(Qualification $qualification): Response
     {
-        $this->authorize('view', $qualification);
+        Gate::authorize('view', $qualification);
 
         return Inertia::render('employee/qualification/show', [
             'qualification' => $this->qualificationResource($qualification),
@@ -103,7 +101,7 @@ class QualificationController
      */
     public function edit(Qualification $qualification): Response
     {
-        $this->authorize('view', $qualification);
+        Gate::authorize('view', $qualification);
 
         return Inertia::render('employee/qualification/edit', [
             'qualification' => $this->qualificationResource($qualification),
@@ -116,7 +114,7 @@ class QualificationController
      */
     public function update(UpdateQualificationRequest $request, Qualification $qualification): RedirectResponse
     {
-        $this->authorize('update', $qualification);
+        Gate::authorize('update', $qualification);
 
         resolve(QualificationUpdateAction::class)
             ->handle(
@@ -137,7 +135,7 @@ class QualificationController
      */
     public function destroy(Qualification $qualification): RedirectResponse
     {
-        $this->authorize('delete', $qualification);
+        Gate::authorize('delete', $qualification);
 
         resolve(QualificationDeleteAction::class)
             ->handle($qualification);

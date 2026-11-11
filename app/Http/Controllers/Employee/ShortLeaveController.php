@@ -20,20 +20,18 @@ use App\Models\Lookup\ShortLeaveType;
 use App\Models\ShortLeave\ShortLeaveRequest;
 use App\Models\User;
 use App\Queries\ShortLeave\ShortLeaveRequestQuery;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
 final class ShortLeaveController
 {
-    use AuthorizesRequests;
-
     public function index(Request $request): Response
     {
-        $this->authorize('viewAny', ShortLeaveRequest::class);
+        Gate::authorize('viewAny', ShortLeaveRequest::class);
 
         $employee = $this->authenticatedEmployee($request);
         $filters = $this->filters($request, $employee);
@@ -75,7 +73,7 @@ final class ShortLeaveController
 
     public function create(Request $request): RedirectResponse
     {
-        $this->authorize('create', ShortLeaveRequest::class);
+        Gate::authorize('create', ShortLeaveRequest::class);
 
         $this->authenticatedEmployee($request);
 
@@ -84,7 +82,7 @@ final class ShortLeaveController
 
     public function store(StoreShortLeaveRequest $request): RedirectResponse
     {
-        $this->authorize('create', ShortLeaveRequest::class);
+        Gate::authorize('create', ShortLeaveRequest::class);
 
         resolve(ShortLeaveRequestCreateAction::class)->handle(
             ShortLeaveRequestData::from($request->validated()),
@@ -100,14 +98,14 @@ final class ShortLeaveController
 
     public function show(ShortLeaveRequest $shortLeave): RedirectResponse
     {
-        $this->authorize('view', $shortLeave);
+        Gate::authorize('view', $shortLeave);
 
         return to_route('short-leaves.index');
     }
 
     public function edit(ShortLeaveRequest $shortLeave): RedirectResponse
     {
-        $this->authorize('update', $shortLeave);
+        Gate::authorize('update', $shortLeave);
 
         return to_route('short-leaves.index', ['edit' => $shortLeave->id]);
     }
@@ -116,7 +114,7 @@ final class ShortLeaveController
         UpdateShortLeaveRequest $request,
         ShortLeaveRequest $shortLeave,
     ): RedirectResponse {
-        $this->authorize('update', $shortLeave);
+        Gate::authorize('update', $shortLeave);
 
         try {
             resolve(ShortLeaveRequestUpdateAction::class)->handle(
@@ -142,7 +140,7 @@ final class ShortLeaveController
 
     public function destroy(ShortLeaveRequest $shortLeave): RedirectResponse
     {
-        $this->authorize('delete', $shortLeave);
+        Gate::authorize('delete', $shortLeave);
 
         try {
             resolve(ShortLeaveRequestDeleteAction::class)->handle($shortLeave);
@@ -190,7 +188,7 @@ final class ShortLeaveController
             ->where('employee_id', $employee->id)
             ->findOrFail($shortLeaveId);
 
-        $this->authorize('update', $shortLeave);
+        Gate::authorize('update', $shortLeave);
 
         return $shortLeave;
     }

@@ -9,19 +9,17 @@ use App\Actions\DeleteMediaAction;
 use App\Http\Requests\Employee\Qualification\QualificationAttachmentRequest;
 use App\Models\Media;
 use App\Models\Qualifications\Qualification;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use UnexpectedValueException;
 
 class QualificationAttachmentController
 {
-    use AuthorizesRequests;
-
     public function store(QualificationAttachmentRequest $request, Qualification $qualification): RedirectResponse
     {
-        $this->authorize('update', $qualification);
+        Gate::authorize('update', $qualification);
 
         $attachments = $request->file('attachments');
 
@@ -38,7 +36,7 @@ class QualificationAttachmentController
         Qualification $qualification,
         Media $media,
     ): RedirectResponse {
-        $this->authorize('update', $qualification);
+        Gate::authorize('update', $qualification);
 
         throw_unless($this->belongsToQualification($media, $qualification), NotFoundHttpException::class);
 

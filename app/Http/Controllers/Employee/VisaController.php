@@ -16,22 +16,20 @@ use App\Models\Employee\Employee;
 use App\Models\Request\Visa;
 use App\Models\User;
 use App\Queries\Request\Visa\EmployeeVisaQuery;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class VisaController
 {
-    use AuthorizesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): Response
     {
-        $this->authorize('viewAny', Visa::class);
+        Gate::authorize('viewAny', Visa::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -62,7 +60,7 @@ class VisaController
      */
     public function create(Request $request): RedirectResponse
     {
-        $this->authorize('create', Visa::class);
+        Gate::authorize('create', Visa::class);
 
         $this->authenticatedEmployee($request);
 
@@ -74,7 +72,7 @@ class VisaController
      */
     public function store(StoreVisaRequest $request): RedirectResponse
     {
-        $this->authorize('create', Visa::class);
+        Gate::authorize('create', Visa::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -101,7 +99,7 @@ class VisaController
      */
     public function show(Visa $visa): RedirectResponse
     {
-        $this->authorize('view', $visa);
+        Gate::authorize('view', $visa);
 
         return to_route('visas.index');
     }
@@ -111,7 +109,7 @@ class VisaController
      */
     public function edit(Visa $visa): RedirectResponse
     {
-        $this->authorize('update', $visa);
+        Gate::authorize('update', $visa);
 
         abort_unless($visa->status === VisaStatusEnum::PENDING, 403);
 
@@ -123,7 +121,7 @@ class VisaController
      */
     public function update(UpdateVisaRequest $request, Visa $visa): RedirectResponse
     {
-        $this->authorize('update', $visa);
+        Gate::authorize('update', $visa);
 
         try {
             resolve(UpdateVisaAction::class)
@@ -159,7 +157,7 @@ class VisaController
      */
     public function destroy(Visa $visa): RedirectResponse
     {
-        $this->authorize('delete', $visa);
+        Gate::authorize('delete', $visa);
 
         try {
             resolve(DeleteVisaAction::class)
@@ -207,7 +205,7 @@ class VisaController
             ->where('employee_id', $employee->id)
             ->findOrFail($visaId);
 
-        $this->authorize('update', $visa);
+        Gate::authorize('update', $visa);
 
         abort_unless($visa->status === VisaStatusEnum::PENDING, 403);
 

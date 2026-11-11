@@ -16,22 +16,20 @@ use App\Models\Employee\Employee;
 use App\Models\Request\FamilyVisit;
 use App\Models\User;
 use App\Queries\Request\FamilyVisit\FamilyVisitQuery;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class FamilyVisitController
 {
-    use AuthorizesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): Response
     {
-        $this->authorize('viewAny', FamilyVisit::class);
+        Gate::authorize('viewAny', FamilyVisit::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -52,7 +50,7 @@ class FamilyVisitController
      */
     public function create(Request $request): Response
     {
-        $this->authorize('create', FamilyVisit::class);
+        Gate::authorize('create', FamilyVisit::class);
 
         $this->authenticatedEmployee($request);
 
@@ -64,7 +62,7 @@ class FamilyVisitController
      */
     public function store(StoreFamilyVisitRequest $request): RedirectResponse
     {
-        $this->authorize('create', FamilyVisit::class);
+        Gate::authorize('create', FamilyVisit::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -90,7 +88,7 @@ class FamilyVisitController
      */
     public function show(FamilyVisit $familyVisit): Response
     {
-        $this->authorize('view', $familyVisit);
+        Gate::authorize('view', $familyVisit);
 
         return Inertia::render('employee/request/family-visit/show', [
             'visit' => FamilyVisitResource::make($familyVisit),
@@ -102,7 +100,7 @@ class FamilyVisitController
      */
     public function edit(FamilyVisit $familyVisit): Response
     {
-        $this->authorize('update', $familyVisit);
+        Gate::authorize('update', $familyVisit);
 
         return Inertia::render('employee/request/family-visit/edit');
     }
@@ -112,7 +110,7 @@ class FamilyVisitController
      */
     public function update(UpdateFamilyVisitRequest $request, FamilyVisit $familyVisit): RedirectResponse
     {
-        $this->authorize('update', $familyVisit);
+        Gate::authorize('update', $familyVisit);
 
         try {
             resolve(UpdateFamilyVisitAction::class)
@@ -146,7 +144,7 @@ class FamilyVisitController
      */
     public function destroy(FamilyVisit $familyVisit): RedirectResponse
     {
-        $this->authorize('delete', $familyVisit);
+        Gate::authorize('delete', $familyVisit);
 
         try {
             resolve(DeleteFamilyVisitAction::class)

@@ -15,22 +15,20 @@ use App\Models\Employee\Employee;
 use App\Models\Request\Letter;
 use App\Models\User;
 use App\Queries\Request\Letter\EmployeeLetterQuery;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class LetterController
 {
-    use AuthorizesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): Response
     {
-        $this->authorize('viewAny', Letter::class);
+        Gate::authorize('viewAny', Letter::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -51,7 +49,7 @@ class LetterController
      */
     public function create(Request $request): Response
     {
-        $this->authorize('create', Letter::class);
+        Gate::authorize('create', Letter::class);
 
         $this->authenticatedEmployee($request);
 
@@ -63,7 +61,7 @@ class LetterController
      */
     public function store(StoreLetterRequest $request): RedirectResponse
     {
-        $this->authorize('create', Letter::class);
+        Gate::authorize('create', Letter::class);
 
         $employee = $this->authenticatedEmployee($request);
 
@@ -89,7 +87,7 @@ class LetterController
      */
     public function show(Letter $letter): Response
     {
-        $this->authorize('view', $letter);
+        Gate::authorize('view', $letter);
 
         return Inertia::render('employee/request/letter/show', [
             'letter' => LetterResource::make($letter),
@@ -101,7 +99,7 @@ class LetterController
      */
     public function edit(Letter $letter): Response
     {
-        $this->authorize('update', $letter);
+        Gate::authorize('update', $letter);
 
         return Inertia::render('employee/request/letter/edit');
     }
@@ -111,7 +109,7 @@ class LetterController
      */
     public function update(UpdateLetterRequest $request, Letter $letter): RedirectResponse
     {
-        $this->authorize('update', $letter);
+        Gate::authorize('update', $letter);
 
         try {
             resolve(UpdateLetterAction::class)
@@ -145,7 +143,7 @@ class LetterController
      */
     public function destroy(Letter $letter): RedirectResponse
     {
-        $this->authorize('delete', $letter);
+        Gate::authorize('delete', $letter);
 
         try {
             resolve(DeleteLetterAction::class)
