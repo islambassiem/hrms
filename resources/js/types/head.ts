@@ -19,6 +19,33 @@ export type HeadEmployeeOption = {
     employeeCode: string;
 };
 
+export type HeadDirectoryGender = {
+    id: number;
+    name: string;
+};
+
+export type HeadDirectoryQualification = {
+    scientificDegree: string | null;
+    educationalSublevel: string | null;
+    major: string | null;
+    graduationDate: string | null;
+};
+
+export type HeadDirectoryEmployee = {
+    id: number;
+    employeeCode: string;
+    name: string;
+    image: string | null;
+    gender: HeadDirectoryGender | null;
+    officialEmail: string | null;
+    latestQualification: HeadDirectoryQualification | null;
+};
+
+export type HeadEmployeeDirectoryFilters = {
+    search: string | null;
+    genderId: number | null;
+};
+
 export type HeadLeaveTypeOption = {
     id: number;
     label: string;
@@ -90,6 +117,63 @@ export type HeadShortLeaveFilters = {
 
 export type HeadDashboardPageProps = {
     headDashboard: HeadDashboardData;
+};
+
+export type HeadEmployeeDirectoryPageProps = {
+    filters: HeadEmployeeDirectoryFilters;
+    genders: HeadDirectoryGender[];
+    employees: HeadPaginatedData<HeadDirectoryEmployee>;
+};
+
+export type HeadEmployeePosition = {
+    title: string;
+    startDate: string | null;
+};
+
+export type HeadEmployeeDetails = {
+    id: number;
+    employeeCode: string;
+    name: string;
+    image: string | null;
+    gender: string | null;
+    officialEmail: string | null;
+    department: string | null;
+    isActive: boolean;
+    joiningDate: string | null;
+    currentPosition: HeadEmployeePosition | null;
+};
+
+export type HeadEmployeeQualificationAttachment = {
+    id: number;
+    name: string;
+    size_bytes: number;
+    mime_type: string | null;
+};
+
+export type HeadEmployeeQualificationDetails = {
+    id: number;
+    major: string | null;
+    minor: string | null;
+    educationalSublevel: string | null;
+    includedSpecialty: string | null;
+    institutionName: string | null;
+    collegeName: string | null;
+    scientificDegree: string | null;
+    graduationDate: string | null;
+    graduationCountry: string | null;
+    isLastQualification: boolean;
+    rating: string | null;
+    gpa: string | null;
+    gpaType: string | null;
+    studyType: string | null;
+    city: string | null;
+    isAuthenticated: boolean;
+    attachments: HeadEmployeeQualificationAttachment[];
+};
+
+export type HeadEmployeeDetailsPageProps = {
+    employee: HeadEmployeeDetails;
+    qualifications: HeadEmployeeQualificationDetails[];
 };
 
 export type HeadLeaveIndexPageProps = {

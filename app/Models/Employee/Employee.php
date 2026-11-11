@@ -8,7 +8,10 @@ use App\Concerns\UserStamp;
 use App\Enums\LeaveTypeEnum;
 use App\Models\Leave\LeaveBalance;
 use App\Models\Lookup\Department;
+use App\Models\Lookup\Gender;
 use App\Models\Payroll\Salary\EmployeeSalaryRevision;
+use App\Models\Qualifications\Qualification;
+use App\Models\User;
 use Database\Factories\Employee\EmployeeFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -107,6 +110,41 @@ final class Employee extends Model
         return $this->currentJobTitles()
             ->one()
             ->latestOfMany('start_date');
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return BelongsTo<Gender, $this>
+     */
+    public function gender(): BelongsTo
+    {
+        return $this->belongsTo(Gender::class);
+    }
+
+    /**
+     * @return HasMany<Qualification, $this>
+     */
+    public function qualifications(): HasMany
+    {
+        return $this->hasMany(Qualification::class);
+    }
+
+    /**
+     * @return HasOne<Qualification, $this>
+     */
+    public function latestQualification(): HasOne
+    {
+        return $this->qualifications()
+            ->where('qualifications.is_last_qualification', true)
+            ->one()
+            ->latestOfMany('graduation_date');
     }
 
     /**
