@@ -54,6 +54,7 @@ class LetterController
         $this->authorize('create', Letter::class);
 
         $this->authenticatedEmployee($request);
+
         return Inertia::render('employee/request/letter/create');
     }
 

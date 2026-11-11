@@ -57,7 +57,7 @@ final class EmployeeController
             ->firstOrFail();
         $qualifications = resolve(EmployeeQualificationsQuery::class)
             ->run($employee)
-            ->orderByDesc('graduation_date')
+            ->latest('graduation_date')
             ->orderByDesc('id')
             ->get();
 
