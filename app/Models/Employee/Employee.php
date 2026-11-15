@@ -220,7 +220,6 @@ final class Employee extends Model
      */
     public function subordinates(): HasMany
     {
-        return $this->hasMany(Employee::class, 'head_id')
-            ->where('head_id', $this->id);
+        return $this->hasMany(Employee::class, 'head_id');
     }
 }

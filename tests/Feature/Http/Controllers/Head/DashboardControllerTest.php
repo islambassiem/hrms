@@ -57,50 +57,64 @@ test('department heads receive active direct subordinate summaries', function ()
     $unrelatedEmployee = Employee::factory()->create(['is_active' => true]);
 
     $leaveType = LeaveType::factory()->create();
-    LeaveRequest::factory()->create([
-        'employee_id' => $maleSubordinate->id,
-        'leave_type_id' => $leaveType->id,
-        'status' => WorkflowActionEnum::PENDING->value,
-    ]);
-    LeaveRequest::factory()->create([
-        'employee_id' => $inactiveSubordinate->id,
-        'leave_type_id' => $leaveType->id,
-        'status' => WorkflowActionEnum::PENDING->value,
-    ]);
-    LeaveRequest::factory()->create([
-        'employee_id' => $unrelatedEmployee->id,
-        'leave_type_id' => $leaveType->id,
-        'status' => WorkflowActionEnum::PENDING->value,
-    ]);
+    LeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $maleSubordinate->id,
+            'leave_type_id' => $leaveType->id,
+            'status' => WorkflowActionEnum::PENDING->value,
+        ]);
+
+    LeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $inactiveSubordinate->id,
+            'leave_type_id' => $leaveType->id,
+            'status' => WorkflowActionEnum::PENDING->value,
+        ]);
+    LeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $unrelatedEmployee->id,
+            'leave_type_id' => $leaveType->id,
+            'status' => WorkflowActionEnum::PENDING->value,
+        ]);
 
     $today = today();
-    LeaveRequest::factory(2)->create([
-        'employee_id' => $maleSubordinate->id,
-        'leave_type_id' => $leaveType->id,
-        'start_date' => $today->copy()->subDay(),
-        'end_date' => $today->copy()->addDay(),
-        'status' => WorkflowActionEnum::APPROVED->value,
-    ]);
-    LeaveRequest::factory()->create([
-        'employee_id' => $femaleSubordinate->id,
-        'leave_type_id' => $leaveType->id,
-        'start_date' => $today->copy()->subDays(3),
-        'end_date' => $today->copy()->subDay(),
-        'status' => WorkflowActionEnum::APPROVED->value,
-    ]);
+    LeaveRequest::factory(2)
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $maleSubordinate->id,
+            'leave_type_id' => $leaveType->id,
+            'start_date' => $today->copy()->subDay(),
+            'end_date' => $today->copy()->addDay(),
+            'status' => WorkflowActionEnum::APPROVED->value,
+        ]);
+    LeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $femaleSubordinate->id,
+            'leave_type_id' => $leaveType->id,
+            'start_date' => $today->copy()->subDays(3),
+            'end_date' => $today->copy()->subDay(),
+            'status' => WorkflowActionEnum::APPROVED->value,
+        ]);
 
     $shortLeaveType = ShortLeaveType::factory()->create();
-    ShortLeaveRequest::factory()->create([
-        'employee_id' => $femaleSubordinate->id,
-        'short_leave_type_id' => $shortLeaveType->id,
-        'status' => WorkflowActionEnum::PENDING->value,
-    ]);
-    ShortLeaveRequest::factory()->create([
-        'employee_id' => $unrelatedEmployee->id,
-        'short_leave_type_id' => $shortLeaveType->id,
-        'status' => WorkflowActionEnum::PENDING->value,
-    ]);
-
+    ShortLeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $femaleSubordinate->id,
+            'short_leave_type_id' => $shortLeaveType->id,
+            'status' => WorkflowActionEnum::PENDING->value,
+        ]);
+    ShortLeaveRequest::factory()
+        ->withPendingWorkflowAction()
+        ->create([
+            'employee_id' => $unrelatedEmployee->id,
+            'short_leave_type_id' => $shortLeaveType->id,
+            'status' => WorkflowActionEnum::PENDING->value,
+        ]);
     $user = User::query()->findOrFail($departmentHead->user_id);
     $user->givePermissionTo(Permission::findOrCreate(PermissionEnum::HEAD_PAGE->value, 'web'));
 

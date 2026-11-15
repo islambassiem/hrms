@@ -4,7 +4,7 @@ namespace App\Queries\Qualification;
 
 use App\Models\Employee\Employee;
 use App\Models\Qualifications\Qualification;
-use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmployeeQualificationsQuery
 {
@@ -27,14 +27,18 @@ class EmployeeQualificationsQuery
         ];
     }
 
+    /**
+     * @return Builder<Qualification>
+     */
     public function run(?Employee $employee = null): Builder
     {
         return Qualification::query()
             ->with(self::resourceRelations())
             ->when(
-                $employee,
-                fn (Builder $query) => $query->where('employee_id', $employee?->id),
-                fn (Builder $query): Builder => $query,
-            );
+                $employee !== null,
+                fn ($query) => $query->where('employee_id', $employee?->id),
+            )
+            ->latest('graduation_date')
+            ->orderByDesc('id');
     }
 }

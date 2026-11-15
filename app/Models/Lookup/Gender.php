@@ -6,8 +6,10 @@ namespace App\Models\Lookup;
 
 use App\Concerns\HasLocalizedName;
 use App\Concerns\UserStamp;
+use App\Observers\GenderObserver;
 use Database\Factories\Lookup\GenderFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
     'updated_by',
 ])]
 #[Table('lookup_genders')]
+#[ObservedBy(GenderObserver::class)]
 final class Gender extends Model
 {
     /** @use HasFactory<GenderFactory> */
@@ -28,4 +31,8 @@ final class Gender extends Model
 
     use HasLocalizedName;
     use UserStamp;
+
+    public const int MALE = 1;
+
+    public const int FEMALE = 2;
 }

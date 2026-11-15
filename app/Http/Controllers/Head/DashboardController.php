@@ -9,7 +9,6 @@ use App\Http\Resources\Head\DepartmentHeadDashboardResource;
 use App\Models\Employee\Employee;
 use App\Models\User;
 use App\Queries\Head\DepartmentHeadDashboardQuery;
-use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -25,14 +24,13 @@ final class DashboardController
             403,
         );
 
-        $departmentHead = $user->employee()->first();
+        $departmentHead = $user->employee;
 
         abort_unless($departmentHead instanceof Employee, 403);
 
-        $dashboard = resolve(DepartmentHeadDashboardQuery::class)->run(
-            $departmentHead,
-            CarbonImmutable::today(),
-        );
+        $dashboard = resolve(DepartmentHeadDashboardQuery::class, [
+            'departmentHead' => $departmentHead,
+        ])->run();
 
         return Inertia::render('head/dashboard', [
             'headDashboard' => DepartmentHeadDashboardResource::make($dashboard)->resolve($request),

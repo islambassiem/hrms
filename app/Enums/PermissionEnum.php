@@ -6,7 +6,7 @@ namespace App\Enums;
 
 enum PermissionEnum: string
 {
-    case HR_PAGE = 'view-hr-page';
+    case HR_PAGE = 'view hr page';
 
-    case HEAD_PAGE = 'view-head-page';
+    case HEAD_PAGE = 'view head page';
 }

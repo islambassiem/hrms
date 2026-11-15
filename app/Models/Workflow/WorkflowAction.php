@@ -10,6 +10,7 @@ use Database\Factories\Workflow\WorkflowActionFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 #[Fillable([
     'workflow_step_id',
@@ -34,5 +35,13 @@ final class WorkflowAction extends Model
         return [
             'action' => WorkflowActionEnum::class,
         ];
+    }
+
+    /**
+     * @return MorphTo<Model, $this>
+     */
+    public function workflowActionable(): MorphTo
+    {
+        return $this->morphTo('actionable');
     }
 }

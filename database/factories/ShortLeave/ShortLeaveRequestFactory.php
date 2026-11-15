@@ -8,6 +8,7 @@ use App\Enums\WorkflowActionEnum;
 use App\Models\Employee\Employee;
 use App\Models\Lookup\ShortLeaveType;
 use App\Models\ShortLeave\ShortLeaveRequest;
+use App\Models\Workflow\WorkflowAction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
@@ -33,5 +34,15 @@ class ShortLeaveRequestFactory extends Factory
             'short_leave_to' => $from->addHours(3),
             'status' => fake()->randomElement(WorkflowActionEnum::cases()),
         ];
+    }
+
+    public function withPendingWorkflowAction(): static
+    {
+        return $this->has(
+            WorkflowAction::factory()->state([
+                'action' => WorkflowActionEnum::PENDING->value,
+            ]),
+            'workflowActions'
+        );
     }
 }

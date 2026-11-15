@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\Lookup\Gender;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
 return [
@@ -133,6 +135,9 @@ return [
     |
     */
 
-    'serializable_classes' => false,
+    'serializable_classes' => [
+        Collection::class,
+        Gender::class,
+    ],
 
 ];

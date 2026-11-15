@@ -8,6 +8,7 @@ use App\Enums\WorkflowActionEnum;
 use App\Models\Employee\Employee;
 use App\Models\Leave\LeaveRequest;
 use App\Models\Lookup\LeaveType;
+use App\Models\Workflow\WorkflowAction;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
@@ -38,5 +39,15 @@ class LeaveRequestFactory extends Factory
             'status' => $status->value,
             'reason' => fake()->optional()->sentence(),
         ];
+    }
+
+    public function withPendingWorkflowAction(): static
+    {
+        return $this->has(
+            WorkflowAction::factory()->state([
+                'action' => WorkflowActionEnum::PENDING->value,
+            ]),
+            'workflowActions'
+        );
     }
 }

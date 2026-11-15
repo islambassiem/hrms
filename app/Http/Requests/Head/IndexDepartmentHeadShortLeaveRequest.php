@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Head;
 
+use App\Enums\PermissionEnum;
 use App\Enums\WorkflowActionEnum;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,7 +16,7 @@ final class IndexDepartmentHeadShortLeaveRequest extends FormRequest
     {
         $user = $this->user();
 
-        return $user instanceof User && $user->can('view-head-page');
+        return $user instanceof User && $user->can(PermissionEnum::HEAD_PAGE->value);
     }
 
     /** @return array<string, array<mixed>|string> */

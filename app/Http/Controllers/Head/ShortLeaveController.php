@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Head;
 
 use App\Data\Head\DepartmentHeadShortLeaveFiltersData;
-use App\Enums\PermissionEnum;
 use App\Enums\WorkflowActionEnum;
 use App\Http\Requests\Head\IndexDepartmentHeadShortLeaveRequest;
 use App\Http\Resources\Head\DepartmentHeadEmployeeOptionResource;
 use App\Http\Resources\Head\DepartmentHeadShortLeaveRequestResource;
 use App\Http\Resources\Head\DepartmentHeadShortLeaveTypeOptionResource;
 use App\Models\Employee\Employee;
-use App\Models\User;
 use App\Queries\Head\DepartmentHeadLeaveRequestQuery;
 use App\Queries\Head\DepartmentHeadShortLeaveRequestQuery;
 use Inertia\Inertia;
@@ -22,16 +20,8 @@ final class ShortLeaveController
 {
     public function index(IndexDepartmentHeadShortLeaveRequest $request): Response
     {
-        $user = $request->user();
-
-        abort_unless(
-            $user instanceof User && $user->can(PermissionEnum::HEAD_PAGE->value),
-            403,
-        );
-
-        $departmentHead = $user->employee()->first();
-
-        abort_unless($departmentHead instanceof Employee, 403);
+        /** @var Employee $head */
+        $head = $request->attributes->get('head');
 
         $validated = $request->validated();
         $filters = DepartmentHeadShortLeaveFiltersData::from([
@@ -53,7 +43,7 @@ final class ShortLeaveController
                 'toDate' => $filters->toDate?->toDateString(),
             ],
             'employees' => DepartmentHeadEmployeeOptionResource::collection(
-                $employeeQuery->activeSubordinates($departmentHead)->get(),
+                $employeeQuery->activeSubordinates($head)->get(),
             )->resolve($request),
             'shortLeaveTypes' => DepartmentHeadShortLeaveTypeOptionResource::collection(
                 $query->shortLeaveTypes()->get(),
@@ -63,7 +53,7 @@ final class ShortLeaveController
                 WorkflowActionEnum::cases(),
             ),
             'shortLeaveRequests' => DepartmentHeadShortLeaveRequestResource::collection(
-                $query->run($departmentHead, $filters)
+                $query->run($head, $filters)
                     ->paginate()
                     ->withQueryString(),
             ),

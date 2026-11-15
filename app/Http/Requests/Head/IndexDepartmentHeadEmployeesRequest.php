@@ -26,8 +26,7 @@ final class IndexDepartmentHeadEmployeesRequest extends FormRequest
             'gender_id' => [
                 'nullable',
                 'integer',
-                Rule::exists('lookup_genders', 'id')
-                    ->whereIn('name_en', ['Male', 'Female']),
+                Rule::exists('lookup_genders', 'id'),
             ],
         ];
     }

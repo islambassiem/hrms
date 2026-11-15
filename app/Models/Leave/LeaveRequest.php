@@ -7,11 +7,13 @@ namespace App\Models\Leave;
 use App\Concerns\UserStamp;
 use App\Models\Employee\Employee;
 use App\Models\Lookup\LeaveType;
+use App\Models\Workflow\WorkflowAction;
 use Database\Factories\Leave\LeaveRequestFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -43,6 +45,14 @@ final class LeaveRequest extends Model implements HasMedia
             'start_date' => 'immutable_date',
             'end_date' => 'immutable_date',
         ];
+    }
+
+    /**
+     * @return MorphMany<WorkflowAction, $this>
+     */
+    public function workflowActions(): MorphMany
+    {
+        return $this->morphMany(WorkflowAction::class, 'actionable');
     }
 
     /**

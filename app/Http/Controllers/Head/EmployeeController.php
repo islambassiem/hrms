@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Head;
 
 use App\Data\Head\DepartmentHeadEmployeeFiltersData;
-use App\Enums\PermissionEnum;
 use App\Http\Requests\Head\IndexDepartmentHeadEmployeesRequest;
 use App\Http\Resources\Head\DepartmentHeadDirectoryEmployeeResource;
-use App\Http\Resources\Head\DepartmentHeadDirectoryGenderResource;
 use App\Http\Resources\Head\DepartmentHeadEmployeeDetailsResource;
 use App\Http\Resources\Head\DepartmentHeadEmployeeQualificationResource;
+use App\Http\Resources\Lookup\IdNameResource;
+use App\Lookups\GenderLookup;
 use App\Models\Employee\Employee;
-use App\Models\User;
 use App\Queries\Head\DepartmentHeadEmployeeDetailsQuery;
 use App\Queries\Head\DepartmentHeadEmployeeDirectoryQuery;
 use App\Queries\Qualification\EmployeeQualificationsQuery;
@@ -22,43 +21,49 @@ use Inertia\Response;
 
 final class EmployeeController
 {
-    public function index(IndexDepartmentHeadEmployeesRequest $request): Response
-    {
-        $departmentHead = $this->authenticatedDepartmentHead($request);
+    public function index(
+        IndexDepartmentHeadEmployeesRequest $request,
+        DepartmentHeadEmployeeDirectoryQuery $query,
+        GenderLookup $genders
+    ): Response {
+        /** @var Employee $head */
+        $head = $request->attributes->get('head');
 
         $validated = $request->validated();
         $filters = DepartmentHeadEmployeeFiltersData::from([
             'search' => $validated['search'] ?? null,
             'genderId' => $validated['gender_id'] ?? null,
         ]);
-        $query = resolve(DepartmentHeadEmployeeDirectoryQuery::class);
 
         return Inertia::render('head/employees/index', [
             'filters' => [
                 'search' => $filters->search,
                 'genderId' => $filters->genderId,
             ],
-            'genders' => DepartmentHeadDirectoryGenderResource::collection(
-                $query->genders()->get(),
+            'genders' => IdNameResource::collection(
+                $genders->get(),
             )->resolve($request),
             'employees' => DepartmentHeadDirectoryEmployeeResource::collection(
-                $query->run($departmentHead, $filters)
+                $query->run($head, $filters)
                     ->paginate(15)
                     ->withQueryString(),
             ),
         ]);
     }
 
-    public function show(Request $request, int $employeeId): Response
-    {
-        $departmentHead = $this->authenticatedDepartmentHead($request);
-        $employee = resolve(DepartmentHeadEmployeeDetailsQuery::class)
-            ->run($departmentHead, $employeeId)
+    public function show(
+        Request $request,
+        int $employeeId,
+        DepartmentHeadEmployeeDetailsQuery $employeeQuery,
+        EmployeeQualificationsQuery $qualificationQuery
+    ): Response {
+        /** @var Employee $head */
+        $head = $request->attributes->get('head');
+        $employee = $employeeQuery
+            ->run($head, $employeeId)
             ->firstOrFail();
-        $qualifications = resolve(EmployeeQualificationsQuery::class)
+        $qualifications = $qualificationQuery
             ->run($employee)
-            ->latest('graduation_date')
-            ->orderByDesc('id')
             ->get();
 
         return Inertia::render('head/employees/show', [
@@ -68,21 +73,5 @@ final class EmployeeController
                 $qualifications,
             )->resolve($request),
         ]);
-    }
-
-    private function authenticatedDepartmentHead(Request $request): Employee
-    {
-        $user = $request->user();
-
-        abort_unless(
-            $user instanceof User && $user->can(PermissionEnum::HEAD_PAGE->value),
-            403,
-        );
-
-        $departmentHead = $user->employee()->first();
-
-        abort_unless($departmentHead instanceof Employee, 403);
-
-        return $departmentHead;
     }
 }

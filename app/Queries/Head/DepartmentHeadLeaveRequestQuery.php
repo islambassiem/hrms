@@ -25,19 +25,19 @@ final class DepartmentHeadLeaveRequestQuery
                 ->where('is_active', true))
             ->when(
                 $filters->employeeId,
-                fn (Builder $query, int $employeeId): Builder => $query->where('employee_id', $employeeId),
+                fn ($query, int $employeeId): Builder => $query->where('employee_id', $employeeId),
             )
             ->when(
                 $filters->leaveTypeId,
-                fn (Builder $query, int $leaveTypeId): Builder => $query->where('leave_type_id', $leaveTypeId),
+                fn ($query, int $leaveTypeId): Builder => $query->where('leave_type_id', $leaveTypeId),
             )
             ->when(
                 $filters->status,
-                fn (Builder $query, string $status): Builder => $query->where('status', $status),
+                fn ($query, string $status): Builder => $query->where('status', $status),
             )
             ->when(
                 $filters->startDate,
-                fn (Builder $query, CarbonImmutable $startDate): Builder => $query->whereDate(
+                fn ($query, CarbonImmutable $startDate): Builder => $query->whereDate(
                     'start_date',
                     '>=',
                     $startDate,
@@ -45,7 +45,7 @@ final class DepartmentHeadLeaveRequestQuery
             )
             ->when(
                 $filters->endDate,
-                fn (Builder $query, CarbonImmutable $endDate): Builder => $query->whereDate(
+                fn ($query, CarbonImmutable $endDate): Builder => $query->whereDate(
                     'end_date',
                     '<=',
                     $endDate,
@@ -57,10 +57,10 @@ final class DepartmentHeadLeaveRequestQuery
     /**
      * @return Builder<Employee>
      */
-    public function activeSubordinates(Employee $departmentHead): Builder
+    public function activeSubordinates(Employee $head): Builder
     {
         return Employee::query()
-            ->where('head_id', $departmentHead->id)
+            ->where('head_id', $head->id)
             ->where('is_active', true)
             ->orderBy('employee_code');
     }

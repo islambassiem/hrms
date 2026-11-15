@@ -78,9 +78,6 @@ test('department heads receive only active direct reports with the directory fie
             ->component('head/employees/index', false)
             ->where('filters.search', null)
             ->where('filters.genderId', null)
-            ->has('genders', 1)
-            ->where('genders.0.id', $gender->id)
-            ->where('genders.0.name', 'Female')
             ->has('employees.data', 1)
             ->where('employees.data.0.id', $subordinate->id)
             ->where('employees.data.0.employeeCode', '500101')
@@ -159,20 +156,6 @@ test('the employee directory rejects an unknown gender filter', function (): voi
 
     $this->actingAs($user)
         ->get(route('head.employees.index', ['gender_id' => 999999]))
-        ->assertSessionHasErrors('gender_id');
-});
-
-test('the employee directory rejects a lookup value outside the configured gender options', function (): void {
-    $departmentHead = Employee::factory()->create(['is_active' => true]);
-    $unsupportedGender = Gender::factory()->create([
-        'name_en' => 'Not a gender option',
-        'name_ar' => 'خيار غير صالح',
-    ]);
-    $user = User::query()->findOrFail($departmentHead->user_id);
-    $user->givePermissionTo(Permission::findOrCreate(PermissionEnum::HEAD_PAGE->value, 'web'));
-
-    $this->actingAs($user)
-        ->get(route('head.employees.index', ['gender_id' => $unsupportedGender->id]))
         ->assertSessionHasErrors('gender_id');
 });
 

@@ -7,11 +7,13 @@ namespace App\Models\ShortLeave;
 use App\Concerns\UserStamp;
 use App\Models\Employee\Employee;
 use App\Models\Lookup\ShortLeaveType;
+use App\Models\Workflow\WorkflowAction;
 use Database\Factories\ShortLeave\ShortLeaveRequestFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 #[Fillable([
     'employee_id',
@@ -40,6 +42,14 @@ final class ShortLeaveRequest extends Model
             'short_leave_from' => 'immutable_datetime',
             'short_leave_to' => 'immutable_datetime',
         ];
+    }
+
+    /**
+     * @return MorphMany<WorkflowAction, $this>
+     */
+    public function workflowActions(): MorphMany
+    {
+        return $this->morphMany(WorkflowAction::class, 'actionable');
     }
 
     /**
