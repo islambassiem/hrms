@@ -1,22 +1,27 @@
-import { dashboard } from '@/routes';
 import { Head } from '@inertiajs/react';
-const Dashboard = () => {
+import { useTranslation } from 'react-i18next';
+
+import { HRPersonnelDashboard } from '@/components/hr/hr-personnel-dashboard';
+import { dashboard } from '@/routes/hr';
+import type { HRDashboardPageProps } from '@/types/hr-dashboard';
+
+export default function Dashboard({
+    hrDashboard = null,
+}: HRDashboardPageProps) {
+    const { t } = useTranslation();
+
     return (
         <>
-            <Head title="HR Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                HR Dashboard
-            </div>
+            <Head title={t('HR Personnel Dashboard')} />
+            <HRPersonnelDashboard data={hrDashboard} />
         </>
     );
-};
-
-export default Dashboard;
+}
 
 Dashboard.layout = {
     breadcrumbs: [
         {
-            title: 'Dashboard',
+            title: 'HR Dashboard',
             href: dashboard(),
         },
     ],
